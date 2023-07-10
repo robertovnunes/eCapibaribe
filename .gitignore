@@ -1,2 +1,3 @@
 node_modules
 ./features/step_definitions
+./questionario_features.docx

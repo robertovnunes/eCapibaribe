@@ -7,6 +7,9 @@ Feature: Criar categorias de itens
         Given que estou na página de "categorias"
         When eu clico em "Nova categoria"
         And eu preencho o campo "Nome" com "Bebidas"
+        And eu preencho o campo "descrição da categoria" com "Liquidos alcoolicos ou não"
+        And eu preencho o campo "palavras chaves" com "bebidas, bebidas alcoolicas, refrigerante"
+        And eu adiciono "bebidas.png" como "imagem ilustrativa"
         And eu clico em "Salvar"
         Then eu vejo a mensagem "Categoria criada com sucesso"
         And eu vejo a categoria "Bebidas" na lista de categorias
@@ -26,3 +29,5 @@ Feature: Criar categorias de itens
         And eu preencho o campo "Nome" com "Bebidas"
         And eu clico em "Salvar"
         Then eu vejo a mensagem "Nome já está em uso"
+
+    Scenario: ciando categoria vazia
