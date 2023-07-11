@@ -83,7 +83,7 @@ This project uses `.env` files to manage database environment variables (you can
 To start the server, run the following command:
 
 ```sh
-uvicorn src.main:app --reload
+python -m uvicorn src.main:app --reload
 ```
 
 This command will run the Uvicorn compiler in watch mode, so every time a modification occurs the server restarts.

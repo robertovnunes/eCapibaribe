@@ -39,6 +39,16 @@ Given('que estou na página de {string}', function (string) {
     }
   });
 
+   When('eu adiciono {string} como {string}', function (string, string2) {
+           // Write code here that turns the phrase above into concrete actions
+           if(string == '' || string2 == '') {
+      return 'Imagem não pode ficar em branco';
+    } else {
+      return '';
+    }
+   });
+
+
   Then('eu vejo a mensagem {string}', function (string) {
     // Write code here that turns the phrase above into concrete actions
     return 'Categoria criada com sucesso';
