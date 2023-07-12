@@ -33,7 +33,7 @@ Feature: Login de usuario
 
     Scenario: login com campo senha vazio
         Given que eu estou na tela de login
-        When eu preencho o campo username com "joao"
+        When eu preencho o campo username com "joao@email.com"
         And eu preencho o campo password com ""
         And eu clico no botão "Login"
         Then eu devo ver a mensagem "Preencha o campo password"
@@ -41,7 +41,7 @@ Feature: Login de usuario
     Scenario: login com usuario e senha incorretos
         Given que eu estou na tela de login
         When eu preencho o campo username com "joao"
-        And eu preencho o campo password com "123456"
+        And eu preencho o campo password com "12346"
         And eu clico no botão "Login"
         Then eu devo ver a mensagem "Usuário e/ou senha incorretos"
 
