@@ -12,7 +12,7 @@ export class UserLoginComponent {
   constructor() { }
 
   ngOnInit(): void {
-  
+    
   }
 
 
