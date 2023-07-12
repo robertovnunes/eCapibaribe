@@ -5,14 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ItemCategoryComponent } from './components/item-category/item-category.component';
-import { UserDataComponent } from './components/user-data/user-data.component';
+import { MainComponent } from './components/main/main.component';
+import { ButtonComponent } from './components/view/button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
     ItemCategoryComponent,
-    UserDataComponent
+    MainComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

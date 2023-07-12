@@ -2,7 +2,7 @@ const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
 
 const verifyCategoryExists = (category) => {
-    if(category == 'Bebidas') {
+    if(category === 'Bebidas') {
         return true;
     }
     else {
@@ -22,7 +22,7 @@ Given('que estou na página de {string}', function (string) {
 
   When('eu clico em {string}', function (string) {
     // Write code here that turns the phrase above into concrete actions
-    if (string == 'Nova categoria') {
+    if (string === 'Nova categoria') {
         if(verifyCategoryExists(string)) {
             return 'Categoria já existe';
         } else {
@@ -32,7 +32,7 @@ Given('que estou na página de {string}', function (string) {
   });
 
   When('eu preencho o campo {string} com {string}', function (string, string2) {
-    if(string == 'Nome' && string2 == '') {
+    if(string === 'Nome' && string2 === '') {
       return 'Nome não pode ficar em branco';
     } else {
       return '';
@@ -41,7 +41,7 @@ Given('que estou na página de {string}', function (string) {
 
    When('eu adiciono {string} como {string}', function (string, string2) {
            // Write code here that turns the phrase above into concrete actions
-           if(string == '' || string2 == '') {
+           if(string === '' || string2 === '') {
       return 'Imagem não pode ficar em branco';
     } else {
       return '';
@@ -56,7 +56,7 @@ Given('que estou na página de {string}', function (string) {
 
   Then('eu vejo a categoria {string} na lista de categorias', function (string) {
     // Write code here that turns the phrase above into concrete actions
-    if(string == 'Bebidas') {
+    if(string === 'Bebidas') {
         return 'Bebidas';
     }
   });
@@ -66,3 +66,22 @@ Given('que estou na página de {string}', function (string) {
     return string;
   });
 
+Then('eu não vejo a categoria {string} na lista de categorias', function (string) {
+    return 'Categoria não existe';
+});
+
+Then('eu ainda vejo o item {string} na lista de itens', function (string) {
+    return "{string} está na lista de itens";
+});
+Then('eu não vejo o item {string} na lista de itens', function (string) {
+    return 'Item não existe';
+});
+Given('eu tenho um item {string} na categoria "Bebidas"', function (string) {
+
+});
+Given('eu vejo a lista de {string}', function (string) {
+    return 'Lista de itens vazia';
+});
+Then(/^eu vejo a descrição "([^"]*)" na lista de categorias$/, function () {
+    return '';
+});

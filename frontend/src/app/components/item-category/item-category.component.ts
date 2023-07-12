@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./item-category.component.css']
 })
 export class ItemCategoryComponent {
+  $categoria!: {nome: string, descricao: string, imagem: string}[];
+
+    constructor() {}
+
+    ngOnInit(): void {
+
+    }
 
 }
