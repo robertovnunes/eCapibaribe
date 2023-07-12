@@ -3,9 +3,16 @@ Feature: Login de usuario
     I want to login usin my username and password
     So I can use the system
 
-    Scenario: login realizado com sucesso
+    Scenario: login realizado com sucesso usando email
         Given que eu estou na tela de login
-        When eu preencho o campo username com "joao"
+        When eu preencho o campo username com "joao@email.com"
+        And eu preencho o campo password com "123456"
+        And eu clico no botão "Login"
+        Then eu devo ver a mensagem "Login realizado com sucesso"
+
+        Scenario: login realizado com sucesso usando cpf
+        Given que eu estou na tela de login
+        When eu preencho o campo username com "12345678900"
         And eu preencho o campo password com "123456"
         And eu clico no botão "Login"
         Then eu devo ver a mensagem "Login realizado com sucesso"

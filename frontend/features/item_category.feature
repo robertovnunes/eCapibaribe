@@ -29,5 +29,4 @@ Feature: Criar categorias de itens
         And eu preencho o campo "Nome" com "Bebidas"
         And eu clico em "Salvar"
         Then eu vejo a mensagem "Nome já está em uso"
-
-    Scenario: ciando categoria vazia
+        And eu continuo na página de "criação de categorias"
