@@ -1,1 +1,7 @@
-<p>button works!</p>
+<button
+        [ngStyle]="{'opacity': buttonDisable ? '0.3' : ''}"
+        [disabled]="buttonDisable"
+        type="{{buttonType}}"
+        (click)="buttonAction.emit()">
+    {{ buttonText }}
+</button>

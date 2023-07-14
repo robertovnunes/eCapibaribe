@@ -1,7 +1,7 @@
 Feature: Login de usuario
     As a user
-    I want to login usin my username and password
-    So I can use the system
+    I want fazer login no sistema
+    So I posso usar o sistema
 
     Scenario: login realizado com sucesso usando email
         Given que eu estou na tela de login
