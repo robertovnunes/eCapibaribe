@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
+     @Input() buttonText!: string;
+     @Input() inputbuttonType!: string;
+     @Input() buttonDisable: boolean = false;
+     @Output() buttonAction: EventEmitter<void> = new EventEmitter();
+     buttonType = this.inputbuttonType === 'submit'? 'submit' : 'button'
+        constructor() {}
 
+        ngOnInit(): void {
+
+        }
 }
