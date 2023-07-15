@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  url = 'http://localhost:3000/user/'; // api rest fake
+  url = 'http://localhost:3000/user'; // api rest fake
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -21,7 +21,14 @@ export class UserService {
 
   // Obtem todos os Userros
   getUserByCPF(cpf: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.url + '?cpf=' + cpf)
+    return this.httpClient.get<User[]>(this.url, { params: { cpf: cpf }})
+      .pipe(
+        retry(2),
+        catchError(this.handleError))
+  }
+
+  getUserByEmail(email: string) {
+    return this.httpClient.get<User[]>(this.url, { params: { email: email }})
       .pipe(
         retry(2),
         catchError(this.handleError))
@@ -40,11 +47,4 @@ export class UserService {
     console.log(errorMessage);
     return throwError(errorMessage);
   };
-
-  getUserByEmail(email: string) {
-    return this.httpClient.get<User[]>(this.url + '?email=' + email)
-      .pipe(
-        retry(2),
-        catchError(this.handleError))
-  }
 }

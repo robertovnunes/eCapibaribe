@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 
 @Component({
     selector: 'app-user-login',
@@ -11,14 +11,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class UserLoginComponent implements OnInit {
 
     user: User[] = [];
-    form!: FormGroup;
     formData = {
         username: '',
         password: ''
     };
 
 
-    constructor(private userService: UserService, private formBuilder: FormBuilder) {
+    constructor(private userService: UserService) {
 
     }
 
@@ -28,25 +27,29 @@ export class UserLoginComponent implements OnInit {
 
     doLogin() {
         console.log();
+        //this.user = this.getUser(this.formData.username);
+        console.log(this.user);
+    }
+
+    getUser(username: string)/*: User[] */{
+        let usuario!: User[];
         this.userService.getUserByCPF(this.formData.username).subscribe((user: User[]) => {
-            if (user.length != 0) {
-                this.user = user;
-                this.checkPassword(this.user);
-            }});
-        this.userService.getUserByEmail(this.formData.username).subscribe((user) => {
-                if (user.length != 0) {
-                    this.user = user;
-                    this.checkPassword(this.user);
-                }
-                });
-                if (this.user[0].cpf === this.formData.username || this.user[0].email === this.formData.username) {
-                    console.log("quarto");
-                    this.checkPassword(this.user);
-                }
+            if (user.length > 0) {
+                console.log(user);
+                //usuario = user;
             }
+        });
+        this.userService.getUserByEmail(this.formData.username).subscribe((user) => {
+            if (user.length > 0) {
+                console.log(user);
+                //usuario = user;
+            }
+        });
+        //console.log(usuario);
+        //return usuario;
+}
 
-
-    checkPassword(user: User[]):boolean {
+    checkPassword(user: User[]): boolean {
         console.log("quinto");
         if (user[0].senha === this.formData.password) {
             console.log("sexto");
@@ -58,5 +61,4 @@ export class UserLoginComponent implements OnInit {
             return false;
         }
     }
-
 }
