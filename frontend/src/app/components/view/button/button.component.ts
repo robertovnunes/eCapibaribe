@@ -9,11 +9,14 @@ export class ButtonComponent {
      @Input() buttonText!: string;
      @Input() inputbuttonType!: string;
      @Input() buttonDisable: boolean = false;
-     @Output() buttonAction: EventEmitter<void> = new EventEmitter();
+     @Input() btnClick!: string;
+     @Output() buttonAction = new EventEmitter();
      buttonType = this.inputbuttonType === 'submit'? 'submit' : 'button'
-        constructor() {}
+
+
+        constructor() {
+        }
 
         ngOnInit(): void {
-
         }
 }

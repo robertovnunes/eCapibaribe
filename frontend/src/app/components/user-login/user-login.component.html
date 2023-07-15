@@ -7,19 +7,21 @@
 
     <body>
         <div id="form-login">
-            <form action="">
-                <div id="username">
+            <form (ngSubmit)="doLogin()">
+                <div id="username" class="form-group">
                     <label for="username">Username</label>
                     <br>
-                    <input type="text" id="username" name="username"  [name] = "username">
+                    <input type="text" id="usernameText" name="textUsername" placeholder="E-mail/CPF" [(ngModel)]="formData.username">
                 </div>
-                <div id="password">
+                <div id="password" class="form-group">
                     <label for="password">Password</label>
                     <br>
-                    <input type="text" id="password" name="password" [name]= "password">
+                    <input type="text" id="passwordText" name="password" placeholder="Senha" [(ngModel)]="formData.password">
                 </div>
-                <div id="submit">
-                    <button type="submit">Login</button>
+                <a href="#">Esqueceu a senha?</a>
+                <div id="buttons" class="form-group">
+                    <button type="submit" name="Entrar">Entrar</button>
+                    <app-button [buttonText]="'Cadastrar'" [buttonDisable]="false"></app-button>
                 </div>
             </form>
         </div>
