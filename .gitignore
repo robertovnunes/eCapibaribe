@@ -2,5 +2,4 @@ frontend/node_modules
 frontend/features/step_definitions
 ./questionario_features.docx
 ./.idea
-frontend/simpleapi
-frontend/.angular/cache
+
