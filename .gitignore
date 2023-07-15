@@ -2,4 +2,4 @@ frontend/node_modules
 frontend/features/step_definitions
 ./questionario_features.docx
 ./.idea
-simpleapi/
+frontend/simpleapi

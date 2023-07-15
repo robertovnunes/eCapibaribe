@@ -7,20 +7,19 @@
 
     <body>
         <div id="form-login">
-            <form>
-                <div id="username" class="form-group">
+            <form action="">
+                <div id="username">
                     <label for="username">Username</label>
                     <br>
-                    <input type="text" id="usernameText" name="username" placeholder="E-mail/CPF" [name] = "username">
+                    <input type="text" id="username" name="username"  [name] = "username">
                 </div>
-                <div id="password" class="form-group">
+                <div id="password">
                     <label for="password">Password</label>
                     <br>
-                    <input type="text" id="passwordText" name="password" placeholder="Senha" [name]= "password">
+                    <input type="text" id="password" name="password" [name]= "password">
                 </div>
-                <div id="submit" class="form-group">
-                    <app-button [buttonText]="'Cadastrar'" [buttonDisable]="false"></app-button>
-                    <app-button [inputbuttonType]="'submit'" [buttonText]="'Login'" [buttonDisable]="false" (click)="doLogin()"></app-button>
+                <div id="submit">
+                    <button type="submit">Login</button>
                 </div>
             </form>
         </div>
