@@ -28,3 +28,11 @@ Feature: Cadastro de itens
         And o usuário seleciona a opção "Cadastrar item"
         Then o usuário recebe uma mensagem "Este item já está cadastrado em seu inventário"
         And o usuário permanece na página "cadastro de item"
+
+    Scenario: Remover item cadastrado
+        Given o usuário de CPF "123.456.789-10" está na página "Inventário"
+        And o item de id "45654" e nome "PortaRetrato" está na página "Inventário"
+        When o usuário seleciona "Remover"
+        And o usuário seleciona "Confirmar"
+        Then o usuário permanece na pagina "Inventário"
+        And o item de id "45654" e nome "PortaRetrato" não está na pagina "Inventário"
