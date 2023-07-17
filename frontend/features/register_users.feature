@@ -3,7 +3,6 @@ Feature: Cadastro e manutenção de Usuários
         I want me cadastrar e ter a opção de deletar minha conta e atualizar meus dados
         So that posso usar a loja
 
-
 Scenario: Cadastro com CPF já utilizado
         Given o usuário de CPF “123.456.789-10” está cadastrado no sistema
         And o usuário está na página de “Cadastro”
