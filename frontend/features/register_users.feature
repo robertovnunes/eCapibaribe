@@ -59,3 +59,5 @@ Scenario: Remover cadastro
         And usuário tem senha “0laMundo!”
         When o usuário seleciona a opção “Deletar perfil”
         Then o usuário recebe uma mensagem “Perfil deletado com sucesso” 
+
+Scenario: FAKE
