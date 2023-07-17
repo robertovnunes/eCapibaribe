@@ -1,11 +1,11 @@
 from fastapi import APIRouter, status
 from src.schemas.response import HttpResponseModel
-from src.service.impl.item_service import ItemService
+from src.service.impl.categoria_service import categoriaService
 
 router = APIRouter()
 
 @router.get(
-    "/{item_id}", 
+    "/{categoria_id}",
     response_model=HttpResponseModel,
     status_code=status.HTTP_200_OK,
     description="Retrieve an item by its ID",

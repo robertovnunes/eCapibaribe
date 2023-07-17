@@ -1,6 +1,6 @@
 from datetime import datetime
 
-ITEM_COLLECTION_EXAMPLE = [
+categoria_COLLECTION_EXAMPLE = [
     {
         "name": "RasenShuriken",
         "created_at": '2023-07-10 10:00:00'
