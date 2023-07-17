@@ -14,10 +14,11 @@ Feature: Cadastro de itens
     
     Scenario: Falha no cadastro do item
         Given o usuário "123.456.789-10" está na página "cadastro de item"
-        And o item de  id "45654" e nome "PortaRetrato" não está cadastrado
+        And o item de id "45654" e nome "PortaRetrato" não está cadastrado
         When o usuário preenche os campos nome "PortaRetrato", preço "11,99", quantidade "1", marca "imaginarium", categoria "foto", descrição "Contém 1 porta retrato com 1 suporte", imagem "ImagemDoProduto", opção de envio "Correio" 
         And o usuário seleciona a opção "Cadastrar item"
         Then o usuário recebe uma mensagem "Falha no cadastro"
+        And o usuário permanece na página "cadastro de item"
         And o usuário visualiza o campo "ID" , que está vazio, destacado
 
     Scenario: Cadastrar item repetido
