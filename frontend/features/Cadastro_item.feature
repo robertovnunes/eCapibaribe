@@ -34,5 +34,5 @@ Feature: Cadastro de itens
         And o item de id "45654" e nome "PortaRetrato" está na página "Inventário"
         When o usuário seleciona "Remover"
         And o usuário seleciona "Confirmar"
-        Then o usuário permanece na pagina "Inventário"
+        Then o usuário de CPF "123.456.789-10" permanece na pagina "Inventário"
         And o item de id "45654" e nome "PortaRetrato" não está na pagina "Inventário"
