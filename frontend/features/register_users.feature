@@ -52,7 +52,7 @@ Scenario: Atualizar cadastro
         Then o usuário recebe uma mensagem “Cadastro atualizado com sucesso” 
 
 Scenario: Remover cadastro
-        Given o usuário está na página de “Perfil”
+        Given o usuário está na página de perfil
         And usuário tem e-mail “teste@email.com” 
         And usuário tem CPF “123.456.789-10”
         And usuário tem o nome “teste”
@@ -60,3 +60,4 @@ Scenario: Remover cadastro
         And usuário tem senha “0laMundo!”
         When o usuário seleciona a opção “Deletar perfil”
         Then o usuário recebe uma mensagem “Perfil deletado com sucesso” 
+        And o usuário é redirecionado para a página inicial
