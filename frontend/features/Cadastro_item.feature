@@ -2,7 +2,7 @@ Feature: Cadastro de itens
 
     As a usuário
 	I want  cadastrar itens
-	So that posso negociá-los
+	So that eu possa vendê-los
 
     Scenario: Item cadastrado com sucesso
         Given o usuário "123.456.789-10" está na página "cadastro de item"
