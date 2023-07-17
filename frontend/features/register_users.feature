@@ -60,6 +60,3 @@ Scenario: Remover cadastro
         When o usuário seleciona a opção “Deletar perfil”
         Then o usuário recebe uma mensagem “Perfil deletado com sucesso” 
         And o usuário é redirecionado para a página inicial
-
-Scenario: FAKE_scenario
-    Given fazendo a lista de config
