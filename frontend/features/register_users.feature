@@ -16,7 +16,7 @@ Scenario: Cadastro com e-mail já utilizado
         When o usuário preenche o  e-mail com “teste@email.com”
         And o usuário seleciona a opção “Concluir Cadastro”
         Then o usuário recebe uma mensagem “E-mail já cadastrado”
-
+ 
 Scenario: Erro no cadastro - faltam campos obrigatórios
         Given o usuário está na página de “Cadastro”
         When o usuário preenche o nome com “teste”
