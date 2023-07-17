@@ -43,5 +43,5 @@ Feature: Cadastro de itens
         When o usuário seleciona "Editar"
         And o usuário muda o nome "PortaRetrato" para o nome "Picture Frame"
         And o usuário seleciona "Confirmar"
-        Then o usuário permanece na pagina "Inventário"
+        Then o usuário de CPF "123.456.789-10" permanece na pagina "Inventário"
         And o item de id "45654" e nome "Picture Frame" está na pagina "Inventário"   
