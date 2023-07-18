@@ -9,8 +9,8 @@ def req_type_to_function(client: TestClient, req_type: str):
     }[req_type]
 
 
-def get_response_items_list(response):
-    return response.json()["data"]["items"]
+def get_response_categoryies_list(response):
+    return response.json()["data"]["categories"]
 
 
 # TODO: create more utils functions

@@ -21,8 +21,8 @@ Note:
 
 
 # Step definitions for the "Obter category por ID" scenario
-@given(parsers.cfparse('o categoryService retorna uma categoria com id "{category_id}" e nome "{category_name}"'))
-def mock_category_service_response(category_id: str, category_name: str):
+@given(parsers.cfparse('o categoryService retorna uma categoria com id "{category_id}"'))
+def mock_category_service_response(category_id: str):
     """
     Mock the categoryService.get_category() method to return an category with the given id and name
     """
@@ -30,7 +30,7 @@ def mock_category_service_response(category_id: str, category_name: str):
     categoryService.get_category = lambda id: HttpResponseModel(
         message=HTTPResponses.category_FOUND().message,
         status_code=HTTPResponses.category_FOUND().status_code,
-        data={"id": category_id, "name": category_name}
+        data={"id": category_id}
     )
 
 
@@ -141,3 +141,18 @@ def step_impl():
 @given("o categoryService retorna uma lista de itens")
 def step_impl():
     raise NotImplementedError(u'STEP: Given o categoryService retorna uma lista de itens')
+
+
+@given('eu recebo um JSON contendo o token "token"')
+def step_impl():
+    raise NotImplementedError(u'STEP: And eu recebo um JSON contendo o token "token"')
+
+
+@given('id "id", nome "nome", email "email" e tipo de usuario "administrador"')
+def step_impl():
+    raise NotImplementedError(u'STEP: And id "id", nome "nome", email "email" e tipo de usuario "administrador"')
+
+
+@given("a categoria não existe no banco de dados")
+def step_impl():
+    raise NotImplementedError(u'STEP: And a categoria não existe no banco de dados')
