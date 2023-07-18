@@ -69,7 +69,7 @@ Scenario: Erro no cadastro - faltam campos obrigatórios
 
 Scenario: Cadastro com sucesso
         Given o usuário está na página de “Cadastro”
-        And usuário de e-mail “teste@email.com” 
+        And usuário de e-mail “teste@email.com” não está cadastrado
         And usuário de CPF “123.456.789-10” não está cadastrado
         When o usuário preenche o nome com “teste”
         And o usuário preenche o e-mail com “teste@email.com”
