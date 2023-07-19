@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <span class="title">Crie um item</span>
+    <mat-form-field class="input">
+        <input
+            [formControl]="form"
+            matInput
+            placeholder="Nome do item"
+            dataCy="item-input" />
+    </mat-form-field>
+    <app-button (click)="createItem()" label="CRIAR" dataCy="create-item">
+    </app-button>
+    <app-button
+        (click)="goToList()"
+        dataCy="view-items"
+        type="btn medium black-outline"
+        label="VER LISTA"></app-button>
+</mat-card>
