@@ -155,4 +155,26 @@ def step_impl():
 
 @given("a categoria não existe no banco de dados")
 def step_impl():
+<<<<<<< HEAD
     raise NotImplementedError(u'STEP: And a categoria não existe no banco de dados')
+=======
+    raise NotImplementedError(u'STEP: And a categoria não existe no banco de dados')
+
+
+@given('não existe a categoria "bebidas" no banco de dados')
+def step_impl():
+    raise NotImplementedError(u'STEP: Given não existe a categoria "bebidas" no banco de dados')
+
+
+@when('uma requisição "POST" for enviada para "/categorias" com o JSON:')
+def step_impl():
+    raise NotImplementedError(u'STEP: When uma requisição "POST" for enviada para "/categorias" com o JSON:
+                              """
+                              {
+                                "nome": "Bebidas",
+                                "descricao": "Bebidas em geral",
+                                "imagem": "http://picsum.photos/200/300",
+                                "keywords": ["bebidas", "refrigerantes", "cervejas"]
+                              }
+                              """')
+>>>>>>> main

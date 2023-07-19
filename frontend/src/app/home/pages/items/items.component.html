@@ -1,0 +1,11 @@
+<div class="container">
+    <mat-card class="card">
+        <div class="title">Lista de Itens</div>
+        <app-list-items [items]="items$ | async"></app-list-items>
+        <app-button
+            (click)="goToHome()"
+            type="btn large black-outline"
+            label="VOLTAR">
+        </app-button>
+    </mat-card>
+</div>
