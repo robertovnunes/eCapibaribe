@@ -20,7 +20,7 @@ Given('que estou na página de {string}', function (string) {
     return 'bebidas';
   });
 
-  When('eu clico em {string}', function (string) {
+  When('eu escolho {string}', function (string) {
     // Write code here that turns the phrase above into concrete actions
     if (string === 'Nova categoria') {
         if(verifyCategoryExists(string)) {
@@ -84,4 +84,37 @@ Given('eu vejo a lista de {string}', function (string) {
 });
 Then(/^eu vejo a descrição "([^"]*)" na lista de categorias$/, function () {
     return '';
+});
+Given(/^que eu estou na tela de login$/, function () {
+
+});
+When(/^eu preencho o campo username com "([^"]*)"$/, function () {
+
+});
+When(/^eu preencho o campo password com "([^"]*)"$/, function () {
+
+});
+When(/^eu escolho no botão "([^"]*)"$/, function () {
+
+});
+Then(/^eu devo ver a mensagem "([^"]*)"$/, function () {
+
+});
+Then(/^eu devo ser redirecionado para a pagina "([^"]*)"$/, function () {
+
+});
+Given(/^logado como "([^"]*)" e senha "([^"]*)"$/, function () {
+
+});
+Given(/^eu vejo a lista "([^"]*)" vazia$/, function () {
+
+});
+Given(/^que eu estou na tela "([^"]*)"$/, function () {
+
+});
+Then(/^eu escolho "([^"]*)"$/, function () {
+
+});
+Then(/^eu vejo a palavra chave "([^"]*)" na lista de categorias$/, function () {
+
 });

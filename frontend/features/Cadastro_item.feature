@@ -1,8 +1,8 @@
-Feature: Cadastro e Manutenção de itens (Inserir, Remover, Atualizar)
+Feature: Cadastro de itens
 
-	As vendedor
-	I want to conseguir registrar, atualizar e remover itens
-	so that  eu possa  manusear meus itens e vendê-los
+    As a usuário
+	I want  cadastrar itens
+	So that eu possa vendê-los
 
     Scenario: Item cadastrado com sucesso
         Given o usuário "123.456.789-10" está na página "cadastro de item"
@@ -53,21 +53,19 @@ Feature: Cadastro e Manutenção de itens (Inserir, Remover, Atualizar)
         Then o usuário recebe uma mensagem "Este item já está cadastrado em seu inventário"
         And o usuário permanece na página "cadastro de item"
 
-    Scenario: Remover item
-        Given o usuário de cpf "123.456.789-10" está na página “Inventário”
-        And o item com nome “PortaRetratoNovo” e id "45654" está na página “Inventário” 
-        When o usuário seleciona “Remover item”
-        And  seleciona “Confirmar”  
-        Then o usuário visualiza a mensagem “O item foi removido com sucesso!”
-        And o usuario permanece na pagina “Inventario” 
-        And o item com nome “PortaRetratoNovo” e id “45654” não é visualizado
+    Scenario: Remover item cadastrado
+        Given o usuário de CPF "123.456.789-10" está na página "Inventário"
+        And o item de id "45654" e nome "PortaRetrato" está na página "Inventário"
+        When o usuário seleciona "Remover"
+        And o usuário seleciona "Confirmar"
+        Then o usuário de CPF "123.456.789-10" permanece na pagina "Inventário"
+        And o item de id "45654" e nome "PortaRetrato" não está na pagina "Inventário"
 
-    Scenario: Atualização de item
-        Given o usuario de cpf "123.456.789-10" está na página “Inventário”
-        And o item com nome “PortaRetrato” e id "45654" está na página “inventário”
-        When o usuario seleciona “Atualizar item” 
-        And altera o campos nome “PortaRetrato” para o nome “PortaRetratoNovo” 
-        And  seleciona “Salvar alterações”
-        Then o usuario recebe a mensagem “Alterações salvas!” 
-        And o usuario permanece na página “Inventário” 
-        And o item com o nome “PortaRetratoNovo” e id “45654” está na página “Inventário”
+    Scenario: Editar item cadastrado
+        Given o usuário de CPF "123.456.789-10" está na página "Inventário"
+        And o item de id "45654" e nome "PortaRetrato" está na página "Inventário"
+        When o usuário seleciona "Editar"
+        And o usuário muda o nome "PortaRetrato" para o nome "Picture Frame"
+        And o usuário seleciona "Confirmar"
+        Then o usuário de CPF "123.456.789-10" permanece na pagina "Inventário"
+        And o item de id "45654" e nome "Picture Frame" está na pagina "Inventário"   
