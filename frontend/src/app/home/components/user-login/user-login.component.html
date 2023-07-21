@@ -1,0 +1,41 @@
+<div>
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                formControlName="username" />
+            <p
+                *ngIf="
+                    form.controls['username'].invalid &&
+                    form.controls['username'].touched
+                ">
+                Username is required
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                type="text"
+                id="password"
+                name="password"
+                formControlName="password" />
+            <p
+                *ngIf="
+                    form.controls['password'].invalid &&
+                    form.controls['password'].touched
+                ">
+                Password is required
+            </p>
+        </div>
+        <div>
+            <p
+                class="login-error-paragraph"
+                name="textError"
+                style="display: none"></p>
+        </div>
+        <button class="btn btn-primary" (click)="doLogin()">Submit</button>
+    </form>
+</div>
