@@ -5,6 +5,7 @@ import {
     FormBuilder,
     Validators,
 } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-user-login',
@@ -20,7 +21,7 @@ export class UserLoginComponent implements OnInit {
     password: FormControl<string | null>;
     form: FormGroup;
 
-    constructor(private readonly fb: FormBuilder) {
+    constructor(private readonly fb: FormBuilder, private router:Router) {
         this.username = this.fb.control('', [Validators.required]);
         this.password = this.fb.control('', [Validators.required]);
         this.form = this.fb.nonNullable.group({
@@ -57,6 +58,7 @@ export class UserLoginComponent implements OnInit {
             this.password.value === 'admin'
         ) {
             alert('Login Successfull');
+            this.router.navigateByUrl('/home', {replaceUrl: true});
             return true;
         } else {
             this.loginError('Username or Password is incorrect');
