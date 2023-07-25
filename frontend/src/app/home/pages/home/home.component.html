@@ -1,6 +1,5 @@
 <div class="container">
-    <app-create-item
-        (goToListEvent)="goToList()"
-        (createItemEvent)="createItem($event)">
-    </app-create-item>
+    <app-button
+        [label]="'Gerenciar Categorias'"
+        (click)="loadCTM()"></app-button>
 </div>

@@ -21,4 +21,9 @@ export class HomeComponent {
     goToList() {
         this.router.navigate(['/items']);
     }
+
+    loadCTM() {
+        console.log('loadCTM');
+        this.router.navigate(['/categories']);
+    }
 }

@@ -16,7 +16,8 @@ import { HomeFacade } from './home.facade';
 import { HomeApi } from './api/home.api';
 import { HomeState } from './state/home.state';
 import { HomeInitializerProvider } from './home.initializer';
-import {UserLoginComponent} from "./components/user-login/user-login.component";
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { ItemCategoriesComponent } from './components/item-categories/item-categories.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import {UserLoginComponent} from "./components/user-login/user-login.component";
         ItemsComponent,
         ListItemsComponent,
         UserLoginComponent,
+        ItemCategoriesComponent,
     ],
     imports: [
         CommonModule,
@@ -37,8 +39,6 @@ import {UserLoginComponent} from "./components/user-login/user-login.component";
     ],
     providers: [HomeFacade, HomeApi, HomeState, HomeInitializerProvider],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [
-        UserLoginComponent
-    ]
+    exports: [UserLoginComponent],
 })
 export class HomeModule {}

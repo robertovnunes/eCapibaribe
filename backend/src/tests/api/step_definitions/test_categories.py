@@ -155,9 +155,6 @@ def step_impl():
 
 @given("a categoria não existe no banco de dados")
 def step_impl():
-<<<<<<< HEAD
-    raise NotImplementedError(u'STEP: And a categoria não existe no banco de dados')
-=======
     raise NotImplementedError(u'STEP: And a categoria não existe no banco de dados')
 
 
@@ -177,4 +174,4 @@ def step_impl():
                                 "keywords": ["bebidas", "refrigerantes", "cervejas"]
                               }
                               """')
->>>>>>> main
+                              )
