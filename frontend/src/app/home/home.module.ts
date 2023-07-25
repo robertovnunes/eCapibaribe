@@ -18,6 +18,7 @@ import { HomeState } from './state/home.state';
 import { HomeInitializerProvider } from './home.initializer';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ItemCategoriesComponent } from './components/item-categories/item-categories.component';
+import { CreateCategoryComponent } from './components/item-categories/create-category/create-category.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ItemCategoriesComponent } from './components/item-categories/item-categ
         ListItemsComponent,
         UserLoginComponent,
         ItemCategoriesComponent,
+        CreateCategoryComponent,
     ],
     imports: [
         CommonModule,
