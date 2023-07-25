@@ -19,6 +19,7 @@ import { HomeInitializerProvider } from './home.initializer';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { ItemCategoriesComponent } from './components/item-categories/item-categories.component';
 import { CreateCategoryComponent } from './components/item-categories/create-category/create-category.component';
+import { CategoriesDashboardComponent } from './components/item-categories/categories-dashboard/categories-dashboard.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { CreateCategoryComponent } from './components/item-categories/create-cat
         UserLoginComponent,
         ItemCategoriesComponent,
         CreateCategoryComponent,
+        CategoriesDashboardComponent,
     ],
     imports: [
         CommonModule,
