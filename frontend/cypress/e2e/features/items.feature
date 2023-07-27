@@ -11,6 +11,6 @@ Scenario: Criar um item
 
 Scenario: Visualizar item
   Given o usuário está na página ""
-  When o usuário escolhe a opção "view-items"
-  Then o usuário está na página "items"
+  When o usuário escolhe a opção "view-itens"
+  Then o usuário está na página "itens"
   And o usuário visualiza o item "792" de nome "Naruto com chapéu do Luffy"
