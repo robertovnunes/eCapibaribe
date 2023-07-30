@@ -8,3 +8,4 @@ Scenario: testando
 		And clico em algo
 		When a pagina seguinte carrega
 		Then consigo ver a pagina
+		And adiciono algo a mais
