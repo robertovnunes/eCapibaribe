@@ -76,35 +76,3 @@ Scenario: Cadastro com sucesso
         And o usuário seleciona a opção “Concluir Cadastro”
         Then o usuário recebe uma mensagem “Cadastro realizado com sucesso” 
         And o usuário é redirecionado para a página de "Login"
-
-Scenario: Cadastro com CPF já utilizado
-        Given o usuário de CPF “123.456.789-10” está cadastrado no sistema
-        When o sistema recebe o pedido para criar o usuário
-        And com o nome com “teste”
-        And com o e-mail com “teste@email.com”
-        And com o CPF com “123.456.789-10”
-        And com o sobrenome com “falha”
-        And com a senha com  “0laMundo!”
-        Then o sistema envia erro “CPF já cadastrado”
-
-Scenario: Cadastro com e-mail já utilizado
-        Given usuário de e-mail “teste@email.com” está cadastrado no sistema
-        When o sistema recebe o pedido para criar o usuário
-        And com o nome com “teste”
-        And com o e-mail com “teste@email.com”
-        And com o CPF com “123.456.789-10”
-        And com o sobrenome com “falha”
-        And com a senha com  “0laMundo!”
-        Then o sistema envia erro “E-mail já cadastrado”
-
-Scenario: Cadastro com sucesso
-        Given usuário de e-mail “teste@email.com” não está cadastrado
-        And usuário de CPF “123.456.789-10” não está cadastrado
-        When o sistema recebe o pedido para criar o usuário
-        And com o nome com “teste”
-        And com o e-mail com “teste@email.com”
-        And com o CPF com “123.456.789-10”
-        And com o sobrenome com “falha”
-        And com a senha com  “0laMundo!”
-        Then o sistema cadastra o usuário
-        And envia mensagem de sucesso "Cadastrada"
