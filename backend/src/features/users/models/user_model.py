@@ -8,4 +8,4 @@ class User(BaseModel):
     email: str | None = None
     senha: str | None
     telefone: str | None
-    dataNascimento: datetime | None
+    dataNascimento: str | None
