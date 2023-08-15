@@ -1,4 +1,4 @@
-# ESS Back-end FastAPI ⚡️
+# ecapibaribe Back-end FastAPI ⚡️
 
 This is the Back-end base project in Python with FastAPI for the Software and Systems Engineering discipline, offered by the Informatics Center (CIn) of the Federal University of Pernambuco (UFPE). This backend uses MongoDB for database manipulation.
 
@@ -83,7 +83,7 @@ This project uses `.env` files to manage database environment variables (you can
 To start the server, run the following command:
 
 ```sh
-python -m uvicorn src.main:app --reload
+uvicorn src.main:app --reload
 ```
 
 This command will run the Uvicorn compiler in watch mode, so every time a modification occurs the server restarts.

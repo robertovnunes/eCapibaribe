@@ -1,0 +1,45 @@
+.btn {
+    background-color: var(--color-texts);
+
+    color: white;
+    font-size: var(--font-subtitle);
+
+    height: 3rem;
+    border-radius: var(--radius-default);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2b2b2b;
+}
+
+// TODO: Add more button colors
+
+.black-outline {
+    background-color: var(---color-background);
+    border: 1px solid var(--color-texts);
+
+    color: var(--color-texts);
+}
+
+.black-outline:hover {
+    background-color: var(--color-texts);
+    color: white;
+}
+
+.large {
+    width: 22rem;
+}
+
+.medium {
+    width: 11rem;
+}
+
+.small {
+    width: 8rem;
+}
+
+:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
