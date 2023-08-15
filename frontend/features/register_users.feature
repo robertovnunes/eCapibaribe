@@ -16,8 +16,7 @@ Scenario: Cadastro com CPF já utilizado
         Then o usuário recebe uma mensagem “CPF já cadastrado”
 
 Scenario: Cadastro com CPF inválido
-        Given o usuário de CPF “123.456.789-10” está cadastrado no sistema
-        And o usuário está na página de “Cadastro”
+        Given o usuário está na página de “Cadastro”
         When o usuário preenche o nome com “teste”
         And o usuário preenche o e-mail com “teste@email.com”
         And o usuário preenche o CPF com “123.456.789-101”
@@ -27,8 +26,7 @@ Scenario: Cadastro com CPF inválido
         Then o usuário recebe uma mensagem “CPF já cadastrado”
 
 Scenario: Cadastro com senha inválida - sem caractere especial
-        Given o usuário de CPF “123.456.789-10” está cadastrado no sistema
-        And o usuário está na página de “Cadastro”
+        Given o usuário está na página de “Cadastro”
         When o usuário preenche o nome com “teste”
         And o usuário preenche o e-mail com “teste@email.com”
         And o usuário preenche o CPF com “123.456.789-101”
@@ -38,8 +36,7 @@ Scenario: Cadastro com senha inválida - sem caractere especial
         Then o usuário recebe uma mensagem “Senha inválida! Falta caractere especial”
 
 Scenario: Cadastro com senha inválida - sem número
-        Given o usuário de CPF “123.456.789-10” está cadastrado no sistema
-        And o usuário está na página de “Cadastro”
+        Given o usuário está na página de “Cadastro”
         When o usuário preenche o nome com “teste”
         And o usuário preenche o e-mail com “teste@email.com”
         And o usuário preenche o CPF com “123.456.789-101”
@@ -79,4 +76,3 @@ Scenario: Cadastro com sucesso
         And o usuário seleciona a opção “Concluir Cadastro”
         Then o usuário recebe uma mensagem “Cadastro realizado com sucesso” 
         And o usuário é redirecionado para a página de "Login"
-
