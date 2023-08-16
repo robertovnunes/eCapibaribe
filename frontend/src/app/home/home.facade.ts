@@ -20,8 +20,8 @@ export class HomeFacade {
             .fetchItems()
             .pipe(first())
             .subscribe({
-                next: (items: Item[]) => {
-                    this.homeState.setItems(items);
+                next: (itens: Item[]) => {
+                    this.homeState.setItems(itens);
                 },
                 error: error => {
                     // TODO: handle error
@@ -34,12 +34,12 @@ export class HomeFacade {
             .addItem(item)
             .pipe(first())
             .subscribe({
-                next: (items: Item[]) => {
+                next: (itens: Item[]) => {
                     // TODO: remove this line when backend is ready
-                    items.push(item);
+                    itens.push(item);
 
-                    if (items.includes(item)) {
-                        this.homeState.setItems(items);
+                    if (itens.includes(item)) {
+                        this.homeState.setItems(itens);
                         alert('Item criado com sucesso!');
                     } else {
                         alert('Erro ao criar item!');

@@ -1,21 +1,32 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ItemsComponent } from './pages/items/items.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './pages/home/home.component';
+import {ItemsComponent} from './pages/itens/itens.component';
+import {UserLoginComponent} from "./components/user-login/user-login.component";
+import {ItemCategoriesComponent} from "./components/item-categories/item-categories.component";
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-    },
-    {
-        path: 'items',
-        component: ItemsComponent,
-    },
+  {
+    path: '',
+    component: UserLoginComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'itens',
+    component: ItemsComponent,
+  },
+  {
+    path: 'categories',
+    component: ItemCategoriesComponent,
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule {
+}

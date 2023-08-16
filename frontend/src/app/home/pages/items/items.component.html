@@ -1,7 +1,7 @@
 <div class="container">
     <mat-card class="card">
         <div class="title">Lista de Itens</div>
-        <app-list-items [items]="items$ | async"></app-list-items>
+        <app-list-itens [itens]="itens$ | async"></app-list-itens>
         <app-button
             (click)="goToHome()"
             type="btn large black-outline"

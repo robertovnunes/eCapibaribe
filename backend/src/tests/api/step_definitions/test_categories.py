@@ -174,3 +174,4 @@ def step_impl():
                                 "keywords": ["bebidas", "refrigerantes", "cervejas"]
                               }
                               """')
+                              )

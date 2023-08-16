@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+node_modules
+features/step_definitions
+./questionario_features.docx
+./.idea
+simpleapi/
+/.angular
+=======
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
@@ -56,3 +64,4 @@ cypress-coverage
 cypress/screenshots
 cypress/videos
 cypress/downloads
+>>>>>>> main
