@@ -109,3 +109,50 @@ Scenario: Cadastro com e-mail inválido
         And com o sobrenome com “falha”
         And com a senha com  “0laMundo!”
         Then o sistema envia erro “E-mail já cadastrado”
+
+
+
+
+
+# cenários de lucas
+
+Scenario: Deletar o usuário com sucesso
+        Given o usuário de CPF “123.456.789-10” existe no sistema
+        When uma requisição “DELETE” for enviada para “/user/delete/123.456.789-10/”
+        Then o status da resposta deve ser “200”
+        And o JSON da resposta deve conter o campo “mensagem” com o valor  “Usuário deletado com sucesso”
+
+Scenario: Falha ao deletar usuário - usuário não existe
+        Given o usuário de CPF “123.456.789-10” não existe no sistema
+        When uma requisição “DELETE” for enviada para “/user/delete/123.456.789-10/”
+        Then o status da resposta deve ser “404”
+        And o JSON da resposta deve conter o campo “mensagem” com o valor “Usuário não existe”
+
+Scenario: Modificar dados do usuário com sucesso
+        Given o usuário de CPF “123.456.789-10” existe no sistema
+        And o usuário tem e-mail “teste@email.com”
+        And o usuário não tem telefone
+        When uma requisição “PUT” for enviada para “/user/update” com o corpo da requisição que contém CPF “123.456.789-10”
+        And contém e-mail “emailnovo@email.com”
+        And contém telefone “12345678910”
+        Then o status da resposta deve ser “200”
+        And o usuário de CPF “123.456.789-10” deve ter o campo e-mail com o valor “emailnovo@email.com”
+        And deve ter o campo telefone com o valor “12345678910”
+        And o JSON da resposta deve conter mensagem “Dados modificados com sucesso.”
+
+Scenario: Modificar dados com email inválido
+        Given o usuário de CPF “123.456.789-10” existe no sistema
+        And o usuário tem e-mail “teste@email.com”
+        When uma requisição “PUT” for enviada para “/user/update” com o corpo da requisição que contém e-mail “emailnovo”
+        Then o status da resposta deve ser 400
+        And o usuário de CPF “123.456.789-10” deve ter o campo e-mail com o valor teste@email.com”
+        And o JSON da resposta deve conter mensagem “Email inválido”
+
+Scenario: Modificar dados com email inválido
+        Given o usuário de CPF “123.456.789-10” existe no sistema
+        And o usuário tem e-mail “teste@email.com”
+        When uma requisição “PUT” for enviada para “/user/update” com o corpo da requisição que contém e-mail “emailnovo”
+        Then o status da resposta deve ser 400
+        And o usuário de CPF “123.456.789-10” deve ter o campo e-mail com o valor teste@email.com”
+        And o JSON da resposta deve conter mensagem “Email inválido”
+
