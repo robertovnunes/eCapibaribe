@@ -6,8 +6,8 @@ from .delete_user import delete_user_by_cpf
 
 users_router = APIRouter()
 
-@users_router.post("/users/modify")
-async def create_item(user: User, file_name: str | None = None):
+@users_router.put("/users/modify")
+async def modify_user(user: User, file_name: str | None = None):
     success_message = modify_user(user)
     return {
         "message": success_message
