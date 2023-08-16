@@ -12,13 +12,16 @@ def save_json(path: str, object: dict):
     with open(path, 'w', encoding='utf-8') as json_file:       
         json.dump(object, json_file)
 
-def create_new_item(new_item: Item) -> str:
-    data = read_json("./features/items/data/item.json")
+def create_new_item(new_item: Item, file_name: str | None) -> str:
+    if file_name == None:
+        file_name = "item.json"
+    path = f"./features/items/data/{file_name}"
+    data = read_json(path)
     items: list[dict] = data["items"]
     for item in items:
         #if cpf == item["cpf_item"] and new_item.item_id == item["item_id"]:
         if new_item.item_id == item["item_id"]:
             raise HTTPException(status_code=409, detail="Id already exist")
     data["items"].append(vars(new_item))
-    save_json("./features/items/data/item.json", data)
+    save_json(path, data)
     return "item registrado com sucesso!"

@@ -9,8 +9,11 @@ def save_json(path: str, object: dict):
     with open(path, 'w', encoding='utf-8') as json_file:       
         json.dump(object, json_file)
 
-def get_all_from_list():
-    data = read_json("./features/items/data/item.json")
+def get_all_from_list(file_name: str | None):
+    if file_name == None:
+        file_name = "item.json"
+    path = f"./features/items/data/{file_name}"
+    data = read_json(path)
     items: list[dict] = data["items"]
     return items
 
