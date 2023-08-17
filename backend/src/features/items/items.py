@@ -7,14 +7,9 @@ from .delete_item import deletar_item
 items_router = APIRouter()
 
 @items_router.post("/items")
-async def create_item(item: Item):
-    msg:str = create_new_item(item)
-    return msg
-
-@items_router.get("/items/")
-async def list_items():
-    items = get_all_from_list()
-    return items
+async def create_item(item: Item, file_name: str | None = None):
+    msg:str = create_new_item(item, file_name)
+    return {"msg":msg}
 
 @items_router.put("/items/update")
 async def update_item(item: Item, file_name:str | None=None):
@@ -25,3 +20,8 @@ async def update_item(item: Item, file_name:str | None=None):
 async def delete_item(id: int,file_name:str | None=None):
     id:int = deletar_item(id,file_name)
     return {"msg":id}
+
+@items_router.get("/items")
+async def list_items(file_name:str | None = None):
+    items = get_all_from_list(file_name)
+    return items

@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Item(BaseModel):
-    cpf_user:str
+    cpf_user: str
     item_id: int
     item_nome: str
     item_price: float
@@ -12,4 +12,3 @@ class Item(BaseModel):
     imagem: str
     op_envio: str
     palavrachave: str | None = None
-    

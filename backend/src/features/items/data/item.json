@@ -1,7 +1,7 @@
 {
     "items": [
         {
-            "cpf_user": "123.456.789-09",
+            "cpf_user": "123.456.789-10",
             "item_id": 45654,
             "item_nome": "Teste",
             "item_price": 19.35,
@@ -13,7 +13,7 @@
             "op_envio": "correio"
         },
         {
-            "cpf_user": "144.256.789-09",
+            "cpf_user": "123.456.789-10",
             "item_id": 45754,
             "item_nome": "newTeste",
             "item_price": 15.35,
