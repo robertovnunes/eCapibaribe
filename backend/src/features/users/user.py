@@ -8,7 +8,7 @@ users_router = APIRouter()
 
 @users_router.put("/users/modify")
 async def modify_user(user: User, file_name: str | None = None):
-    success_message = modify_user(user)
+    success_message = modify_user(user, file_name)
     return {
         "message": success_message
     }
