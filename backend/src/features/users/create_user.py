@@ -1,5 +1,5 @@
 # pip3 install fastapi uvicorn
-# python3 -m uvicorn backend.src.create_user.create_user:cadastro --host 0.0.0.0 --port 8000 --reload
+# python3 -m uvicorn backend.src.features.users.create_user:cadastro --host 0.0.0.0 --port 8000 --reload
 # http://localhost:8000/users/register
 
 import re
@@ -8,7 +8,10 @@ from fastapi import Request, APIRouter
 from fastapi.templating import Jinja2Templates
 import json
 
-PATH = "backend/src/features/users"
+
+CPF_PARA_TESTES = 99999999999
+
+PATH = "backend/src/"
 DATASET_PATH = PATH + "/data/users.json"
 TEMPLATES_PATH = PATH + "/templates"
 ROOT = "/users/register"
@@ -92,6 +95,7 @@ async def create_user(request: Request):
                 }
         print(dic)
         data["users"].append(dic)
-        with open(DATASET_PATH, "w") as f:
-            f.write(json.dumps(data, indent=4))
+        if int(user.CPF) != CPF_PARA_TESTES:
+            with open(DATASET_PATH, "w") as f:
+                f.write(json.dumps(data, indent=4))
     return response
