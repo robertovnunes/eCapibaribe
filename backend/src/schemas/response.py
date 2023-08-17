@@ -34,6 +34,71 @@ class HTTPResponses:
         )
 
     @staticmethod
+    def CATEGORY_NOT_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not found",
+            status_code=404,
+        )
+
+    @staticmethod
+    def CATEGORY_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category found",
+            status_code=200,
+        )
+    
+    @staticmethod
+    def CATEGORIES_NOT_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not found",
+            status_code=404,
+        )
+
+    @staticmethod
+    def CATEGORIES_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category found",
+            status_code=200,
+        )
+
+
+    @staticmethod
+    def CATEGORY_CREATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category created",
+            status_code=201,
+        )
+
+    @staticmethod
+    def CATEGORY_NOT_CREATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not created",
+            status_code=500,
+        )
+
+    @staticmethod
+    def USER_NOT_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="User not found",
+            status_code=404,
+        )
+
+    @staticmethod
+    def USER_FOUND() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="User found",
+            status_code=200,
+        )
+
+    @staticmethod
+    def USER_CREATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="User created",
+            status_code=201,
+        )
+
+
+    @staticmethod
     def SERVER_ERROR() -> HttpResponseModel:
         return HttpResponseModel(
             message="Server error",

@@ -1,115 +1,48 @@
-from typing import List, Dict
+import json as json
 from uuid import uuid4
-from pymongo import MongoClient, errors
-from pymongo.collection import Collection, IndexModel
-from src.config.config import env
 from logging import INFO, WARNING, getLogger
+
+CATEGORY_DATABASE_FILE = "./db/database/categorydb.json"
+ITEM_DATABASE_FILE = "./db/database/itensdb.json"
+USER_DATABASE_FILE = "./db/database/usersdb.json"
 
 logger = getLogger('uvicorn')
 
-class Database():
 
-    ID_LENGTH = 8
-
-    def __init__(self):
-        self.db = None
-        self.connect()
-        
-
-    def connect(self):
-        try:
-            mongo_connection = MongoClient(env.DB_URL)
-
-            logger.setLevel(INFO)
-
-            self.db = mongo_connection[env.DB_NAME]
-
-            print("--------------------")
-            logger.info("MongoDB connected!")
-            logger.info(f"Server Version: {mongo_connection.server_info()['version']}")
-            print("--------------------")
+def get_categories_db():
+    with open(CATEGORY_DATABASE_FILE) as c:
+        cdb = json.load(c)
+    return cdb
 
 
-        except errors.ServerSelectionTimeoutError as err:
+def get_itens_db():
+    with open(ITEM_DATABASE_FILE) as i:
+        idb = json.load(i)
+    return idb
 
-            mongo_connection = None
-            logger.setLevel(WARNING)
-            logger.info(f"MongoDB connection error! {err}")
 
-    def close_connection(self):
-        print("--------------------")
-        logger.info("MongoDB connection closed!")
-        print("--------------------")
-        self.db.client.close()
+def get_users_db():
+    with open(USER_DATABASE_FILE) as u:
+        udb = json.load(u)
+    return udb
 
-    def get_db(self):
-        return self.db
-    
 
-    def create_collection(
-        self, 
-        name: str,
-        indexes: List[IndexModel] = [],
-        validation_schema: Dict = {}
-    ) -> Collection:
-        """
-        Create a collection
+def write_categories_db(cdb):
+    with open(CATEGORY_DATABASE_FILE, 'w') as c:
+        json.dump(cdb, c)
 
-        Parameters
-        - name : str
-            The name of the collection to create    
-        - indexes : List[IndexModel]
-            The indexes to create in the collection
-        - validation_schema : dict
-            The validation schema used to validate data inserted into the 
-            collection. It should be a dictionary representing a JSON Schema
 
-        Returns
-        - pymongo.collection.Collection
-            The created collection
+def write_itens_db(idb):
+    with open(ITEM_DATABASE_FILE, 'w') as i:
+        json.dump(idb, i)
 
-        Raises
-        - TypeError: If indexes is not a list of pymongo.IndexModel
+
+class database:
+
+    def get_all_itens(self) -> list:
 
         """
-            
-        collection_options = { "validator": { "$jsonSchema": validation_schema } }
-            
-        collection: Collection = self.db.create_collection(
-            name,
-            **collection_options
-        )
-
-        collection.create_indexes(indexes)
-
-        logger.info(f"Collection {name} created!")
-
-        return collection
-
-    def drop_collection(self, name) -> bool:
-        """
-        Drop a collection
-
-        Parameters
-        - name : str
-            The name of the collection to drop
-
-        Returns
-        - bool
-            True if the collection was dropped successfully, False otherwise
-
-        """
-
-        if name in self.db.list_collection_names():
-            self.db.drop_collection(name)
-            logger.info(f"Collection {name} dropped!")
-            return True
-
-        return False
-    
-    def get_all_items(self, collection_name: str) -> list:
-        """
-        Get all items from a collection
+        Get all itens from a collection
 
         Parameters:
         - collection_name: str
@@ -117,17 +50,13 @@ class Database():
 
         Returns:
         - list
-            A list of all items in the collection
+            A list of all itens in the collection
 
         """
+        idb = get_itens_db()
+        return idb
 
-        collection: Collection = self.db[collection_name]
-
-        items = list(collection.find({}, {"_id": 0}))
-
-        return items
-    
-    def get_item_by_id(self, collection_name: str, item_id: str) -> dict:
+    def get_item_by_id(self, item_id: str) -> dict:
         """
         Retrieve an item by its ID from a collection
 
@@ -140,14 +69,13 @@ class Database():
         Returns:
         - dict or None:
             The item if found, None otherwise
-
         """
-        collection: Collection = self.db[collection_name]
+        idb = get_itens_db()
+        for item in idb["itens"]:
+            if item["id"] == item_id:
+                return item
 
-        item = collection.find_one({"id": str(item_id)}, {"_id": 0})
-        return item
-    
-    def insert_item(self, collection_name: str, item: dict) -> dict:
+    def insert_item(self, item: dict) -> dict:
         """
         Insert an item into a collection
 
@@ -163,19 +91,16 @@ class Database():
 
         """
         # TODO: test if this method works
-
+        idb = get_itens_db()
         item["id"] = str(uuid4())[:self.ID_LENGTH]
-
-        collection: Collection = self.db[collection_name]
-
-        item_id = collection.insert_one(item).inserted_id
+        item_id = idb.insert_one(item).inserted_id
         return {
             "id": str(item_id),
             **item
         }
-    
-    # TODO: implement update_item method
-    # def update_item(self, collection_name: str, item_id: str, item: dict) -> dict:
+
+        # TODO: implement update_item method
+        # def update_item(self, collection_name: str, item_id: str, item: dict) -> dict:
         """
         Update an item in a collection
 
@@ -193,8 +118,8 @@ class Database():
 
         """
 
-    # TODO: implement delete_item method
-    # def delete_item(self, collection_name: str, item_id: str) -> list:
+        # TODO: implement delete_item method
+        # def delete_item(self, collection_name: str, item_id: str) -> list:
         """
         Delete an item of a collection
 
@@ -206,6 +131,200 @@ class Database():
 
         Returns:
         - list:
-            A list of all items in the collection.
+            A list of all itens in the collection.
 
         """
+
+    def get_all_categories(self) -> list:
+        """
+        Get all itens from a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection
+
+        Returns:
+        - list
+            A list of all itens in the collection
+
+        """
+        cdb = get_categories_db()
+        return cdb
+
+    def get_category_by_id(self, category_id: str) -> dict:
+        """
+        Retrieve an item by its ID from a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item will be stored
+        - item_id: str
+            The ID of the item to retrieve
+
+        Returns:
+        - dict or None:
+            The item if found, None otherwise
+
+        """
+        cdb = get_categories_db()
+        for category in cdb["categories"]:
+            if category["id"] == category_id:
+                return category
+
+    def insert_category(self,category_id: str, category: dict) -> dict:
+        """
+        Insert an item into a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item will be stored
+        - item: dict
+            The item to insert
+
+        Returns:
+        - dict:
+            The inserted item
+
+        """
+
+        cdb = get_categories_db()
+        cdb["categories"].append(category)
+        write_categories_db(cdb)
+
+
+
+
+    def update_category(self, category_id: str, categoryupdt: dict) -> dict:
+        cdb = get_categories_db()
+        for category in cdb["categories"]:
+            if category["id"] == category_id:
+                category["name"] = categoryupdt["name"]
+                #segue nessa mesma logica para os outros campos
+
+        write_categories_db(cdb)
+
+
+
+
+
+    def delete_category(self, category_id: str) -> list:
+        """
+        Delete an item of a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item is stored
+        - item_id: str
+            The ID of the item to delete
+
+        Returns:
+        - list:
+            A list of all itens in the collection.
+
+        """
+        cdb = get_categories_db()
+        for category in cdb["categories"]:
+            if category["id"] == category_id:
+                cdb["categories"].pop(category)
+
+        write_categories_db(cdb)
+
+    def get_all_users(self) -> list:
+        """
+        Get all users from a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection
+
+        Returns:
+        - list
+            A list of all users in the collection
+
+        """
+        udb = get_users_db()
+        return udb
+
+    def get_user_by_id(self, user_id: str) -> dict:
+        """
+        Retrieve an item by its ID from a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item will be stored
+        - item_id: str
+            The ID of the item to retrieve
+
+        Returns:
+        - dict or None:
+            The item if found, None otherwise
+
+        """
+
+        udb = get_users_db()
+        for user in udb["users"]:
+            if user["id"] == user_id:
+                return user
+
+    def insert_user(self, user: dict) -> dict:
+        """
+        Insert an item into a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item will be stored
+        - item: dict
+            The item to insert
+
+        Returns:
+        - dict:
+            The inserted item
+
+        """
+        # TODO: test if this method works
+
+        user["id"] = str(uuid4())[:self.ID_LENGTH]
+        udb = get_users_db()
+        user_id = udb.insert_one(user).inserted_id
+        return {
+            "id": str(user_id),
+            **user
+        }
+
+        # TODO: implement update_item method
+        # def update_item(self, collection_name: str, item_id: str, item: dict) -> dict:
+        """
+        Update an item in a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item is stored
+        - item_id: str
+            The ID of the item to update
+        - item: dict
+            New item data
+
+        Returns:
+        - dict:
+            The updated item
+
+        """
+
+        # TODO: implement delete_item method
+        # def delete_item(self, collection_name: str, item_id: str) -> list:
+        """
+        Delete an item of a collection
+
+        Parameters:
+        - collection_name: str
+            The name of the collection where the item is stored
+        - item_id: str
+            The ID of the item to delete
+
+        Returns:
+        - list:
+            A list of all itens in the collection.
+
+        """
+
+

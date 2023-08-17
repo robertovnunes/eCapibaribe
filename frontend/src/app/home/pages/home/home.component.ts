@@ -19,6 +19,11 @@ export class HomeComponent {
     }
 
     goToList() {
-        this.router.navigate(['/items']);
+        this.router.navigate(['/itens']);
+    }
+
+    loadCTM() {
+        console.log('loadCTM');
+        this.router.navigate(['/categories']);
     }
 }

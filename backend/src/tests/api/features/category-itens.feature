@@ -1,37 +1,48 @@
 Feature: Categorias API
 
   Scenario: Obter categoria por ID
-    Given o categoryService retorna uma categoria com id "123"
-    And a categoria não existe no banco de dados
-    When uma requisição "GET" for enviada para "/categorias/123"
+    Given a categoria "bebidas" existe no banco de dados
+    When uma requisição "GET" for enviada para "/categories/1"
     Then o status da resposta deve ser "200"
-    And o JSON da resposta deve conter id "123" e nome "Bebidas"
+    And o corpo da resposta deve conter o id da categoria igual a "1"
+    And o corpo da resposta deve conter o nome da categoria igual a "bebidas"
+    And o corpo da resposta deve conter a descrição da categoria igual a "bebidas"
+    And o corpo da resposta deve conter a url da imagem da categoria igual a "https://picsum.photos/200/300"
+    And o corpo da resposta deve conter a lista de palavras-chave da categoria igual a "bebidas"
 
-  Scenario: Adicionando categoria
-    Given não existe a categoria "bebidas" no banco de dados
-    When uma requisição "POST" for enviada para "/categorias" com o JSON:
+  Scenario Outline: Obter todas as categorias
+    Given a categoria "bebidas" existe no banco de dados
+    And a categoria "brinquedos" existe no banco de dados
+    And a categoria "eletrônicos" existe no banco de dados
+    When uma requisição "GET" for enviada para "/categories"
+    Then o status da resposta deve ser "200"
+    And o JSON da resposta deve ser uma lista com "3" categorias
+    And a categoria com id igual a "<id>" e nome igual a <nome>
+    And descrição igual a "<desc>"
+    And imagem igual a "<image>"
+    And palavras-chave igual a "<keywords>"
+    And lista de itens igual a "<items>"
+
+    Examples:
+      | id | nome        | desc        | image                         | keywords    | items |
+      | 1  | bebidas     | bebidas     | https://picsum.photos/200/300 | bebidas     | []    |
+      | 2  | brinquedos  | brinquedos  | https://picsum.photos/200/300 | brinquedos  | []    |
+      | 3  | eletronicos | eletronicos | https://picsum.photos/200/300 | eletronicos | []    |
+
+  Scenario Outline: Adicionando Categoria
+    When uma requisição "POST" for enviada para "/categories" com o JSON
     """
     {
-      "nome": "Bebidas",
-      "descricao": "Bebidas em geral",
-      "imagem": "http://picsum.photos/200/300",
-      "keywords": ["bebidas", "refrigerantes", "cervejas"]
+      "name": "<name>",
+      "description": "<description>",
+      "image": "<image>",
+      "keywords": "<keywords>"
+      "itens": "<items>"
     }
     """
-    Then o status da resposta deve ser "201"
-    And o JSON da resposta deve conter id "123" e nome "Bebidas"
-
-  
-
-  Scenario: Obter todas as categorias
-    Given o categoryService retorna uma lista de itens
-    When uma requisição "GET" for enviada para "/categorias"
     Then o status da resposta deve ser "200"
-    And o JSON da resposta deve ser uma lista de itens
-    And a categoria com id "123" e nome "Bebidas" está na lista
-    And a categoria com id "456" e nome "Brinquedos" está na lista
+    And a categoria com id igual a "<id>" e nome igual a "<name>" esta no banco de dados
 
-  Scenario: Obter categoria por ID inexistente
-    Given o categoryService não retorna um categoria com id "123"
-    When uma requisição "GET" for enviada para "/categorias/123"
-    Then o status da resposta deve ser "404"
+    Examples:
+      | id | name   | description | image                         | keywords | items |
+      | 4  | moveis | moveis      | https://picsum.photos/200/300 | Moveis   | []    |

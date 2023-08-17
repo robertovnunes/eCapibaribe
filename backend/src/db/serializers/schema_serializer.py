@@ -18,7 +18,7 @@ def schema_properties_serializer(properties: dict) -> dict:
             "bsonType": value['bson_type'],
             "description": value['description']
         }
-        for key, value in properties.items()
+        for key, value in properties.itens()
     }
 
 def schema_serializer(schema) -> dict:

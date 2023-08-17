@@ -17,8 +17,8 @@ def item_response_entity(item) -> dict:
         "created_at": item["created_at"],
     }
 
-def item_list_entity(items) -> list:
+def item_list_entity(itens) -> list:
     """
     Returns a list of the item entity
     """
-    return [item_entity(item) for item in items]
+    return [item_entity(item) for item in itens]

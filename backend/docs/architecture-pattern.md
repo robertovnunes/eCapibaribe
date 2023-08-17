@@ -63,10 +63,10 @@ It's worth mentioning the [router.py](../src/api/router.py) file, which is respo
 
 For example:
 ```sh
-api_router.include_router(items.router, prefix="/items", tags=["items"])
+api_router.include_router(itens.router, prefix="/itens", tags=["itens"])
 
 ```
-When adding a new API route, make sure to initialize the router in the corresponding API file. An example is already provided in the [items.py](../src/api/items.py)  file, and the approach remains the same for all APIs. This ensures that the APIs and their endpoints are registered and recognized within the application.
+When adding a new API route, make sure to initialize the router in the corresponding API file. An example is already provided in the [itens.py](../src/api/itens.py)  file, and the approach remains the same for all APIs. This ensures that the APIs and their endpoints are registered and recognized within the application.
 
 ---
 

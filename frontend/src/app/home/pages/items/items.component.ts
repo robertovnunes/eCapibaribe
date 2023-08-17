@@ -5,15 +5,15 @@ import { HomeFacade } from '../../home.facade';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-items',
-    templateUrl: './items.component.html',
-    styleUrls: ['./items.component.scss'],
+    selector: 'app-itens',
+    templateUrl: './itens.component.html',
+    styleUrls: ['./itens.component.scss'],
 })
 export class ItemsComponent {
-    items$: Observable<Item[]> = new Observable<Item[]>();
+    itens$: Observable<Item[]> = new Observable<Item[]>();
 
     constructor(private readonly facade: HomeFacade, private router: Router) {
-        this.items$ = this.facade.getItems();
+        this.itens$ = this.facade.getItems();
     }
 
     goToHome() {

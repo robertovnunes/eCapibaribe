@@ -1,7 +1,7 @@
 Feature: Login API
 
   Scenario: Login com sucesso
-    Given que o loginService retorna um email "joao@email.com" e senha "123456"
+    Given que o userService retorna um email "joao@email.com" e senha "123456"
     When eu envio uma requisição "GET" para "/users/joao@email.com/123456"
     Then eu recebo status code "200"
     And eu recebo um JSON contendo o token "token"
