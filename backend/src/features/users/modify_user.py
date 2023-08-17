@@ -12,7 +12,7 @@ def save_json(path: str, object: dict):
     with open(path, 'w', encoding='utf-8') as json_file:
         json.dump(object, json_file, default=str)
 
-def modify_user(new_user_data: User, file_name: str | None) -> User:
+def modify_user_by_cpf(new_user_data: User, file_name: str | None) -> User:
     if file_name == None:
         file_name = "users"
         

@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 
-from src.schemas.category import CategoryGet
+from schemas.category import CategoryGet
 
 class CategoryServiceMeta(ABC):
 

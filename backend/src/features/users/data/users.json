@@ -8,6 +8,15 @@
             "senha": "123456789",
             "telefone": "1234567890",
             "dataNascimento": "10/10/1990"
+        },
+        {
+            "nome": "teste",
+            "sobrenome": "falha",
+            "cpf": 12345678910,
+            "email": "teste@email.com",
+            "senha": "0laMundo!",
+            "telefone": "",
+            "dataNascimento": ""
         }
     ]
 }

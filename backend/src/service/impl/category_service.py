@@ -1,6 +1,6 @@
-from src.schemas.response import HTTPResponses, HttpResponseModel
-from src.service.meta.category_service_meta import CategoryServiceMeta
-from src.db.__init__ import database as db
+from schemas.response import HTTPResponses, HttpResponseModel
+from service.meta.category_service_meta import CategoryServiceMeta
+from db.__init__ import database as db
 
 
 class categoryService(CategoryServiceMeta):

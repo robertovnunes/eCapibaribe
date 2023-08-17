@@ -1,18 +1,21 @@
 # pip3 install fastapi uvicorn
-# python3 -m uvicorn backend/src/api/create_user:cadastro --host 0.0.0.0 --port 8000 --reload
+# python3 -m uvicorn backend.src.features.users.create_user:cadastro --host 0.0.0.0 --port 8000 --reload
 # http://localhost:8000/users/register
 
 import re
-import pandas as pd
 from fastapi import Request, APIRouter
 from fastapi.templating import Jinja2Templates
-import os
+import json
 
-PATH = "src"
-DATASET_PATH = PATH + "/data/users.csv"
+
+CPF_PARA_TESTES = 99999999999
+
+PATH = "./features/users"
+DATASET_PATH = PATH + "/data/users.json"
+TEMPLATES_PATH = PATH + "/templates"
 ROOT = "/users/register"
 cadastro = APIRouter(include_in_schema=False)
-templates = Jinja2Templates(directory="../templates")
+templates = Jinja2Templates(directory=TEMPLATES_PATH)
 
 class User():
     def __init__(self, request: Request) -> None:
@@ -26,24 +29,28 @@ class User():
         self.dataNascimento = None
         pass
 
-    async def load_data(self):
+    async def load_data(self) -> None:
         form = await self.request.form()
         self.nome = form.get("nome")
         self.sobrenome = form.get("sobrenome")
-        self.CPF = form.get("CPF")
+        self.CPF = form.get("cpf")
         self.email = form.get("email")
         self.senha = form.get("senha")
         self.telefone = form.get("telefone")
         self.dataNascimento = form.get("dataNascimento")
         
 
-    async def is_valid(self):
-        df = pd.read_csv(DATASET_PATH, index_col="CPF")
+    async def is_valid(self) -> (dict, str):
+        with open(DATASET_PATH) as f:
+            df = json.load(f)
+        data = df["users"]
+        
+        data = {key: [i[key] for i in data] for key in data[0]}
         
         if self.CPF in ("", None) or self.nome in ("", None) or self.sobrenome in ("", None) or self.email in ("", None) or self.senha in ("", None):
             return None, {"msg":"Todos os campos obrigatórios devem ser preenchidos"}
         
-        elif int(self.CPF) in df.index:
+        elif int(self.CPF) in data["cpf"]:
             return None, {"msg":"CPF já cadastrado"}
         
         elif len(str(self.CPF)) != 11:
@@ -58,7 +65,7 @@ class User():
         elif not re.search(r'[A-Z]', self.senha):
             return None, {"msg":"Senha inválida! Falta uma letra maiúscula!"}
         
-        elif self.email in df["email"].values:
+        elif self.email in data["email"]:
             return None, {"msg":"E-mail já cadastrado"}
         
         elif not re.search(r'^[\w\.-]+@[\w\.-]+\.\w+$', self.email):
@@ -75,17 +82,19 @@ def get_user_info(request: Request):
 async def create_user(request: Request):
     user = User(request)
     await user.load_data()
-    df, response = await user.is_valid()
-    if df is not None:
-        dic = { "nome": [user.nome],
-                "sobrenome": [user.sobrenome],
-                "CPF": [int(user.CPF)],
-                "email": [user.email],
-                "senha": [user.senha],
-                "telefone": [user.telefone],
-                "dataNascimento": [user.dataNascimento]
+    data, response = await user.is_valid()
+    if data is not None:
+        dic = { "nome": user.nome,
+                "sobrenome": user.sobrenome,
+                "cpf": int(user.CPF),
+                "email": user.email,
+                "senha": user.senha,
+                "telefone": user.telefone,
+                "dataNascimento": user.dataNascimento
                 }
         print(dic)
-        df = pd.concat([df, pd.DataFrame.from_dict(dic).set_index("CPF", inplace=True)])
-        df.to_csv(DATASET_PATH)
+        data["users"].append(dic)
+        if int(user.CPF) != CPF_PARA_TESTES:
+            with open(DATASET_PATH, "w") as f:
+                f.write(json.dumps(data, indent=4))
     return response
