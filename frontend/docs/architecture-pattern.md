@@ -49,7 +49,7 @@ The idea here is that each flow or important part of the project is separated in
 
 ### Components
 
-The interface components that can be reused in other parts of the module in question would be created in the "components" folder. For example, a simple component that lists values as you want, like the component ["list-items"](../src/app/home/components/list-items/list-items.component.ts) in the example module "Home" of the base project. So, this list would be located in the "Home" module, inside the "components" folder.
+The interface components that can be reused in other parts of the module in question would be created in the "components" folder. For example, a simple component that lists values as you want, like the component ["list-itens"](../src/app/home/components/list-itens/list-itens.component.ts) in the example module "Home" of the base project. So, this list would be located in the "Home" module, inside the "components" folder.
 
 ### Pages
 

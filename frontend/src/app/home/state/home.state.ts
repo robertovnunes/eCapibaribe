@@ -4,17 +4,17 @@ import { Item } from '../types/item';
 
 @Injectable()
 export class HomeState {
-    private readonly items = new BehaviorSubject<Item[]>([]);
+    private readonly itens = new BehaviorSubject<Item[]>([]);
 
     public getItems() {
-        return this.items.asObservable();
+        return this.itens.asObservable();
     }
 
-    public setItems(items: Item[]) {
-        this.items.next(items);
+    public setItems(itens: Item[]) {
+        this.itens.next(itens);
     }
 
     public addItem(item: Item) {
-        this.items.next([...this.items.value, item]);
+        this.itens.next([...this.itens.value, item]);
     }
 }
