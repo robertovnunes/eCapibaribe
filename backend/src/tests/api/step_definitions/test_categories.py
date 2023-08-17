@@ -4,9 +4,6 @@ from src.service.impl.category_service import categoryService
 from src.tests.api.utils.utils import get_response_categories_list, req_type_to_function
 
 
-
-
-
 @scenario('../features/category-itens.feature', 'Obter categoria por ID')
 def test_get_category_by_id():
     pass

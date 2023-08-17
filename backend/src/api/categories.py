@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
-from src.schemas.response import HttpResponseModel
-from src.service.impl.category_service import categoryService
+from ..schemas.response import HttpResponseModel
+from ..service.impl.category_service import categoryService
 
 router = APIRouter()
 
@@ -66,3 +66,30 @@ def get_categories() -> HttpResponseModel:
     return category_list_response
 
 # TODO: Add POST, PUT, DELETE endpoints
+
+
+@router.post(
+    "/",
+    response_model=HttpResponseModel,
+    status_code=status.HTTP_200_OK,
+    description="Retrieve all categories",
+    tags=["categories"],
+    responses={
+        status.HTTP_200_OK: {
+            "model": HttpResponseModel,
+            "description": "Successfully inserted category",
+        }
+    },
+)
+def post_category(category) -> HttpResponseModel:
+    """
+    Post category.
+
+    Returns:
+    - A list of all categories.
+
+    """
+
+    category_list_response = categoryService.post_category(category)
+
+    return category_list_response

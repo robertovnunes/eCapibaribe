@@ -1,6 +1,6 @@
-from src.schemas.response import HTTPResponses, HttpResponseModel
-from src.service.meta.category_service_meta import CategoryServiceMeta
-from src.db.__init__ import database as db
+from ...schemas.response import HTTPResponses, HttpResponseModel
+from ...service.meta.category_service_meta import CategoryServiceMeta
+from ...db.__init__ import database as db
 
 
 class categoryService(CategoryServiceMeta):
@@ -39,7 +39,7 @@ class categoryService(CategoryServiceMeta):
     @staticmethod
     def post_category(category):
         """Post category method implementation"""
-        category = db.create_category('categories', category)
+        category = db.insert_category('categories', category)
         if not category:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_CREATED().message,
@@ -51,4 +51,19 @@ class categoryService(CategoryServiceMeta):
             status_code=HTTPResponses.CATEGORY_CREATED().status_code,
             data=category,
         )
-    # TODO: implement other methods (create, update, delete)
+
+    @staticmethod
+    def put_category(category_id: str, category: dict):
+        """Put category method implementation"""
+        category = db.update_category('categories', category_id, category)
+        if not category:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_UPDATED().message,
+                status_code=HTTPResponses.CATEGORY_NOT_UPDATED().status_code,
+            )
+
+        return HttpResponseModel(
+            message=HTTPResponses.CATEGORY_UPDATED().message,
+            status_code=HTTPResponses.CATEGORY_UPDATED().status_code,
+            data=category,
+        )
