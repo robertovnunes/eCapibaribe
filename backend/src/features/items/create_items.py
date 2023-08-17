@@ -19,7 +19,7 @@ def create_new_item(new_item: Item, file_name: str | None) -> str:
     data = read_json(path)
     items: list[dict] = data["items"]
     for item in items:
-        #if cpf == item["cpf_item"] and new_item.item_id == item["item_id"]:
+        #if cpf == item["cpf_user"] and new_item.item_id == item["item_id"]:
         if new_item.item_id == item["item_id"]:
             raise HTTPException(status_code=409, detail="Id already exist")
     data["items"].append(vars(new_item))

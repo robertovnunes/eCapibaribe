@@ -9,7 +9,7 @@ Feature: Registrar de Itens
 
     Scenario: Registrar item com sucesso
         Given o item de id  "89098" não está registrado
-        When o sistema recebe a requisição para registrar o item com item_id "89098"
+        When o sistema recebe a requisição POST para registrar o Item com o item_id "89098"
         And nome "nome_teste"
         And preço "25.90"
         And quantidade "1"
@@ -20,11 +20,11 @@ Feature: Registrar de Itens
         And op_envio "op_teste"
         And palavrachave "keyteste"
         Then o sistema registra o item
-        And envia mensagem de sucesso "Item registrado com sucesso"
+        And o sistema envia uam mensagem "Item registrado com sucesso!"
 
     Scenario: Falha ao registrar item com id repetido
         Given o item de id  "89098" está registrado
-        When o sistema recebe a requisição para registrar o item com item_id "89098"
+        When o sistema recebe a requisição POST para registrar o Item com item_id "89098"
         And nome "nome_teste"
         And preço "25.90"
         And quantidade "1"
@@ -34,7 +34,7 @@ Feature: Registrar de Itens
         And imagem "imagem.jpg"
         And op_envio "op_teste"
         And palavrachave "keyteste"
-        Then o sistema envia o erro "Item_id ja registrado"
+        Then o sistemada envia uma mensagem "Id ja está em uso!"
 
 
 """Scenario: Obter todos os itens
