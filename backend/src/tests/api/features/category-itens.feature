@@ -46,3 +46,10 @@ Feature: Categorias API
     Examples:
       | id | name   | description | image                         | keywords | items |
       | 4  | moveis | moveis      | https://picsum.photos/200/300 | Moveis   | []    |
+
+
+    Scenario: Removendo categoria
+    Given a categoria "bebidas" existe no banco de dados
+    When uma requisição "DELETE" for enviada para "/categories/1"
+    Then o status da resposta deve ser "200"
+    And a categoria "bebidas" não existe mais no banco de dados

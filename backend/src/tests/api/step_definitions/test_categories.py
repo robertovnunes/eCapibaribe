@@ -13,6 +13,10 @@ def test_get_category_by_id():
 def test_get_all_categories():
     pass
 
+@scenario('../features/category-itens.feature', 'Removendo categoria')
+def test_post_category():
+    pass
+
 
 @given(parsers.cfparse('a categoria "{category_name}" existe no banco de dados'))
 def mock_category_service_response(category_name: str):
@@ -21,10 +25,6 @@ def mock_category_service_response(category_name: str):
 
 @when(parsers.cfparse('uma requisição "{req_type}" for enviada para "{req_url}"'), target_fixture="context")
 def send_get_category_request(client, context, req_type: str, req_url: str):
-    """
-    Send a request to the given URL using the given request type
-    """
-
     response = req_type_to_function(client, req_type)(req_url)
     context["response"] = response
     return context
@@ -35,7 +35,6 @@ def check_response_status_code(context, status_code: str):
     """
     Check if the response status code is the expected
     """
-
     assert context["response"].status_code == int(status_code)
     return context
 
@@ -50,7 +49,6 @@ def check_response_body_id(context, category_id: str):
         category_id (str): category id
 
     """
-
     response_body = context["response"].json()["data"]
     assert response_body["id"] == category_id
 
@@ -223,3 +221,18 @@ def send_post_category_request(client, context):
     response = req_type_to_function(client, "POST")("/categories", json=context.text)
     context["response"] = response
     return context
+
+
+@given('a categoria "{category_name}" não existe mais no banco de dados')
+def check_category_not_exist(context, category_name: str):
+    """
+    Check if the response body is a json with the given category name
+
+    Args:
+        context: pytest-bdd context
+        category_name (str): category name
+
+    """
+
+    response_body = context["response"].json()["data"]
+    assert response_body["name"] == category_name
