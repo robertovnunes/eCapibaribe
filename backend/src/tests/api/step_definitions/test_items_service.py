@@ -65,3 +65,29 @@ def post_request(client: TestClient, context, mensagem):
    response = client.post("/items", content = data, params={"file_name": db_file_name})
    assert response.status_code == 200
    assert response.json() == {"msg":mensagem}
+
+@scenario(scenario_name="Mostrar itens registrados", feature_name="../features/registro_de_items.feature")
+def test_show_item():
+    """Show item"""
+
+@given(parsers.cfparse('que possuo items registrados'))
+def item_registrado():
+    """items registrados"""
+
+@when(parsers.cfparse('uma requisição GET for enviada para "{req_url}"'), target_fixture="context")
+def get_route(client:TestClient, context, req_url):
+    response = client.get(req_url, params={"file_name": db_file_name})
+    context["response"] = response
+    return context
+
+@then(parsers.cfparse('o status da resposta deve ser "{status_code}"'), target_fixture="context")
+def check_response_status_code(context, status_code: str):
+    """
+    Check if the response status code is the expected
+    """
+    assert context["response"].status_code == int(status_code)
+    return context
+
+@then(parsers.cfparse('o arquivo da resposta deve possuir uma lista com os items registrados'), target_fixture="context")
+def get_items_registrados(context):
+    assert type(context["response"].json()) == list

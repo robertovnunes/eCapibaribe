@@ -2,9 +2,9 @@ Feature: Registrar de Itens
 
     Scenario: Mostrar itens registrados
         Given que possuo items registrados
-        When uma requisição "GET"  for enviada para "/items"
+        When uma requisição GET for enviada para "/items"
         Then o status da resposta deve ser "200"
-        And o arquivo da resposta deve possuir uma lista com todos os items registrados
+        And o arquivo da resposta deve possuir uma lista com os items registrados
 
 
     Scenario: Registrar item com sucesso
@@ -26,7 +26,9 @@ Feature: Registrar de Itens
 
     Scenario: Falha ao registrar item com id repetido
         Given o item de id  "89098" está registrado
-        When o sistema recebe a requisição POST para registrar o Item com item_id "89098"
+        When o usuario de cpf "123.456.789.10" registra o item
+        And o sistema recebe a requisição POST para "/items" registrar o Item
+        And com item_id "89098"
         And "nome" "nome_teste"
         And "preço" "25.90"
         And "quantidade" "1"
@@ -36,7 +38,8 @@ Feature: Registrar de Itens
         And "imagem" "imagem.jpg"
         And "op_envio" "op_teste"
         And "palavrachave" "keyteste"
-        Then o sistemada envia uma mensagem "Id ja está em uso!"
+        Then o sistema registra o item
+        And o sistema envia uma mensagem de erro "Id ja está em uso!"
 
 
 """Scenario: Obter todos os itens
