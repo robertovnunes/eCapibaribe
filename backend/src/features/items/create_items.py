@@ -24,4 +24,4 @@ def create_new_item(new_item: Item, file_name: str | None) -> str:
             raise HTTPException(status_code=409, detail="Id already exist")
     data["items"].append(vars(new_item))
     save_json(path, data)
-    return "item registrado com sucesso!"
+    return "Item registrado com sucesso!"

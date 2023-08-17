@@ -8,7 +8,7 @@ items_router = APIRouter()
 @items_router.post("/items")
 async def create_item(item: Item, file_name: str | None = None):
     msg:str = create_new_item(item, file_name)
-    return msg
+    return {"msg":msg}
 
 @items_router.get("/items/")
 async def list_items(file_name:str | None = None):

@@ -1,4 +1,5 @@
 import pytest
+import json
 from src.features.items.models.item_model import Item
 from pytest_bdd import parsers, given, when, then, scenario
 from fastapi.testclient import TestClient
@@ -33,6 +34,12 @@ def insert_item_id(context, item_id):
 
 @when(parsers.cfparse('"{field}" "{value}"'), target_fixture = "context")
 def insert_item_values(context, field, value):
+    if value.isnumeric():
+        if value.isdigit():
+            value = int(value)
+        else: 
+            value = float(value)
+    
     context[field] = value
     return context 
 
@@ -42,19 +49,19 @@ def resgistrar(context):
 
 @then(parsers.cfparse('o sistema envia uam mensagem "{mensagem}"'), target_fixture="context")
 def post_request(client: TestClient, context, mensagem):
-   x = Item()
-   x.cpf_user = context["cpf_user"]
-   x.item_id = context["item_id"]
-   x.item_nome =  context["item_nome"]
-   x.item_price = context["preco"]
-   x.quantidade = context["quantidade"]
-   x.marca = context["marca"]
-   x.categoria = context["categoria"]
-   x.descricao = context["descricao"]
-   x.imagem = context["imagem"]
-   x.op_envio = context["op_envio"]
-   x.palavrachave =context["palavrachave"]
-
-   response = client.post("/items", data = x, params={"file_name": db_file_name})
+   data = json.dumps({
+        "cpf_user": context["cpf_user"],
+        "item_id": context["item_id"],
+        "item_nome": context["nome"],
+        "item_price": context["preco"],
+        "quantidade":context["quantidade"],
+        "marca": context["marca"],
+        "categoria": context["categoria"],
+        "descricao": context["descricao"],
+        "imagem": context["imagem"],
+        "op_envio": context["op_envio"],
+        "palavrachave": context["palavrachave"]
+   })
+   response = client.post("/items", content = data, params={"file_name": db_file_name})
    assert response.status_code == 200
    assert response.json() == {"msg":mensagem}
