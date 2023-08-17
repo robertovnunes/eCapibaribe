@@ -13,15 +13,14 @@
         },
         {
             "item_id": 45754,
-            "item_nome": "newTeste",
+            "item_nome": "Teste",
             "item_price": 15.35,
-            "quantidade": 2,
-            "marca": "marcaTeste3",
-            "categoria": "categoriaTeste2",
-            "descricao": "teste1234",
-            "imagem": "imagem007.jpg",
-            "op_envio": "correio",
-            "palavrachave": null
+            "quantidade": 1,
+            "marca": "marcaTeste",
+            "categoria": "categoriaTeste",
+            "descricao": "teste123",
+            "imagem": "imagem.jpg",
+            "op_envio": "correio"
         }
     ]
 }

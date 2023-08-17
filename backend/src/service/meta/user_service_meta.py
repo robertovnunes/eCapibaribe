@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 
-from src.schemas.user import UserGet
+from schemas.user import UserGet
 
 class UserServiceMeta(ABC):
 
