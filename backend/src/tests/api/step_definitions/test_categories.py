@@ -1,7 +1,7 @@
-from .schemas.response import HTTPResponses, HttpResponseModel
-from .pytest_bdd import parsers, given, when, then, scenario, scenarios
-from .service.impl.category_service import categoryService
-from .tests.api.utils.utils import get_response_categories_list, req_type_to_function
+from src.schemas.response import HTTPResponses, HttpResponseModel
+from pytest_bdd import parsers, given, when, then, scenario, scenarios
+from src.service.impl.category_service import categoryService
+from src.tests.api.utils.utils import get_response_categories_list, req_type_to_function
 
 
 @scenario('../features/category-itens.feature', 'Obter categoria por ID')
@@ -142,9 +142,8 @@ def check_all_response_body_id(context, id, nome):
         context: pytest-bdd context
 
     """
-    response = get_response_categories_list
+    response = get_response_categories_list(context["response"])
     response_body = response.json()["data"]["categories"]
-    response_body = context["response"].json()["data"]["categories"]
     for category in response_body:
         print(category["id"], type(category["name"]), type(nome))
         if category["id"] == id:
