@@ -3,61 +3,72 @@
 
 from pytest_bdd import parsers, given, when, then, scenario
 from fastapi.testclient import TestClient
-from backend.src.features.users.create_user import cadastro, ROOT
+from backend.src.features.users.create_user import cadastro, ROOT, CPF_PARA_TESTES
 import random
 
 client = TestClient(cadastro)
-CPF_PARA_TESTES = 99999999999
 
 
 @scenario("../features/test_cadastro.feature", "Cadastro com sucesso")
-def test_bdd_sucesso(context):
+def test_bdd_sucesso():
     """ Get all items """
-    return ""
+    pass
+
+
+@scenario("../features/test_cadastro.feature", "Faltam campos obrigatórios")
+def test_bdd_falta_campo():
+    """ Get all items """
+    pass
       
-@given(parsers.parse('usuário de e-mail "teste_@email.com" não está cadastrado'))
-def usuario_nao_cadastrado():
+@given(parsers.parse('usuário de e-mail "teste_@email.com" não está cadastrado'), target_fixture="context")
+def usuario_nao_cadastrado(context):
     # Simular verificação de usuário não cadastrado por e-mail
-    pass
+    return context
 
-@given(parsers.parse('usuário de CPF "99999999999" não está cadastrado'))
-def usuario_nao_cadastrado_por_cpf():
+@given(parsers.parse('usuário de CPF "99999999999" não está cadastrado'), target_fixture="context")
+def usuario_nao_cadastrado_por_cpf(context):
     # Simular verificação de usuário não cadastrado por CPF
-    pass
+    return context
 
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
+@when(parsers.parse('o sistema recebe o pedido para criar o usuário'), target_fixture="context")
+def cria_user(context):
     # Simular verificação de usuário não cadastrado por CPF
-    pass
+    return context
 
-@when(parsers.parse('com o nome com "{nome}"'))
+@when(parsers.parse('com o nome com "{nome}"'), target_fixture="context")
 def com_nome(context, nome):
     context["nome"] = nome
-
-@when(parsers.parse('com o e-mail com "{email}"'))
+    return context
+    
+    
+@when(parsers.parse('com o e-mail com "{email}"'), target_fixture="context")
 def com_email(context,email):
     context["email"] = email
+    return context
 
-@when(parsers.parse('com o CPF com "{cpf}"'))
+@when(parsers.parse('com o CPF com "{cpf}"'), target_fixture="context")
 def com_cpf(context,cpf):
     context["cpf"] = cpf
+    return context
 
-@when(parsers.parse('com o sobrenome com "{sobrenome}"'))
+@when(parsers.parse('com o sobrenome com "{sobrenome}"'), target_fixture="context")
 def com_sobrenome(context,sobrenome):
     context["sobrenome"] = sobrenome
+    return context
 
-@when(parsers.parse('com a senha com "{senha}"'))
+@when(parsers.parse('com a senha com "{senha}"'), target_fixture="context")
 def com_senha(context,senha):
     context["senha"] = senha
+    return context
     
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
+@then(parsers.parse('o sistema cadastra o usuário'), target_fixture="context")
+def cadastro(context):
     # Simular verificação de usuário não cadastrado por CPF
-    pass
+    return context
 
-@then(parsers.parse('envia mensagem de sucesso "{mensagem}"'))
+@then(parsers.parse('envia mensagem de sucesso "{mensagem}"'), target_fixture="context")
 def envia_mensagem(context, mensagem):
-    print(context)
+    print()
     response = client.post(ROOT, data={
         "nome": context["nome"],
         "sobrenome": context["sobrenome"],
@@ -69,80 +80,13 @@ def envia_mensagem(context, mensagem):
     })
     assert response.status_code == 200
     assert response.json() == {"msg":mensagem}
-    pass
+    return context
 
-
-
-
-#####
-
-
-
-
-@scenario("../features/test_cadastro.feature", "Faltam campos obrigatórios")
-def test_bdd_falta_campo(context):
-    """ Get all items """
-    return ""
       
-@given(parsers.parse('usuário de e-mail "teste@email.com" não está cadastrado'))
-def usuario_nao_cadastrado():
+@given(parsers.parse('usuário de e-mail "teste@email.com" não está cadastrado'), target_fixture="context")
+def usuario_nao_cadastrado(context):
     # Simular verificação de usuário não cadastrado por e-mail
-    pass
-
-@given(parsers.parse('usuário de CPF "99999999999" não está cadastrado'))
-def usuario_nao_cadastrado_por_cpf():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-# @when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-# def cria_user():
-#     # Simular verificação de usuário não cadastrado por CPF
-#     pass
-
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
-
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
-    
-# def com_cpf(context,cpf):
-#     context["cpf"] = None
-    
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
-def envia_mensagem(context, mensagem):
-    print(context)
-    response = client.post(ROOT, data={
-        "nome": context["nome"],
-        "sobrenome": context["sobrenome"],
-        "cpf": None,
-        "email": context["email"],
-        "senha": context["senha"],
-        "telefone": None,
-        "dataNascimento": None
-    })
-    assert response.status_code == 200
-    assert response.json() == {"msg":mensagem}
-    pass
-
-
-
-
-#######
+    return context
 
 
 
@@ -151,292 +95,67 @@ def test_bdd_cpf_inválido(context):
     """ Get all items """
     pass
 
-@given(parsers.parse('o usuário de CPF "1234567891" não está cadastrado no sistema'))
-def usuario_nao_cadastrado_por_cpf():
+@given(parsers.parse('o usuário de CPF "1234567891" não está cadastrado no sistema'), target_fixture="context")
+def usuario_nao_cadastrado_por_cpf(context):
     # Simular verificação de usuário não cadastrado por CPF
-    pass
+    return context
 
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
 
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
-
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# @when(parsers.parse('com o CPF com "{cpf}"'))
-# def com_cpf(context,cpf):
-#     context["cpf"] = cpf
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
-    
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
-def envia_mensagem(context, mensagem):
-    print(context)
-    response = client.post(ROOT, data={
-        "nome": context["nome"],
-        "sobrenome": context["sobrenome"],
-        "cpf": context["cpf"],
-        "email": context["email"],
-        "senha": context["senha"],
-        "telefone": None,
-        "dataNascimento": None
-    })
-    assert response.status_code == 200
-    assert response.json() == {"msg":mensagem}
-    pass
 
 
 @scenario("../features/test_cadastro.feature", "Cadastro com e-mail inválido")
 def test_bdd_email_invalido(context):
     """ Get all items """
-    return ""
+    pass
       
-@given(parsers.parse('usuário de e-mail "teste_@email.com" não está cadastrado no sistema'))
-def usuario_nao_cadastrado():
+@given(parsers.parse('usuário de e-mail "teste_@email.com" não está cadastrado no sistema'), target_fixture="context")
+def usuario_nao_cadastrado(context):
     # Simular verificação de usuário não cadastrado por e-mail
-    pass
+    return context
 
-@given(parsers.parse('usuário de CPF "99999999999" não está cadastrado'))
-def usuario_nao_cadastrado_por_cpf():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
-
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# # @when(parsers.parse('com o CPF com "{cpf}"'))
-# # def com_cpf(context,cpf):
-# #     context["cpf"] = cpf
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
     
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
-def envia_mensagem(context, mensagem):
-    print(context)
-    response = client.post(ROOT, data={
-        "nome": context["nome"],
-        "sobrenome": context["sobrenome"],
-        "cpf": context["cpf"],
-        "email": context["email"],
-        "senha": context["senha"],
-        "telefone": None,
-        "dataNascimento": None
-    })
-    assert response.status_code == 200
-    assert response.json() == {"msg":mensagem}
-    pass
-
 
 @scenario("../features/test_cadastro.feature", "Cadastro com e-mail já utilizado")
 def test_bdd_email_ja_existe(context):
     """ Get all items """
-    return ""
+    pass
       
-@given(parsers.parse('usuário de e-mail "teste@email.com" está cadastrado no sistema'))
-def usuario_nao_cadastrado():
+@given(parsers.parse('usuário de e-mail "teste@email.com" está cadastrado no sistema'), target_fixture="context")
+def usuario_nao_cadastrado(context):
     # Simular verificação de usuário não cadastrado por e-mail
-    pass
-
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
-
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
-    
-
-# @when(parsers.parse('com o CPF com "{cpf}"'))
-# def com_cpf(context,cpf):
-#     context["cpf"] = cpf
-
-    
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
-def envia_mensagem(context, mensagem):
-    print(context)
-    response = client.post(ROOT, data={
-        "nome": context["nome"],
-        "sobrenome": context["sobrenome"],
-        "cpf": context["cpf"],
-        "email": context["email"],
-        "senha": context["senha"],
-        "telefone": None,
-        "dataNascimento": None
-    })
-    assert response.status_code == 200
-    assert response.json() == {"msg":mensagem}
-    pass
+    return context
 
 
-#####
+####
 
-######
 
 @scenario("../features/test_cadastro.feature", "Cadastro com senha inválida")
-def test_bdd_fail_senha(context):
+def test_bdd_fail_senha():
     """ Get all items """
-    return ""
+    pass
       
-@given(parsers.parse('usuário de e-mail "teste_@email.com" não está cadastrado no sistema'))
-def usuario_nao_cadastrado():
-    # Simular verificação de usuário não cadastrado por e-mail
-    pass
 
-@given(parsers.parse('usuário de CPF "99999999999" não está cadastrado'))
-def usuario_nao_cadastrado_por_cpf():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
-
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# @when(parsers.parse('com o CPF com "{cpf}"'))
-# def com_cpf(context,cpf):
-#     context["cpf"] = cpf
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
     
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
-def envia_mensagem(context, mensagem):
-    print(context)
-    response = client.post(ROOT, data={
-        "nome": context["nome"],
-        "sobrenome": context["sobrenome"],
-        "cpf": context["cpf"],
-        "email": context["email"],
-        "senha": context["senha"],
-        "telefone": None,
-        "dataNascimento": None
-    })
-    assert response.status_code == 200
-    assert response.json() == {"msg":mensagem}
-    pass
-
 
 @scenario("../features/test_cadastro.feature", "Cadastro com CPF já utilizado")
-def test_bdd_cpf_existe(context):
+def test_bdd_cpf_existe():
     """ Get all items """
-    return ""
-
-@given(parsers.parse('o usuário de CPF "12345678910" está cadastrado no sistema'))
-def usuario_nao_cadastrado_por_cpf():
-    # Simular verificação de usuário não cadastrado por CPF
     pass
 
-@when(parsers.parse('o sistema recebe o pedido para criar o usuário'))
-def cria_user():
+@given(parsers.parse('o usuário de CPF "12345678910" está cadastrado no sistema'), target_fixture="context")
+def usuario_nao_cadastrado_por_cpf(context):
     # Simular verificação de usuário não cadastrado por CPF
-    pass
+    return context
 
-# @when(parsers.parse('com o nome com "{nome}"'))
-# def com_nome(context, nome):
-#     context["nome"] = nome
 
-# @when(parsers.parse('com o e-mail com "{email}"'))
-# def com_email(context,email):
-#     context["email"] = email
-
-# @when(parsers.parse('com o CPF com "{cpf}"'))
-# def com_cpf(context,cpf):
-#     context["cpf"] = cpf
-
-# @when(parsers.parse('com o sobrenome com "{sobrenome}"'))
-# def com_sobrenome(context,sobrenome):
-#     context["sobrenome"] = sobrenome
-
-# @when(parsers.parse('com a senha com "{senha}"'))
-# def com_senha(context,senha):
-#     context["senha"] = senha
-    
-@then(parsers.parse('o sistema cadastra o usuário'))
-def cadastro():
-    # Simular verificação de usuário não cadastrado por CPF
-    pass
-
-@then(parsers.parse('o sistema envia erro "{mensagem}"'))
+@then(parsers.parse('o sistema envia erro "{mensagem}"'), target_fixture="context")
 def envia_mensagem(context, mensagem):
     print(context)
+    
     response = client.post(ROOT, data={
         "nome": context["nome"],
         "sobrenome": context["sobrenome"],
-        "cpf": context["cpf"],
+        "cpf": context["cpf"] if "cpf" in context.keys() else None,
         "email": context["email"],
         "senha": context["senha"],
         "telefone": None,
@@ -444,5 +163,4 @@ def envia_mensagem(context, mensagem):
     })
     assert response.status_code == 200
     assert response.json() == {"msg":mensagem}
-    pass
-
+    return context
