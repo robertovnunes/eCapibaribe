@@ -22,7 +22,9 @@ def modify_user(new_user_data: User, file_name: str | None) -> User:
     users: list[dict] = data["users"]
     for idx, user in enumerate(users):
         if user_cpf == user["cpf"]:
+            print("aaaaa")
             data["users"][idx] = vars(new_user_data)
+            print("xxxxx")
             save_json(path, data)            
             return "Usuário modificado com sucesso"
     
