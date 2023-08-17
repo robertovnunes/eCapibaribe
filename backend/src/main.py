@@ -1,10 +1,10 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from features.users.user import users_router
-from features.users.create_user import cadastro
-from features.items.items import items_router
-from api.router import api_router
+from .features.users.user import users_router
+from .features.users.create_user import cadastro
+from .features.items.items import items_router
+from .api.router import api_router
 
 
 app = FastAPI()

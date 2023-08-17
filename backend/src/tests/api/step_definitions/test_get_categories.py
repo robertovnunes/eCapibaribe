@@ -4,18 +4,15 @@ from src.service.impl.category_service import categoryService
 from src.tests.api.utils.utils import get_response_categories_list, req_type_to_function
 
 
-@scenario('../features/category-itens.feature', 'Obter categoria por ID')
+@scenario('../features/buscar-categorias.feature', 'Obter categoria por ID')
 def test_get_category_by_id():
     pass
 
 
-@scenario('../features/category-itens.feature', 'Obter todas as categorias')
+@scenario('../features/buscar-categorias.feature', 'Obter todas as categorias')
 def test_get_all_categories():
     pass
 
-@scenario('../features/category-itens.feature', 'Removendo categoria')
-def test_post_category():
-    pass
 
 
 @given(parsers.cfparse('a categoria "{category_name}" existe no banco de dados'))
@@ -212,27 +209,3 @@ def check_all_response_body_itens(context, itens):
         assert category['itens'] == itens
 
 
-@when('uma requisição "POST" for enviada para "/categories" com o JSON')
-def send_post_category_request(client, context):
-    """
-    Send a request to the given URL using the given request type
-    """
-
-    response = req_type_to_function(client, "POST")("/categories", json=context.text)
-    context["response"] = response
-    return context
-
-
-@given('a categoria "{category_name}" não existe mais no banco de dados')
-def check_category_not_exist(context, category_name: str):
-    """
-    Check if the response body is a json with the given category name
-
-    Args:
-        context: pytest-bdd context
-        category_name (str): category name
-
-    """
-
-    response_body = context["response"].json()["data"]
-    assert response_body["name"] == category_name
