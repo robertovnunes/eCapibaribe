@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from features.users.user import users_router
+from backend.src.features.users.user import users_router
+from backend.src.features.users.create_user import cadastro
 
 app = FastAPI()
 app.add_middleware(
@@ -11,3 +12,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(users_router)
+app.include_router(cadastro)
