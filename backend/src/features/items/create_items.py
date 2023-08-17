@@ -21,7 +21,7 @@ def create_new_item(new_item: Item, file_name: str | None) -> str:
     for item in items:
         #if cpf == item["cpf_user"] and new_item.item_id == item["item_id"]:
         if new_item.item_id == item["item_id"]:
-            raise HTTPException(status_code=409, detail="Id already exist")
+            raise HTTPException(status_code=409, detail="Id ja está em uso!")
     data["items"].append(vars(new_item))
     save_json(path, data)
     return "Item registrado com sucesso!"

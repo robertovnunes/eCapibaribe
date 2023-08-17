@@ -22,13 +22,13 @@ Feature: Registrar de Itens
         And "op_envio" "op_teste"
         And "palavrachave" "keyteste"
         Then o sistema registra o item
-        And o sistema envia uam mensagem "Item registrado com sucesso!"
+        And o sistema envia uma mensagem "Item registrado com sucesso!"
 
     Scenario: Falha ao registrar item com id repetido
-        Given o item de id  "89098" está registrado
+        Given o item de id  "45654" está registrado
         When o usuario de cpf "123.456.789.10" registra o item
         And o sistema recebe a requisição POST para "/items" registrar o Item
-        And com item_id "89098"
+        And com item_id "45654"
         And "nome" "nome_teste"
         And "preço" "25.90"
         And "quantidade" "1"

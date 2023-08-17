@@ -4,6 +4,7 @@ from src.features.items.models.item_model import Item
 from pytest_bdd import parsers, given, when, then, scenario
 from fastapi.testclient import TestClient
 
+
 db_file_name = "item_test.json"
 
 """ Scenario: Registrar item com sucesso """
@@ -47,7 +48,7 @@ def insert_item_values(context, field, value):
 def resgistrar(context):
   return context
 
-@then(parsers.cfparse('o sistema envia uam mensagem "{mensagem}"'), target_fixture="context")
+@then(parsers.cfparse('o sistema envia uma mensagem "{mensagem}"'), target_fixture="context")
 def post_request(client: TestClient, context, mensagem):
    data = json.dumps({
         "cpf_user": context["cpf_user"],
@@ -66,6 +67,7 @@ def post_request(client: TestClient, context, mensagem):
    assert response.status_code == 200
    assert response.json() == {"msg":mensagem}
 
+
 @scenario(scenario_name="Mostrar itens registrados", feature_name="../features/registro_de_items.feature")
 def test_show_item():
     """Show item"""
@@ -75,7 +77,7 @@ def item_registrado():
     """items registrados"""
 
 @when(parsers.cfparse('uma requisição GET for enviada para "{req_url}"'), target_fixture="context")
-def get_route(client:TestClient, context, req_url):
+def route_for_get(client:TestClient, context, req_url):
     response = client.get(req_url, params={"file_name": db_file_name})
     context["response"] = response
     return context
