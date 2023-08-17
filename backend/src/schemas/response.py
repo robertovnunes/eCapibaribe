@@ -70,6 +70,13 @@ class HTTPResponses:
         )
 
     @staticmethod
+    def CATEGORY_NOT_CREATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not created",
+            status_code=500,
+        )
+
+    @staticmethod
     def USER_NOT_FOUND() -> HttpResponseModel:
         return HttpResponseModel(
             message="User not found",

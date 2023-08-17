@@ -8,14 +8,33 @@ USER_DATABASE_FILE = "./db/database/usersdb.json"
 
 logger = getLogger('uvicorn')
 
-with open(CATEGORY_DATABASE_FILE) as c:
-    cdb = json.load(c)
 
-with open(ITEM_DATABASE_FILE) as i:
-    idb = json.load(i)
+def get_categories_db():
+    with open(CATEGORY_DATABASE_FILE) as c:
+        cdb = json.load(c)
+    return cdb
 
-with open(USER_DATABASE_FILE) as u:
-    udb = json.load(u)
+
+def get_itens_db():
+    with open(ITEM_DATABASE_FILE) as i:
+        idb = json.load(i)
+    return idb
+
+
+def get_users_db():
+    with open(USER_DATABASE_FILE) as u:
+        udb = json.load(u)
+    return udb
+
+
+def write_categories_db(cdb):
+    with open(CATEGORY_DATABASE_FILE, 'w') as c:
+        json.dump(cdb, c)
+
+
+def write_itens_db(idb):
+    with open(ITEM_DATABASE_FILE, 'w') as i:
+        json.dump(idb, i)
 
 
 class database:
@@ -34,6 +53,7 @@ class database:
             A list of all itens in the collection
 
         """
+        idb = get_itens_db()
         return idb
 
     def get_item_by_id(self, item_id: str) -> dict:
@@ -50,7 +70,7 @@ class database:
         - dict or None:
             The item if found, None otherwise
         """
-
+        idb = get_itens_db()
         for item in idb["itens"]:
             if item["id"] == item_id:
                 return item
@@ -71,7 +91,7 @@ class database:
 
         """
         # TODO: test if this method works
-
+        idb = get_itens_db()
         item["id"] = str(uuid4())[:self.ID_LENGTH]
         item_id = idb.insert_one(item).inserted_id
         return {
@@ -128,7 +148,7 @@ class database:
             A list of all itens in the collection
 
         """
-
+        cdb = get_categories_db()
         return cdb
 
     def get_category_by_id(self, category_id: str) -> dict:
@@ -146,12 +166,12 @@ class database:
             The item if found, None otherwise
 
         """
-
+        cdb = get_categories_db()
         for category in cdb["categories"]:
             if category["id"] == category_id:
                 return category
 
-    def insert_category(self, category: dict) -> dict:
+    def insert_category(self,category_id: str, category: dict) -> dict:
         """
         Insert an item into a collection
 
@@ -166,38 +186,28 @@ class database:
             The inserted item
 
         """
-        # TODO: test if this method works
 
-        category["id"] = str(uuid4())[:self.ID_LENGTH]
-
-        category_id = cdb.insert_one(category).inserted_id
-        return {
-            "id": str(category_id),
-            **category
-        }
+        cdb = get_categories_db()
+        cdb["categories"].append(category)
+        write_categories_db(cdb)
 
 
-        def update_category(self, icategory_id: str, category: dict) -> dict:
-            """
-            Update an item in a collection
-
-            Parameters:
-            - collection_name: str
-                The name of the collection where the item is stored
-            - item_id: str
-                The ID of the item to update
-            - item: dict
-                New item data
-
-            Returns:
-            - dict:
-                The updated item
-
-            """
 
 
-        # TODO: implement delete_item method
-        # def delete_category(self, collection_name: str, item_id: str) -> list:
+    def update_category(self, category_id: str, categoryupdt: dict) -> dict:
+        cdb = get_categories_db()
+        for category in cdb["categories"]:
+            if category["id"] == category_id:
+                category["name"] = categoryupdt["name"]
+                #segue nessa mesma logica para os outros campos
+
+        write_categories_db(cdb)
+
+
+
+
+
+    def delete_category(self, category_id: str) -> list:
         """
         Delete an item of a collection
 
@@ -212,6 +222,12 @@ class database:
             A list of all itens in the collection.
 
         """
+        cdb = get_categories_db()
+        for category in cdb["categories"]:
+            if category["id"] == category_id:
+                cdb["categories"].pop(category)
+
+        write_categories_db(cdb)
 
     def get_all_users(self) -> list:
         """
@@ -226,6 +242,7 @@ class database:
             A list of all users in the collection
 
         """
+        udb = get_users_db()
         return udb
 
     def get_user_by_id(self, user_id: str) -> dict:
@@ -244,6 +261,7 @@ class database:
 
         """
 
+        udb = get_users_db()
         for user in udb["users"]:
             if user["id"] == user_id:
                 return user
@@ -266,6 +284,7 @@ class database:
         # TODO: test if this method works
 
         user["id"] = str(uuid4())[:self.ID_LENGTH]
+        udb = get_users_db()
         user_id = udb.insert_one(user).inserted_id
         return {
             "id": str(user_id),
@@ -307,3 +326,5 @@ class database:
             A list of all itens in the collection.
 
         """
+
+

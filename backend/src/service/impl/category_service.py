@@ -39,7 +39,7 @@ class categoryService(CategoryServiceMeta):
     @staticmethod
     def post_category(category):
         """Post category method implementation"""
-        category = db.create_category('categories', category)
+        category = db.insert_category('categories', category)
         if not category:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_CREATED().message,
@@ -51,4 +51,35 @@ class categoryService(CategoryServiceMeta):
             status_code=HTTPResponses.CATEGORY_CREATED().status_code,
             data=category,
         )
-    # TODO: implement other methods (create, update, delete)
+
+    @staticmethod
+    def put_category(category_id: str, category: dict):
+        """Put category method implementation"""
+        category = db.update_category('categories', category_id, category)
+        if not category:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_UPDATED().message,
+                status_code=HTTPResponses.CATEGORY_NOT_UPDATED().status_code,
+            )
+
+        return HttpResponseModel(
+            message=HTTPResponses.CATEGORY_UPDATED().message,
+            status_code=HTTPResponses.CATEGORY_UPDATED().status_code,
+            data=category,
+        )
+
+    @staticmethod
+    def delete_category(category_id: str):
+        """Delete category method implementation"""
+        category = db.delete_category('categories', category_id)
+        if not category:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_DELETED().message,
+                status_code=HTTPResponses.CATEGORY_NOT_DELETED().status_code,
+            )
+
+        return HttpResponseModel(
+            message=HTTPResponses.CATEGORY_DELETED().message,
+            status_code=HTTPResponses.CATEGORY_DELETED().status_code,
+            data=category,
+        )
