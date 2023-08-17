@@ -1,7 +1,7 @@
-from src.schemas.response import HTTPResponses, HttpResponseModel
-from pytest_bdd import parsers, given, when, then, scenario, scenarios
-from src.service.impl.category_service import categoryService
-from src.tests.api.utils.utils import get_response_categories_list, req_type_to_function
+from .schemas.response import HTTPResponses, HttpResponseModel
+from .pytest_bdd import parsers, given, when, then, scenario, scenarios
+from .service.impl.category_service import categoryService
+from .tests.api.utils.utils import get_response_categories_list, req_type_to_function
 
 
 @scenario('../features/category-itens.feature', 'Obter categoria por ID')
@@ -116,7 +116,7 @@ def check_response_body_keywords(context, category_keywords: str):
     assert response_body["keywords"] == category_keywords
 
 
-@then(parsers.cfparse('o JSON da resposta deve ser uma lista com "{total}" categorias'))
+@then(parsers.cfparse('o JSON da resposta deve ser uma lista com "{total}" categorias'), target_fixture="context")
 def check_response_body_is_a_list(context, total):
     """
     Check if the response body is a list of categories
@@ -130,7 +130,7 @@ def check_response_body_is_a_list(context, total):
     assert len(response_body) == int(total)
 
 
-@then(parsers.cfparse('a categoria com id igual a {id} e nome igual a {nome}'))
+@then(parsers.cfparse('a categoria com id igual a {id} e nome igual a {nome}'), target_fixture="context")
 @then("a categoria com id igual a <id> e nome igual a <nome>")
 def check_all_response_body_id(context, id, nome):
     """
@@ -142,13 +142,13 @@ def check_all_response_body_id(context, id, nome):
         context: pytest-bdd context
 
     """
-
+    response = get_response_categories_list
+    response_body = response.json()["data"]["categories"]
     response_body = context["response"].json()["data"]["categories"]
     for category in response_body:
         print(category["id"], type(category["name"]), type(nome))
         if category["id"] == id:
             assert category["name"] == nome
-
 
 
 @then(parsers.cfparse("descrição igual a {desc}"))
@@ -213,3 +213,14 @@ def check_all_response_body_itens(context, itens):
     response_body = context["response"].json()["data"]
     for category in response_body:
         assert category['itens'] == itens
+
+
+@when('uma requisição "POST" for enviada para "/categories" com o JSON')
+def send_post_category_request(client, context):
+    """
+    Send a request to the given URL using the given request type
+    """
+
+    response = req_type_to_function(client, "POST")("/categories", json=context.text)
+    context["response"] = response
+    return context

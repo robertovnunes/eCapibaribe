@@ -8,7 +8,7 @@ from fastapi import Request, APIRouter
 from fastapi.templating import Jinja2Templates
 import os
 
-PATH = "backend/src"
+PATH = "src"
 DATASET_PATH = PATH + "/data/users.csv"
 ROOT = "/users/register"
 cadastro = APIRouter(include_in_schema=False)

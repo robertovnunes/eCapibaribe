@@ -1,6 +1,6 @@
-from ...schemas.response import HTTPResponses, HttpResponseModel
-from ...service.meta.category_service_meta import CategoryServiceMeta
-from ...db.__init__ import database as db
+from src.schemas.response import HTTPResponses, HttpResponseModel
+from src.service.meta.category_service_meta import CategoryServiceMeta
+from src.db.__init__ import database as db
 
 
 class categoryService(CategoryServiceMeta):
@@ -65,5 +65,21 @@ class categoryService(CategoryServiceMeta):
         return HttpResponseModel(
             message=HTTPResponses.CATEGORY_UPDATED().message,
             status_code=HTTPResponses.CATEGORY_UPDATED().status_code,
+            data=category,
+        )
+
+    @staticmethod
+    def delete_category(category_id: str):
+        """Delete category method implementation"""
+        category = db.delete_category('categories', category_id)
+        if not category:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_DELETED().message,
+                status_code=HTTPResponses.CATEGORY_NOT_DELETED().status_code,
+            )
+
+        return HttpResponseModel(
+            message=HTTPResponses.CATEGORY_DELETED().message,
+            status_code=HTTPResponses.CATEGORY_DELETED().status_code,
             data=category,
         )

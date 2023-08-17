@@ -3,7 +3,7 @@
 
 from pytest_bdd import scenario
 from fastapi.testclient import TestClient
-from api.create_user import cadastro, ROOT
+from src.api.create_user import cadastro, ROOT
 import random
 
 client = TestClient(cadastro)

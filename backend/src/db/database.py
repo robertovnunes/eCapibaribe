@@ -8,24 +8,29 @@ USER_DATABASE_FILE = "src/db/database/usersdb.json"
 
 logger = getLogger('uvicorn')
 
+
 def get_categories_db():
     with open(CATEGORY_DATABASE_FILE) as c:
         cdb = json.load(c)
     return cdb
+
 
 def get_itens_db():
     with open(ITEM_DATABASE_FILE) as i:
         idb = json.load(i)
     return idb
 
+
 def get_users_db():
     with open(USER_DATABASE_FILE) as u:
         udb = json.load(u)
     return udb
 
+
 def write_categories_db(cdb):
     with open(CATEGORY_DATABASE_FILE, 'w') as c:
         json.dump(cdb, c)
+
 
 def write_itens_db(idb):
     with open(ITEM_DATABASE_FILE, 'w') as i:
@@ -166,7 +171,7 @@ class database:
             if category["id"] == category_id:
                 return category
 
-    def insert_category(self, category: dict) -> dict:
+    def insert_category(self,category_id: str, category: dict) -> dict:
         """
         Insert an item into a collection
 
@@ -181,9 +186,6 @@ class database:
             The inserted item
 
         """
-        # TODO: test if this method works
-
-        category["id"] = str(uuid4())[:self.ID_LENGTH]
 
         cdb = get_categories_db()
         cdb["categories"].append(category)
@@ -205,7 +207,6 @@ class database:
 
 
 
-        # TODO: implement delete_item method
     def delete_category(self, category_id: str) -> list:
         """
         Delete an item of a collection
