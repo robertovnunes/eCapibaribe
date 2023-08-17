@@ -67,7 +67,39 @@ def post_request(client: TestClient, context, mensagem):
    assert response.status_code == 200
    assert response.json() == {"msg":mensagem}
 
+###################
 
+@scenario(scenario_name="Falha ao registrar item com id repetido", feature_name="../features/registro_de_items.feature")
+def test_register_item_2():
+    """Register item"""
+    
+
+@given(parsers.cfparse('o item de id  "{item_id}" está registrado'))
+def item_registrado():
+    return {}
+
+
+@then(parsers.cfparse('o sistema envia uma mensagem de erro "{mensagem}"'), target_fixture="context")
+def post_request_2(client: TestClient, context, mensagem):
+   data = json.dumps({
+        "cpf_user": context["cpf_user"],
+        "item_id": context["item_id"],
+        "item_nome": context["nome"],
+        "item_price": context["preco"],
+        "quantidade":context["quantidade"],
+        "marca": context["marca"],
+        "categoria": context["categoria"],
+        "descricao": context["descricao"],
+        "imagem": context["imagem"],
+        "op_envio": context["op_envio"],
+        "palavrachave": context["palavrachave"]
+   })
+   response = client.post("/items", content = data, params={"file_name": db_file_name})
+   assert response.status_code == 409
+   assert response.json() == {"detail":mensagem}
+
+############################
+""" Mostrar itens registrados """
 @scenario(scenario_name="Mostrar itens registrados", feature_name="../features/registro_de_items.feature")
 def test_show_item():
     """Show item"""

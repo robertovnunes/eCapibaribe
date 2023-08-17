@@ -13,3 +13,4 @@ email_validator
 multipart
 ujson
 orjson
+python-multipart
