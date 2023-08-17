@@ -70,29 +70,29 @@ def mock_user_not_found_in_system(id: int):
     }
 
 @when(
-    parsers.cfparse('uma requisição DELETE for realizada na rota {req_url} com o id do item {id} no corpo da requisição'), 
+    parsers.cfparse('uma requisição DELETE for realizada na rota "{req_url}" com o id do item "{id}" no corpo da requisição'), 
     target_fixture="context"
 )
-def send_delete_request(client: TestClient, context, req_url: str):
-   
-    response = client.delete(req_url, params={"file_name": db_file_name})
+def send_delete_request(client: TestClient, context, req_url: str, id:str):
+    path = f"{req_url}/{id}"
+    response = client.delete(path, params={"file_name": db_file_name})
     context["response"] = response
     return context
 
 
-@then(parsers.cfparse('o status da resposta deve ser {status_code}'), target_fixture="context")
-def check_response_status_code(context, status_code: int):
+@then(parsers.cfparse('o status da resposta deve ser "{status_code}"'), target_fixture="context")
+def check_response_status_code(context, status_code: str):
     """parsers
     Check if the response status code is the expected
     """
-    assert context["response"].status_code == status_code
+    assert context["response"].status_code == int(status_code)
     return context
 
 
-@then(parsers.cfparse('o JSON da resposta deve conter a mensagem {msg} com o campo {id}'), target_fixture="context")
-def check_response_status_message(context, key: str, value: int):
+@then(parsers.cfparse('o JSON da resposta deve conter o campo "{msg}" do item id "{value}"'), target_fixture="context")
+def check_response_status_message(context, msg: str, value: str):
     """parsers
     Check if the response status code is the expected
     """
-    assert context["response"].json() == {key: value}
+    assert context["response"].json() == {msg: int(value)}
     return context
