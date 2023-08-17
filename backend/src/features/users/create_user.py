@@ -3,7 +3,6 @@
 # http://localhost:8000/users/register
 
 import re
-import pandas as pd
 from fastapi import Request, APIRouter
 from fastapi.templating import Jinja2Templates
 import json
@@ -11,7 +10,7 @@ import json
 
 CPF_PARA_TESTES = 99999999999
 
-PATH = "backend/src/"
+PATH = "backend/src/features/users"
 DATASET_PATH = PATH + "/data/users.json"
 TEMPLATES_PATH = PATH + "/templates"
 ROOT = "/users/register"
