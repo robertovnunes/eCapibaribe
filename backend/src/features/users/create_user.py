@@ -10,7 +10,7 @@ import json
 
 CPF_PARA_TESTES = 99999999999
 
-PATH = "backend/src/features/users"
+PATH = "./features/users"
 DATASET_PATH = PATH + "/data/users.json"
 TEMPLATES_PATH = PATH + "/templates"
 ROOT = "/users/register"

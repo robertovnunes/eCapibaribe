@@ -3,7 +3,7 @@
 
 from pytest_bdd import parsers, given, when, then, scenario
 from fastapi.testclient import TestClient
-from backend.src.features.users.create_user import cadastro, ROOT, CPF_PARA_TESTES
+from features.users.create_user import cadastro, ROOT, CPF_PARA_TESTES
 import random
 
 client = TestClient(cadastro)
