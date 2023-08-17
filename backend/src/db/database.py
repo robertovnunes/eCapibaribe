@@ -2,9 +2,9 @@ import json as json
 from uuid import uuid4
 from logging import INFO, WARNING, getLogger
 
-CATEGORY_DATABASE_FILE = "src/db/database/categorydb.json"
-ITEM_DATABASE_FILE = "src/db/database/itensdb.json"
-USER_DATABASE_FILE = "src/db/database/usersdb.json"
+CATEGORY_DATABASE_FILE = "./db/database/categorydb.json"
+ITEM_DATABASE_FILE = "./db/database/itensdb.json"
+USER_DATABASE_FILE = "./db/database/usersdb.json"
 
 logger = getLogger('uvicorn')
 
