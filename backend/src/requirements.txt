@@ -1,0 +1,15 @@
+uvicorn
+fastapi
+pydantic
+pymongo
+python-dotenv
+pytest
+pytest-mongodb
+pytest-bdd
+httpx
+pandas
+jinja2
+email_validator
+multipart
+ujson
+orjson
