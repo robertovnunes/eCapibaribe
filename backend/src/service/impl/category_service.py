@@ -1,6 +1,18 @@
-from schemas.response import HTTPResponses, HttpResponseModel
-from service.meta.category_service_meta import CategoryServiceMeta
-from db.__init__ import database as db
+from typing import Union
+
+from pydantic import BaseModel
+from src.schemas.response import HTTPResponses, HttpResponseModel
+from src.service.meta.category_service_meta import CategoryServiceMeta
+from src.db.__init__ import database as db
+
+
+class Category(BaseModel):
+    id: Union[str, None] = None
+    name: str
+    description: str
+    image: str
+    keywords: list
+    items: list
 
 
 class categoryService(CategoryServiceMeta):
@@ -23,7 +35,7 @@ class categoryService(CategoryServiceMeta):
     @staticmethod
     def get_categories():
         """Get category method implementation"""
-        categories = db.get_all_categories('categories')
+        categories = db.get_all_categories()
         if not categories:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_FOUND().message,
@@ -37,10 +49,18 @@ class categoryService(CategoryServiceMeta):
         )
 
     @staticmethod
-    def post_category(category):
+    def post_category(category: Category):
         """Post category method implementation"""
-        category = db.insert_category('categories', category)
-        if not category:
+        newCategory = category
+        try:
+            response = db.insert_category(newCategory)
+        except Exception as e:
+            print(e)
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_CREATED().message,
+                status_code=HTTPResponses.CATEGORY_NOT_CREATED().status_code,
+            )
+        if not response:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_CREATED().message,
                 status_code=HTTPResponses.CATEGORY_NOT_CREATED().status_code,
@@ -49,13 +69,12 @@ class categoryService(CategoryServiceMeta):
         return HttpResponseModel(
             message=HTTPResponses.CATEGORY_CREATED().message,
             status_code=HTTPResponses.CATEGORY_CREATED().status_code,
-            data=category,
         )
 
     @staticmethod
     def put_category(category_id: str, category: dict):
         """Put category method implementation"""
-        category = db.update_category('categories', category_id, category)
+        category = db.update_category(category_id, category)
         if not category:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_UPDATED().message,
@@ -71,7 +90,7 @@ class categoryService(CategoryServiceMeta):
     @staticmethod
     def delete_category(category_id: str):
         """Delete category method implementation"""
-        category = db.delete_category('categories', category_id)
+        category = db.delete_category(category_id)
         if not category:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_DELETED().message,
@@ -83,3 +102,18 @@ class categoryService(CategoryServiceMeta):
             status_code=HTTPResponses.CATEGORY_DELETED().status_code,
             data=category,
         )
+
+    @staticmethod
+    def get_last_category_id():
+        """Get last category id method implementation"""
+        lastid: str
+        categories = db.get_all_categories()
+        if not categories:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_NOT_FOUND().message,
+                status_code=HTTPResponses.CATEGORY_NOT_FOUND().status_code,
+            )
+        for category in categories:
+            lastid = category["id"]
+
+        return lastid

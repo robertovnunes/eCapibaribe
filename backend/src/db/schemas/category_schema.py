@@ -17,7 +17,7 @@ class CategorySchema(ModelSchema):
             "description": "The category's description"
         },
         "keywords": {
-            "bson_type": "string",
+            "bson_type": "list",
             "description": "The category's keywords"
         },
         "image_url": {
@@ -25,7 +25,7 @@ class CategorySchema(ModelSchema):
             "description": "The category's image_url"
         },
         "itens": {
-            "bson_type": "array",
+            "bson_type": "list",
             "description": "The category's itens"
         }
     }

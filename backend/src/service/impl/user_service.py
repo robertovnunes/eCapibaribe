@@ -1,6 +1,6 @@
-from schemas.response import HTTPResponses, HttpResponseModel
-from service.meta.user_service_meta import UserServiceMeta
-from db.__init__ import database as db
+from src.schemas.response import HTTPResponses, HttpResponseModel
+from src.service.meta.user_service_meta import UserServiceMeta
+from src.db.__init__ import database as db
 
 
 class userService(UserServiceMeta):

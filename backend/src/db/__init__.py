@@ -1,4 +1,3 @@
-from .database import database as db
-from .config.create_collections import create_collections
+from .categoriesDAO import database as db
 
 database = db

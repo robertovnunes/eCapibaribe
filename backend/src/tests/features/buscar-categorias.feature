@@ -11,9 +11,14 @@ Feature: Buscar categorias
         And o corpo da resposta deve conter a lista de palavras-chave da categoria igual a "bebidas"
 
       Scenario Outline: Obter todas as categorias
-        Given a categoria "bebidas" existe no banco de dados
-        And a categoria "brinquedos" existe no banco de dados
-        And a categoria "eletrônicos" existe no banco de dados
+        Given a categoria "<category>" existe no banco de dados
+        And a categoria "<category>" existe no banco de dados
+        And a categoria "<category>" existe no banco de dados
+        Examples:
+            | category    |
+            | bebidas     |
+            | brinquedos  |
+            | eletronicos |
         When uma requisição "GET" for enviada para "/categories"
         Then o status da resposta deve ser "200"
         And o JSON da resposta deve ser uma lista com "3" categorias

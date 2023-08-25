@@ -106,4 +106,37 @@ class HTTPResponses:
         )
 
 
-    # TODO: implement other responses (item created, updated, deleted, etc)
+    @staticmethod
+    def CATEGORY_NOT_UPDATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not updated",
+            status_code=500,
+        )
+
+    @staticmethod
+    def CATEGORY_UPDATED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category updated",
+            status_code=200,
+        )
+
+    @staticmethod
+    def CATEGORY_NOT_DELETED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category not deleted",
+            status_code=500,
+        )
+
+    @staticmethod
+    def CATEGORY_DELETED() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category deleted",
+            status_code=200,
+        )
+
+    @staticmethod
+    def CATEGORY_ALREADY_EXISTS() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Category already exists",
+            status_code=400,
+        )
