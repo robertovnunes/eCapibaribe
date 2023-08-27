@@ -1,12 +1,10 @@
 import json as json
 from typing import Union
-from uuid import uuid4
 from logging import INFO, WARNING, getLogger
 
 from pydantic import BaseModel
 
-CATEGORY_DATABASE_FILE = "src/db/database/categorydb.json"
-
+CATEGORY_DATABASE_FILE = "db/database/categorydb.json"
 
 logger = getLogger('uvicorn')
 
@@ -26,18 +24,14 @@ def get_categories_db():
     return cdb
 
 
-
-
-
 def write_categories_db(cdb):
     with open(CATEGORY_DATABASE_FILE, 'w') as c:
         json.dump(cdb, c)
 
 
-
-
 class database:
 
+    @staticmethod
     def get_all_categories() -> list:
         """
         Get all itens from a collection
@@ -54,7 +48,8 @@ class database:
         cdb = get_categories_db()
         return cdb
 
-    def get_category_by_id(self, category_id: str) -> Category:
+    @staticmethod
+    def get_category_by_id(category_id: str) -> Category:
         """
         Retrieve an item by its ID from a collection
 
@@ -74,6 +69,7 @@ class database:
             if category["id"] == category_id:
                 return category
 
+    @staticmethod
     def insert_category(category: Category) -> Category:
         """
         Insert an item into a collection
@@ -96,7 +92,8 @@ class database:
         write_categories_db(cdb)
         return category
 
-    def update_category(self, category_id: str, categoryupdt: Category):
+    @staticmethod
+    def update_category(category_id: str, categoryupdt: Category):
         cdb = get_categories_db()
         for category in cdb["categories"]:
             if category["id"] == category_id:
@@ -105,6 +102,7 @@ class database:
 
         write_categories_db(cdb)
 
+    @staticmethod
     def delete_category(category_id: str) -> list:
         """
         Delete an item of a collection
