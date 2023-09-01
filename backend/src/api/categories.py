@@ -78,9 +78,6 @@ def get_category(category_id: str) -> HttpResponseModel:
     return category_get_response
 
 
-# TODO: Add POST, PUT, DELETE endpoints
-
-
 @router.post(
     "/",
     response_model=HttpResponseModel,

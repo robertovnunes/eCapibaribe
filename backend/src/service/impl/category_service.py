@@ -20,7 +20,7 @@ class categoryService(CategoryServiceMeta):
     @staticmethod
     def get_category(category_id: str) -> HttpResponseModel:
         """Get category by id method implementation"""
-        category = db.get_category_by_id('categories', category_id)
+        category = db.get_category_by_id(category_id)
         if not category:
             return HttpResponseModel(
                 message=HTTPResponses.CATEGORY_NOT_FOUND().message,
@@ -32,8 +32,9 @@ class categoryService(CategoryServiceMeta):
             data=category,
         )
 
+
     @staticmethod
-    def get_categories():
+    def get_categories() -> HttpResponseModel:
         """Get category method implementation"""
         categories = db.get_all_categories()
         if not categories:
@@ -117,3 +118,5 @@ class categoryService(CategoryServiceMeta):
             lastid = category["id"]
 
         return lastid
+
+

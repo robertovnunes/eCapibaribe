@@ -6,20 +6,48 @@ Feature: Adicionar categorias no backend
   Scenario Outline: Adicionando Categoria
     Given a categoria "<name>" não existe no banco de dados
     When uma requisição "POST" for enviada para "/categories" com o "<name>" "<description>" "<image>" "<keywords>" "<itens>"
-    Examples:
-        |name           |description   |image                        |keywords     |itens|
-        | eletronicos   |  eletronicos |https://picsum.photos/200/300|[eletronicos]|[]   |
     Then o status da resposta deve ser "200"
     And a categoria "<name>" existe no banco de dados
+    Examples:
+        |name           |description   |image                        |keywords       |itens|
+        | eletronicos   |  eletronicos |https://picsum.photos/200/300|['eletronicos']| []  |
 
 
   Scenario Outline: Adicionando Categoria com nome já existente
-    Given a categoria "brinquedos" existe no banco de dados
+    Given a categoria "<name>" existe no banco de dados
     When uma requisição "POST" for enviada para "/categories" com o "<name>" "<description>" "<image>" "<keywords>" "<itens>"
-    Examples:
-        |name           |description   |image                        |keywords   |itens|
-        | eletronicos   |  eletronicos |https://picsum.photos/200/300|eletronicos|[]   |
     Then o status da resposta deve ser "400"
-    And a mensagem de erro deve ser "Categoria já existe"
+    And a mensagem de erro deve ser "Category already exists"
+    Examples:
+        |name           |description   |image                        |keywords      |itens|
+        |  brinquedos   |  brinquedos  |https://picsum.photos/200/300|["brinquedos"]|[]   |
 
 
+  Scenario Outline: Adicionando Categoria com nome vazio
+    Given a categoria "<name>" não existe no banco de dados
+    When uma requisição "POST" for enviada para "/categories" com o "<name>" "<description>" "<image>" "<keywords>" "<itens>"
+    Then o status da resposta deve ser "400"
+    And a mensagem de erro deve ser "Category name cannot be empty"
+    Examples:
+        |name           |description   |image                        |keywords      |itens|
+        |      ""       |  brinquedos  |https://picsum.photos/200/300|["brinquedos"]|[]   |
+
+
+  Scenario Outline: Adicionando Categoria com descrição vazia
+    Given a categoria "<name>" não existe no banco de dados
+    When uma requisição "POST" for enviada para "/categories" com o "<name>" "<description>" "<image>" "<keywords>" "<itens>"
+    Then o status da resposta deve ser "400"
+    And a mensagem de erro deve ser "Category description cannot be empty"
+    Examples:
+        |name           |description   |image                        |keywords      |itens|
+        |  comida   |      ""      |https://picsum.photos/200/300|["brinquedos"]|[]   |
+
+
+  Scenario Outline: Adicionando Categoria com imagem vazia
+    Given a categoria "<name>" não existe no banco de dados
+    When uma requisição "POST" for enviada para "/categories" com o "<name>" "<description>" "<image>" "<keywords>" "<itens>"
+    Then o status da resposta deve ser "400"
+    And a mensagem de erro deve ser "Category image cannot be empty"
+    Examples:
+        |name           |description   |image                        |keywords      |itens|
+        |  comida   |  comida  |      ""                     |["comida"]|[]   |

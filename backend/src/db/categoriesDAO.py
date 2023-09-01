@@ -4,7 +4,7 @@ from logging import INFO, WARNING, getLogger
 
 from pydantic import BaseModel
 
-CATEGORY_DATABASE_FILE = "db/database/categorydb.json"
+CATEGORY_DATABASE_FILE = "src/db/database/categorydb.json"
 
 logger = getLogger('uvicorn')
 
@@ -49,7 +49,7 @@ class database:
         return cdb
 
     @staticmethod
-    def get_category_by_id(category_id: str) -> Category:
+    def get_category(category_id: str) -> Category:
         """
         Retrieve an item by its ID from a collection
 
@@ -68,6 +68,8 @@ class database:
         for category in cdb["categories"]:
             if category["id"] == category_id:
                 return category
+
+
 
     @staticmethod
     def insert_category(category: Category) -> Category:

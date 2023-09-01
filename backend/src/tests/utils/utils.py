@@ -10,5 +10,6 @@ def req_type_to_function(client: TestClient, req_type: str):
     }[req_type]
 
 
-def get_response_categories_list(response):
+def get_data_response(response):
     return response.json()["data"]
+
