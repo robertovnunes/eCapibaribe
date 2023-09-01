@@ -11,7 +11,7 @@ class Category(BaseModel):
     description: str
     image: str
     keywords: list
-    itens: list
+    items: list
 
 
 @scenario(
@@ -76,9 +76,10 @@ def send_post_request(context, client, name, description, image, keywords, itens
                    description=description,
                    image=image,
                    keywords=keywordlist,
-                   itens=itenslist).model_dump()
+                   items=itenslist).model_dump()
     response = req_type_to_function(client, "POST")("/categories", json=new)
-    context.update({"response": response.json()})
+    print(response.json())
+    context["response"] = response
     return context
 
 

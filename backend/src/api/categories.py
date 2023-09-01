@@ -1,12 +1,21 @@
 from fastapi import APIRouter, status
 from ..schemas.response import HttpResponseModel, HTTPResponses
 from ..service.impl.category_service import categoryService
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from typing import Union
 
 
 router = APIRouter()
 
+
+def validatefield(value) -> bool:
+    '''
+    Validates the model fields
+    returns a list of missing fields
+    '''
+    if value is None:
+        return True
+    return False
 
 class Category(BaseModel):
     id: Union[str, None] = None
@@ -15,6 +24,7 @@ class Category(BaseModel):
     image: str
     keywords: list
     items: list
+
 
 
 @router.get(
@@ -108,6 +118,16 @@ def post_category(category: Category) -> HttpResponseModel:
                 status_code=HTTPResponses.CATEGORY_ALREADY_EXISTS().status_code,
             )
     category.id = str((int(categories[-1]["id"]) + 1))
+    missingfieldslist = []
+    for f, v in category.model_fields.items():
+        if validatefield(v):
+            missingfieldslist.append(f)
+    if len(missingfieldslist) > 0:
+        return HttpResponseModel(
+            message="Missing fields",
+            status_code=400,
+            data={"fields": missingfieldslist}
+        )
 
     print(category)
     category_post_response = categoryService.post_category(category)

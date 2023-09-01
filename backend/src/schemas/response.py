@@ -138,3 +138,10 @@ class HTTPResponses:
             message="Category already exists",
             status_code=400,
         )
+
+    @staticmethod
+    def MISSING_FIELDS() -> HttpResponseModel:
+        return HttpResponseModel(
+            message="Missing fields",
+            status_code=400,
+        )
