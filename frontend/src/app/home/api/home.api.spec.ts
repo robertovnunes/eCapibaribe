@@ -17,6 +17,6 @@ describe('HomeApi', () => {
     });
 
     it('should be created', () => {
-        expect(api).toBeTruthy();
+        expect(api).not.equal(null);
     });
 });

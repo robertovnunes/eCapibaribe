@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Item } from '../types/item';
+import {Category} from "../types/category";
 
 @Injectable()
 export class HomeState {
@@ -10,8 +11,8 @@ export class HomeState {
         return this.itens.asObservable();
     }
 
-    public setItems(itens: Item[]) {
-        this.itens.next(itens);
+    public setCategories(categories: Category[]) {
+        this.itens.next(categories);
     }
 
     public addItem(item: Item) {

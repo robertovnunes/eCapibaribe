@@ -10,8 +10,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { CreateItemComponent } from './components/create-item/create-item.component';
-import { ItemsComponent } from './pages/itens/itens.component';
-import { ListItemsComponent } from './components/list-itens/list-itens.component';
 import { HomeFacade } from './home.facade';
 import { HomeApi } from './api/home.api';
 import { HomeState } from './state/home.state';
@@ -25,8 +23,6 @@ import { CategoriesDashboardComponent } from './components/item-categories/categ
     declarations: [
         HomeComponent,
         CreateItemComponent,
-        ItemsComponent,
-        ListItemsComponent,
         UserLoginComponent,
         ItemCategoriesComponent,
         CreateCategoryComponent,

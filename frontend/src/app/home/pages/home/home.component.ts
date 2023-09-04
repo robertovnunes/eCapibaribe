@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Item } from '../../types/item';
 import { Router } from '@angular/router';
 import { HomeFacade } from '../../home.facade';
+import { Category } from '../../types/category';
 
 @Component({
     selector: 'app-home',
@@ -14,12 +14,8 @@ export class HomeComponent {
         private readonly facade: HomeFacade
     ) {}
 
-    async createItem(item: Item) {
-        await this.facade.addItem(item);
-    }
-
-    goToList() {
-        this.router.navigate(['/itens']);
+    async createCategory(category: Category) {
+        await this.facade.addCategory(category);
     }
 
     loadCTM() {

@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
     @Input() type = 'btn large';
-    @Input() label = 'Button';
+    @Input() label = '';
     @Input() disabled = false;
 }

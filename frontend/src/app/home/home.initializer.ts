@@ -2,7 +2,7 @@ import { APP_INITIALIZER } from '@angular/core';
 import { HomeFacade } from './home.facade';
 
 export const homeInitializer = (homeFacade: HomeFacade) => () => {
-    homeFacade.fetchItems();
+    homeFacade.fetchCategories();
 };
 
 export const HomeInitializerProvider = {

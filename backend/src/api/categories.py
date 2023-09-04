@@ -121,7 +121,7 @@ def post_category(category: Category) -> HttpResponseModel:
     missingfieldslist = []
     for f, v in category.model_fields.items():
         if validatefield(v):
-            missingfieldslist.append(f)
+            missingfieldslist.append(f.__str__())
     if len(missingfieldslist) > 0:
         return HttpResponseModel(
             message="Missing fields",
