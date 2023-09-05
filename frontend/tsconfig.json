@@ -27,6 +27,9 @@
       "@badeball/cypress-cucumber-preprocessor/*": [
         "./node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/*"
       ]
+    },
+    "node": {
+      
     }
   },
   "include": ["src", "cypress.config.ts"],
@@ -35,5 +38,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+
 }
