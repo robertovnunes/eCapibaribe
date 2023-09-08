@@ -6,18 +6,21 @@ import re
 from fastapi import Request, APIRouter
 from fastapi.templating import Jinja2Templates
 import json
+import os
 
+print(os.getcwd())
 
 CPF_PARA_TESTES = 99999999999
+HOME_PATH = os.getcwd()
+DATASET_PATH = HOME_PATH  + f"{os.sep}backend{os.sep}src{os.sep}db{os.sep}database{os.sep}usersdb.json"
+TEMPLATES_PATH = HOME_PATH + f"{os.sep}backend{os.sep}src{os.sep}templates"
 
-PATH = "./features/users"
-DATASET_PATH = PATH + "/data/users.json"
-TEMPLATES_PATH = PATH + "/templates"
-ROOT = "/users/register"
-cadastro = APIRouter(include_in_schema=False)
 templates = Jinja2Templates(directory=TEMPLATES_PATH)
 
-class User():
+def transform_cpf(cpf: str) -> str:
+    return cpf.replace(".", "").replace("-", "")
+
+class Cadastro():
     def __init__(self, request: Request) -> None:
         self.request = request
         self.nome = None
@@ -28,12 +31,15 @@ class User():
         self.telefone = None
         self.dataNascimento = None
         pass
+    
+    def __str__(self) -> str:
+        return f"Nome: {self.nome}, sobrenome: {self.sobrenome}, CPF: {self.CPF}, email: {self.email}, senha: {self.senha}, telefone: {self.telefone}, data de nascimento: {self.dataNascimento}"
 
     async def load_data(self) -> None:
         form = await self.request.form()
         self.nome = form.get("nome")
         self.sobrenome = form.get("sobrenome")
-        self.CPF = form.get("cpf")
+        self.CPF = form.get("CPF")
         self.email = form.get("email")
         self.senha = form.get("senha")
         self.telefone = form.get("telefone")
@@ -44,16 +50,15 @@ class User():
         with open(DATASET_PATH) as f:
             df = json.load(f)
         data = df["users"]
-        
         data = {key: [i[key] for i in data] for key in data[0]}
-        
+        print(self)
         if self.CPF in ("", None) or self.nome in ("", None) or self.sobrenome in ("", None) or self.email in ("", None) or self.senha in ("", None):
             return None, {"msg":"Todos os campos obrigatórios devem ser preenchidos"}
         
-        elif int(self.CPF) in data["cpf"]:
+        elif self.CPF in data["cpf"]:
             return None, {"msg":"CPF já cadastrado"}
         
-        elif len(str(self.CPF)) != 11:
+        elif len(transform_cpf(self.CPF)) != 11:
             return None, {"msg":"CPF inválido"}
         
         elif not re.search(r'[^a-zA-Z0-9\s]', self.senha):
@@ -73,20 +78,16 @@ class User():
         
         return df, {"msg":"Cadastro realizado com sucesso"}
     
-
-@cadastro.get(ROOT)
-def get_user_info(request: Request):
+    
+def get_templated_response(request: Request):
     return templates.TemplateResponse("create_user.html", {"request": request})
 
-@cadastro.post(ROOT)
-async def create_user(request: Request):
-    user = User(request)
-    await user.load_data()
-    data, response = await user.is_valid()
+
+def create_user(data, response, user):
     if data is not None:
         dic = { "nome": user.nome,
                 "sobrenome": user.sobrenome,
-                "cpf": int(user.CPF),
+                "cpf": user.CPF,
                 "email": user.email,
                 "senha": user.senha,
                 "telefone": user.telefone,
@@ -94,7 +95,7 @@ async def create_user(request: Request):
                 }
         print(dic)
         data["users"].append(dic)
-        if int(user.CPF) != CPF_PARA_TESTES:
+        if int(transform_cpf(user.CPF)) != CPF_PARA_TESTES:
             with open(DATASET_PATH, "w") as f:
                 f.write(json.dumps(data, indent=4))
     return response

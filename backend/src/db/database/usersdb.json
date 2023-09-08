@@ -1,11 +1,20 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "name": "Joao",
-      "email": "joao@email.com",
-      "password": "123456",
-      "cpf": "12345678900"
-    }
-  ]
+    "users": [
+        {
+            "id": "1",
+            "name": "Joao",
+            "email": "joao@email.com",
+            "password": "123456",
+            "cpf": "12345678900"
+        },
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "711.880.474-69",
+            "email": "bccnf@cin.ufpe.br",
+            "senha": "0laMundo!",
+            "telefone": "995751338",
+            "dataNascimento": ""
+        }
+    ]
 }
