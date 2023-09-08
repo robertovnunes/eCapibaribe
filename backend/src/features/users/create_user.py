@@ -1,7 +1,7 @@
 # pip3 install fastapi uvicorn
 # python3 -m uvicorn backend.src.features.users.create_user:cadastro --host 0.0.0.0 --port 8000 --reload
 # http://localhost:8000/users/register
-
+# http://localhost:8000/users/delete/711.880.474-69
 
 import re
 from fastapi import Request, APIRouter
@@ -22,7 +22,7 @@ def transform_cpf(cpf: str) -> str:
     """Transforms CPF to number for validation
 
     Args:
-        cpf (str): CPF gattered from form
+        cpf (str): CPF gattered from request
 
     Returns:
         str: CPF without . or -
@@ -30,6 +30,14 @@ def transform_cpf(cpf: str) -> str:
     return cpf.replace(".", "").replace("-", "")
 
 def validate_cpf(cpf: str) -> bool:
+    """Checks if cpf is valid
+
+    Args:
+        cpf (str): CPF gattered from request
+
+    Returns:
+        bool: whether CPF is valid
+    """
     try: 
         if len(transform_cpf(cpf)) == 11 and int(transform_cpf(cpf))>0:
             return True
@@ -53,6 +61,8 @@ class Cadastro():
         return f"Nome: {self.nome}, sobrenome: {self.sobrenome}, CPF: {self.CPF}, email: {self.email}, senha: {self.senha}, telefone: {self.telefone}, data de nascimento: {self.dataNascimento}"
 
     async def load_data(self) -> None:
+        """loads request into Cadastro object
+        """
         form = await self.request.form()
         self.nome = form.get("nome")
         self.sobrenome = form.get("sobrenome")
@@ -64,6 +74,11 @@ class Cadastro():
         
 
     async def is_valid(self) -> (dict, dict):
+        """Checks if request is valid and the user can be created
+
+        Returns:
+            tuple of dicts: dicts for data and response
+        """
         with open(DATASET_PATH) as f:
             df = json.load(f)
             
@@ -101,6 +116,12 @@ def get_templated_response(request: Request):
     return templates.TemplateResponse("create_user.html", {"request": request})
 
 def save_user_in_db(data:dict, user:Cadastro):
+    """Save user to database
+
+    Args:
+        data (dict): data from database
+        user (Cadastro): data from request
+    """
     if data is not None:
         dic = { "nome": user.nome,
                 "sobrenome": user.sobrenome,
