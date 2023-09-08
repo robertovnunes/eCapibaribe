@@ -1,5 +1,5 @@
 # pip3 install fastapi uvicorn
-# python3 -m uvicorn backend.src.features.users.create_user:cadastro --host 0.0.0.0 --port 8000 --reload
+# python3 -m uvicorn backend.src.features.users.user:users_router --host 0.0.0.0 --port 8000 --reload
 # http://localhost:8000/users/register
 # http://localhost:8000/users/delete/711.880.474-69
 
@@ -9,12 +9,10 @@ from fastapi.templating import Jinja2Templates
 import json
 import os
 
-print(os.getcwd())
-
 CPF_PARA_TESTES = 99999999999
-HOME_PATH = os.getcwd()
-DATASET_PATH = HOME_PATH  + f"{os.sep}db{os.sep}database{os.sep}usersdb.json"
-TEMPLATES_PATH = HOME_PATH + f"{os.sep}templates"
+HOME_PATH = os.getcwd().split("eCapibaribe")[0] + "eCapibaribe"
+DATASET_PATH = HOME_PATH  + f"{os.sep}backend{os.sep}src{os.sep}db{os.sep}database{os.sep}usersdb.json"
+TEMPLATES_PATH = HOME_PATH + f"{os.sep}frontend{os.sep}src{os.sep}templates"
 TEMPLATE_NAME = "create_user.html"
 
 REQUEST_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha", "telefone", "dataNascimento"]
