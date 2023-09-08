@@ -4,7 +4,7 @@
 # http://localhost:8000/users/delete/711.880.474-69
 
 import re
-from fastapi import Request, APIRouter
+from fastapi import Request
 from fastapi.templating import Jinja2Templates
 import json
 import os
@@ -15,6 +15,10 @@ CPF_PARA_TESTES = 99999999999
 HOME_PATH = os.getcwd()
 DATASET_PATH = HOME_PATH  + f"{os.sep}backend{os.sep}src{os.sep}db{os.sep}database{os.sep}usersdb.json"
 TEMPLATES_PATH = HOME_PATH + f"{os.sep}backend{os.sep}src{os.sep}templates"
+TEMPLATE_NAME = "create_user.html"
+
+REQUEST_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha", "telefone", "dataNascimento"]
+MANDATORY_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha"]
 
 templates = Jinja2Templates(directory=TEMPLATES_PATH)
 
@@ -48,29 +52,23 @@ def validate_cpf(cpf: str) -> bool:
 class Cadastro():
     def __init__(self, request: Request) -> None:
         self.request = request
-        self.nome = None
-        self.sobrenome = None
-        self.CPF = None
-        self.email = None
-        self.senha = None
-        self.telefone = None
-        self.dataNascimento = None
+        self.request_dict = {}
+        for key in REQUEST_FIELDS:
+            self.request_dict[key] = None
         pass
     
     def __str__(self) -> str:
-        return f"Nome: {self.nome}, sobrenome: {self.sobrenome}, CPF: {self.CPF}, email: {self.email}, senha: {self.senha}, telefone: {self.telefone}, data de nascimento: {self.dataNascimento}"
+        string = ""
+        for key in REQUEST_FIELDS:
+            string += f"{key}: {self.request_dict[key]}\n"
+        return string
 
     async def load_data(self) -> None:
         """loads request into Cadastro object
         """
         form = await self.request.form()
-        self.nome = form.get("nome")
-        self.sobrenome = form.get("sobrenome")
-        self.CPF = form.get("CPF")
-        self.email = form.get("email")
-        self.senha = form.get("senha")
-        self.telefone = form.get("telefone")
-        self.dataNascimento = form.get("dataNascimento")
+        for key in REQUEST_FIELDS:
+            self.request_dict[key] = form.get(key)
         
 
     async def is_valid(self) -> (dict, dict):
@@ -82,30 +80,28 @@ class Cadastro():
         with open(DATASET_PATH) as f:
             df = json.load(f)
             
-        data = {key: [i[key] for i in df["users"]] for key in df["users"][0]}
+        data = {key: [i[key] for i in df["users"]] for key in REQUEST_FIELDS}
         
-        if self.CPF in ("", None) or self.nome in ("", None) or self.sobrenome in ("", None) or self.email in ("", None) or self.senha in ("", None):
+        if any([key for key in MANDATORY_FIELDS if not self.request_dict[key]]):
             return None, {"msg":"Todos os campos obrigatórios devem ser preenchidos"}
         
-        elif self.CPF in data["cpf"]:
-            return None, {"msg":"CPF já cadastrado"}
+        for key in ["cpf", "email"]:
+            if self.request_dict[key] in data[key]:
+                return None, {"msg": f"{key} já cadastrado"}
         
-        elif not validate_cpf(self.CPF):
+        if not validate_cpf(self.request_dict["cpf"]):
             return None, {"msg":"CPF inválido"}
         
-        elif not re.search(r'[^a-zA-Z0-9\s]', self.senha):
+        if not re.search(r'[^a-zA-Z0-9\s]', self.request_dict["senha"]):
             return None, {"msg":"Senha inválida! Falta caractere especial!"}
         
-        elif not re.search(r'\d', self.senha):
+        if not re.search(r'\d', self.request_dict["senha"]):
             return None, {"msg":"Senha inválida! Falta um número!"}
         
-        elif not re.search(r'[A-Z]', self.senha):
+        if not re.search(r'[A-Z]', self.request_dict["senha"]):
             return None, {"msg":"Senha inválida! Falta uma letra maiúscula!"}
         
-        elif self.email in data["email"]:
-            return None, {"msg":"E-mail já cadastrado"}
-        
-        elif not re.search(r'^[\w\.-]+@[\w\.-]+\.\w+$', self.email):
+        if not re.search(r'^[\w\.-]+@[\w\.-]+\.\w+$', self.request_dict["email"]):
             return None, {"msg":"E-mail inválido"}
         
         return df, {"msg":"Cadastro realizado com sucesso"}
@@ -113,7 +109,7 @@ class Cadastro():
 
     
 def get_templated_response(request: Request):
-    return templates.TemplateResponse("create_user.html", {"request": request})
+    return templates.TemplateResponse(TEMPLATE_NAME, {"request": request})
 
 def save_user_in_db(data:dict, user:Cadastro):
     """Save user to database
@@ -123,15 +119,11 @@ def save_user_in_db(data:dict, user:Cadastro):
         user (Cadastro): data from request
     """
     if data is not None:
-        dic = { "nome": user.nome,
-                "sobrenome": user.sobrenome,
-                "cpf": user.CPF,
-                "email": user.email,
-                "senha": user.senha,
-                "telefone": user.telefone,
-                "dataNascimento": user.dataNascimento
-                }
+        dic = {}
+        for key in REQUEST_FIELDS:
+            dic[key] = user.request_dict[key]
+        
         data["users"].append(dic)
-        if int(transform_cpf(user.CPF)) != CPF_PARA_TESTES:
+        if int(transform_cpf(dic["cpf"])) != CPF_PARA_TESTES:
             with open(DATASET_PATH, "w") as f:
                 f.write(json.dumps(data, indent=4))
