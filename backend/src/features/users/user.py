@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request
 from .models.user_model import User
 from .modify_user import modify_user_by_cpf
 from .delete_user import delete_user_by_cpf
-from .create_user import get_templated_response, Cadastro, create_user
+from .create_user import get_templated_response, Cadastro, save_user_in_db
 
 
 users_router = APIRouter()
@@ -32,4 +32,5 @@ async def register_user(request: Request):
     user = Cadastro(request)
     await user.load_data()
     data, response = await user.is_valid()
-    return create_user(data, response, user)
+    save_user_in_db(data, user)
+    return response

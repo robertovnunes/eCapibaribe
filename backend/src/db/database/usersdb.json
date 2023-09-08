@@ -1,13 +1,6 @@
 {
     "users": [
         {
-            "id": "1",
-            "name": "Joao",
-            "email": "joao@email.com",
-            "password": "123456",
-            "cpf": "12345678900"
-        },
-        {
             "nome": "Bianca",
             "sobrenome": "Carneiro",
             "cpf": "711.880.474-69",
