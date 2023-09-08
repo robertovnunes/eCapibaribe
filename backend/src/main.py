@@ -2,7 +2,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from features.users.user import users_router
-from features.users.create_user import cadastro
 from features.items.items import items_router
 from api.router import api_router
 
@@ -19,7 +18,6 @@ app.add_middleware(
 
 app.include_router(items_router)
 app.include_router(users_router)
-app.include_router(cadastro)
 app.include_router(api_router)
 
 

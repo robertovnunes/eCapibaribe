@@ -8,6 +8,15 @@
             "senha": "0laMundo!",
             "telefone": "995751338",
             "dataNascimento": ""
+        },
+        {
+            "nome": "teste",
+            "sobrenome": "falha",
+            "cpf": "12345678910",
+            "email": "teste@email.com",
+            "senha": "0laMundo!",
+            "telefone": "",
+            "dataNascimento": ""
         }
     ]
 }

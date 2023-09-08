@@ -13,8 +13,8 @@ print(os.getcwd())
 
 CPF_PARA_TESTES = 99999999999
 HOME_PATH = os.getcwd()
-DATASET_PATH = HOME_PATH  + f"{os.sep}backend{os.sep}src{os.sep}db{os.sep}database{os.sep}usersdb.json"
-TEMPLATES_PATH = HOME_PATH + f"{os.sep}backend{os.sep}src{os.sep}templates"
+DATASET_PATH = HOME_PATH  + f"{os.sep}db{os.sep}database{os.sep}usersdb.json"
+TEMPLATES_PATH = HOME_PATH + f"{os.sep}templates"
 TEMPLATE_NAME = "create_user.html"
 
 REQUEST_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha", "telefone", "dataNascimento"]
@@ -85,12 +85,12 @@ class Cadastro():
         if any([key for key in MANDATORY_FIELDS if not self.request_dict[key]]):
             return None, {"msg":"Todos os campos obrigatórios devem ser preenchidos"}
         
+        if not validate_cpf(self.request_dict["cpf"]):
+            return None, {"msg":"cpf inválido"}
+        
         for key in ["cpf", "email"]:
             if self.request_dict[key] in data[key]:
                 return None, {"msg": f"{key} já cadastrado"}
-        
-        if not validate_cpf(self.request_dict["cpf"]):
-            return None, {"msg":"CPF inválido"}
         
         if not re.search(r'[^a-zA-Z0-9\s]', self.request_dict["senha"]):
             return None, {"msg":"Senha inválida! Falta caractere especial!"}
@@ -102,7 +102,7 @@ class Cadastro():
             return None, {"msg":"Senha inválida! Falta uma letra maiúscula!"}
         
         if not re.search(r'^[\w\.-]+@[\w\.-]+\.\w+$', self.request_dict["email"]):
-            return None, {"msg":"E-mail inválido"}
+            return None, {"msg":"email inválido"}
         
         return df, {"msg":"Cadastro realizado com sucesso"}
     
