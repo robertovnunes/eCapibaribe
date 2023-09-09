@@ -1,24 +1,25 @@
-<div class="form-create-category">
+<div>
   <form [formGroup]="form">
-    <div class="fieldName">
+    <div class="form-group">
       <label for="name">Nome da Categoria</label><br>
-      <input type="text" id="name" formControlName="name">
+      <input type="text" id="name" name="name" formControlName="name">
     </div>
-    <div class="fieldDesc">
-      <label for="description">Descrição da categoria</label><br>
-      <input type="text" id="description" formControlName="description">
+    <div class="form-group">
+      <label for="desc">Descrição da categoria</label><br>
+      <input type="text" id="desc" name="desc" formControlName="desc">
     </div>
-    <div class="keywords">
+    <div class="form-group">
       <label for="keywords">Keywords</label><br>
-      <input type="text" id="keywords" formControlName="keywords">
+      <input type="text" id="keywords" name="keywords" formControlName="keywords">
     </div>
-    <div class="image">
+    <div class="form-group">
       <!--substituir pelo upload de uma imagem -->
-      <label for="image">Keywords</label><br>
-      <input type="url" id="image" formControlName="image">
+      <label for="image">imagem</label><br>
+      <input type="url" id="image" name="image" formControlName="image">
     </div>
-    <div class="submit">
-      <input type="submit" (click)="save()">
+    <div>
+      <button class="btn btn-primary" (click)="save()">Adicionar</button>
+      <button class="btn btn-primary" (click)="cancel()">Cancelar</button>
     </div>
   </form>
 </div>

@@ -26,8 +26,8 @@ export class ListCategoriesComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  remove(id: number) {
-    this.categoriesService.removeCategory(id).subscribe(
+  remove(id: number | null) {
+    this.categoriesService.removeCategory(id!).subscribe(
       (categories) =>
         this.categories = categories.data)
   }

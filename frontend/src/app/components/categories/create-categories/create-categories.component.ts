@@ -11,58 +11,72 @@ import {CategoriesService} from "../../../service/categories/categories.service"
 })
 export class CreateCategoriesComponent implements OnInit{
 
-  private category!: Category;
-  catnameInput!: HTMLInputElement | null;
-  catdescInput!: HTMLInputElement | null;
-  catkeywordsInput!: HTMLInputElement | null;
-  catimageInput!: HTMLInputElement | null;
+  nameInput!: HTMLInputElement | null;
+  descInput!: HTMLInputElement | null;
+  keywordsInput!: HTMLInputElement | null;
+  imageInput!: HTMLInputElement | null;
 
-  catname: FormControl<string | null>
-  catdesc: FormControl<string | null>
-  catkeywords: FormControl<string | null>
-  catimage: FormControl<string | null>
+  name: FormControl<string | null>
+  desc: FormControl<string | null>
+  keywords: FormControl<string | null>
+  image: FormControl<string | null>
 
   form: FormGroup;
 
-  newCategory!: Category;
 
 
   constructor(private readonly fb: FormBuilder,
               private router: Router,
               private categoriesService: CategoriesService) {
-    this.catname = this.fb.control('', [Validators.required]);
-    this.catdesc = this.fb.control('', [Validators.required]);
-    this.catkeywords = this.fb.control('', [Validators.required]);
-    this.catimage = this.fb.control('', [Validators.required]);
+    this.name = this.fb.control('', [Validators.required]);
+    this.desc = this.fb.control('', [Validators.required]);
+    this.keywords = this.fb.control('', [Validators.required]);
+    this.image = this.fb.control('', [Validators.required]);
     this.form = this.fb.nonNullable.group({
-      catname: this.catname,
-      catdesc: this.catdesc,
-      catkeywords: this.catkeywords,
-      catimage: this.catimage
+      name: this.name,
+      desc: this.desc,
+      keywords: this.keywords,
+      image: this.image
     });
   }
 
   ngOnInit(): void {
-    this.catnameInput = document.querySelector('input[name="name"]');
-    this.catdescInput = document.querySelector('input[name="description"]');
-    this.catkeywordsInput = document.querySelector('input[name="keywords"]');
-    this.catimageInput = document.querySelector('input[name="image"]')
+    this.nameInput = document.querySelector('input[name="name"]');
+    this.descInput = document.querySelector('input[name="desc"]');
+    this.keywordsInput = document.querySelector('input[name="keywords"]');
+    this.imageInput = document.querySelector('input[name="image"]')
   }
 
 
   save() {
-    if (this.form.invalid){
-      alert("Ta faltando alguma coisa!");
-      return false;
-    }
-    else {
-      this.newCategory.name = this.catname.toString();
-      this.newCategory.description = this.catdesc.toString();
-      this.newCategory.keywords = this.catkeywords.toString();
-      this.newCategory.image = this.catimage.toString();
-      this.categoriesService.addCategory(this.newCategory);
-      return true;
-    }
+    let result;
+    let message;
+    let newCategory: Category;
+    newCategory = {} as Category;
+    if (!(this.name == null || this.desc == null || this.keywords == null || this.image == null)) {
+      newCategory.name = <string>this.name.value;
+      newCategory.description = <string>this.desc.value;
+      newCategory.keywords = [<string>this.keywords.value];
+      newCategory.image = <string>this.image.value;
+      newCategory.items = [];
+      this.categoriesService.addCategory(newCategory).subscribe(res => {
+        result = res.status_code;
+        message = res.message;
+      });
+      if (result === 200) {
+        alert("Categoria criada com sucesso!");
+        this.router.navigate(['list-categories'], {replaceUrl: true}).then(r => r);
+      } else {
+        alert("Erro ao criar categoria! "+ message);
+        return false;
+      }
 
+    }
+    return true;
+
+  }
+
+  cancel() {
+    this.router.navigateByUrl('/categories', {replaceUrl: true}).then(r => r);
   }
 }

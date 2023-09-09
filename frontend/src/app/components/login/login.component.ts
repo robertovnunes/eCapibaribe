@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       return false;
     }
     let result = false;
-  this.userloginService.getUser(this.username.value).subscribe((u) => this.user = u.data);
+    this.userloginService.getUser(this.username.value).subscribe((u) => this.user = u.data);
     for (let x in this.user) {
       console.log(x);
     }

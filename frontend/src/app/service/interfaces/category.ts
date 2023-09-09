@@ -1,8 +1,8 @@
 export interface Category {
-    id: number;
+    id: number | null;
     name: string;
     description: string;
-    keywords: string;
+    keywords: string[];
     image: string;
-    items: string[];
+    items: [];
 }
