@@ -1,0 +1,14 @@
+<div>
+  <p>Categorias</p>
+  <ul>
+    <li *ngFor="let category of categories">
+      {{category.id}}
+      {{category.name}}
+      {{category.description}}
+      {{category.image}}
+      {{category.items}}
+      <p (click)="remove(category.id)">remover</p>
+    </li>
+
+  </ul>
+</div>

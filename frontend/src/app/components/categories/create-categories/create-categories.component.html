@@ -1,0 +1,24 @@
+<div class="form-create-category">
+  <form [formGroup]="form">
+    <div class="fieldName">
+      <label for="name">Nome da Categoria</label><br>
+      <input type="text" id="name" formControlName="name">
+    </div>
+    <div class="fieldDesc">
+      <label for="description">Descrição da categoria</label><br>
+      <input type="text" id="description" formControlName="description">
+    </div>
+    <div class="keywords">
+      <label for="keywords">Keywords</label><br>
+      <input type="text" id="keywords" formControlName="keywords">
+    </div>
+    <div class="image">
+      <!--substituir pelo upload de uma imagem -->
+      <label for="image">Keywords</label><br>
+      <input type="url" id="image" formControlName="image">
+    </div>
+    <div class="submit">
+      <input type="submit" (click)="save()">
+    </div>
+  </form>
+</div>
