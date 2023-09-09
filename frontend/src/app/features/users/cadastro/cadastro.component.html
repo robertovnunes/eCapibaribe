@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastro.component.css">
+    <title>eCapibaribe - Cadastro</title>
+</head>
+<body>
+    <h2 class="brand-logo center" style="font-weight: 600;" >Cadastro</h2>
+    <div class="row">
+        <form class="col s10 offset-s2" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="input-field col s5">
+                    <input id="nome" type="text" >
+                    <label for="nome">Nome*</label>
+                </div>
+                <div class="input-field col s5">
+                    <input id="sobrenome" type="text" >
+                    <label for="sobrenome">Sobrenome*</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="cpf" type="text" >
+                    <label for="cpf">CPF*</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s5">
+                    <input id="telefone" type="number">
+                    <label for="telefone">Telefone</label>
+                </div>
+                <div class="input-field col s5">
+                    <input id="dataNascimento" type="text">
+                    <label for="dataNascimento">Data de Nascimento</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="email" type="email">
+                    <label for="email">Email*</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="senha" type="password">
+                    <label for="senha">Senha*</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light offset-s2" type="submit">Enviar
+            </button>
+        </form>
+    </div>
+</body>
+</html>
