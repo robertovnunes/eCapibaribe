@@ -19,25 +19,15 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
-    "esModuleInterop": true,
-    "types": ["@types", "typings"],
-    "typeRoots": ["node_modules/@types", "typings"],
-    "paths": {
-      "@badeball/cypress-cucumber-preprocessor/*": [
-        "./node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/*"
-      ]
-    },
-    "node": {
-      
-    }
+    "lib": [
+      "ES2022",
+      "dom"
+    ]
   },
-  "include": ["src", "cypress.config.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-
+  }
 }

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 from ..schemas.response import HttpResponseModel, HTTPResponses
-from ..service.impl.category_service import categoryService
-from pydantic import BaseModel, model_validator
+from ..features.categories.service.category_service import categoryService
+from pydantic import BaseModel
 from typing import Union
 
 
