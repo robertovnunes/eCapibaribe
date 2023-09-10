@@ -22,8 +22,9 @@ async def delete_user(cpf: str, file_name: str | None = None):
     }
 
 
-@users_router.post("/users/register")
+@users_router.post("/api/users/register")
 async def register_user(request: Request):
+    print(await request.json())
     user = Cadastro(request)
     await user.load_data()
     data, response = await user.is_valid()

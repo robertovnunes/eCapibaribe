@@ -13,17 +13,17 @@
             <div class="row">
                 <div class="input-field col s5 form-group">
                     <label for="nome">Nome*</label>
-                    <input id="nome" type="text" class="form-control" name="nome" [(ngModel)]="user.nome">
+                    <input id="nome" type="text" class="form-control" name="nome" [(ngModel)]="user.nome" required>
                 </div>
                 <div class="input-field col s5 form-group">
                     <label for="sobrenome">Sobrenome*</label>
-                    <input id="sobrenome" type="text" class="form-control" name="sobrenome" [(ngModel)]="user.sobrenome">
+                    <input id="sobrenome" type="text" class="form-control" name="sobrenome" [(ngModel)]="user.sobrenome" required>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10 form-group">
                     <label for="cpf">CPF*</label>
-                    <input id="cpf" type="text" class="form-control" name="cpf" [(ngModel)]="user.cpf">
+                    <input id="cpf" type="text" class="form-control" name="cpf" [(ngModel)]="user.cpf" required>
                 </div>
             </div>
             <div class="row">
@@ -39,13 +39,13 @@
             <div class="row">
                 <div class="input-field col s10 form-group">
                     <label for="email">Email*</label>
-                    <input id="email" type="email" class="form-control" name="email" [(ngModel)]="user.email">
+                    <input id="email" type="email" class="form-control" name="email" [(ngModel)]="user.email" required>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10 form-group">
                     <label for="senha">Senha*</label>
-                    <input id="senha" type="password" class="form-control" name="senha" [(ngModel)]="user.senha">
+                    <input id="senha" type="password" class="form-control" name="senha" [(ngModel)]="user.senha" required>
                 </div>
             </div>
             <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar">Enviar
