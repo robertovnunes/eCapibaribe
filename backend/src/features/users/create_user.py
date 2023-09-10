@@ -1,24 +1,19 @@
 # pip3 install fastapi uvicorn
 # python3 -m uvicorn backend.src.features.users.user:users_router --host 0.0.0.0 --port 8000 --reload
-# http://localhost:4200/users/register
+# http://localhost:8000/users/register
 # http://localhost:8000/users/delete/711.880.474-69
 
 import re
 from fastapi import Request
-from fastapi.templating import Jinja2Templates
 import json
 import os
 
 CPF_PARA_TESTES = 99999999999
 HOME_PATH = os.getcwd().split("eCapibaribe")[0] + "eCapibaribe"
 DATASET_PATH = HOME_PATH  + f"{os.sep}backend{os.sep}src{os.sep}db{os.sep}database{os.sep}usersdb.json"
-TEMPLATES_PATH = HOME_PATH + f"{os.sep}frontend{os.sep}src{os.sep}app{os.sep}features{os.sep}users{os.sep}cadastro"
-TEMPLATE_NAME = "cadastro.component.html"
-
 REQUEST_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha", "telefone", "dataNascimento"]
 MANDATORY_FIELDS = ["nome", "sobrenome", "cpf", "email", "senha"]
 
-templates = Jinja2Templates(directory=TEMPLATES_PATH)
 
 def transform_cpf(cpf: str) -> str:
     """Transforms CPF to number for validation
@@ -105,9 +100,6 @@ class Cadastro():
         return df, {"msg":"Cadastro realizado com sucesso"}
     
 
-    
-def get_templated_response(request: Request):
-    return templates.TemplateResponse(TEMPLATE_NAME, {"request": request})
 
 def save_user_in_db(data:dict, user:Cadastro):
     """Save user to database
