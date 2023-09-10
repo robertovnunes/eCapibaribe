@@ -5,10 +5,11 @@ from pytest_bdd import parsers, given, when, then, scenario
 from fastapi.testclient import TestClient
 from features.users.create_user import CPF_PARA_TESTES
 from features.users.user import users_router
+import json
 
 client = TestClient(users_router)
 
-ROOT = "/users/register"
+ROOT = "/api/users/register"
 
 @scenario("../features/test_cadastro.feature", "Cadastro com sucesso")
 def test_bdd_sucesso():
@@ -70,7 +71,7 @@ def cadastro(context):
 @then(parsers.parse('envia mensagem de sucesso "{mensagem}"'), target_fixture="context")
 def envia_mensagem(context, mensagem):
     print()
-    response = client.post(ROOT, data={
+    response = client.post(ROOT, json={
         "nome": context["nome"],
         "sobrenome": context["sobrenome"],
         "cpf": context["cpf"],
@@ -153,7 +154,7 @@ def usuario_nao_cadastrado_por_cpf(context):
 def envia_mensagem(context, mensagem):
     print(context)
     
-    response = client.post(ROOT, data={
+    response = client.post(ROOT, json={
         "nome": context["nome"],
         "sobrenome": context["sobrenome"],
         "cpf": context["cpf"] if "cpf" in context.keys() else None,
