@@ -13,15 +13,16 @@ export class CadastroComponent implements OnInit {
     constructor(private http: HttpClient) { }
     
     ngOnInit(): void {
+        this.user = new User();
         console.debug("entrei init")
     }
     
     
     onSubmit() {
-        // aqui você pode implementar a logica para fazer seu formulário salvar
         console.log(this.user);
+        
+        this.http.post("http://localhost:8000/users/register", {"nome": this.user.nome, "sobrenome": this.user.sobrenome, "cpf": this.user.cpf, "telefone": this.user.telefone, "senha": this.user.senha, "email": this.user.email, "dataNascimento": this.user.dataNascimento})
         // ao instanciar novamente o objeto cliente, você vai limpar os controles na tela
         this.user = new User();
-        this.http.post("http://localhost:8000/users/register", {"nome": this.user.nome, "sobrenome": this.user.sobrenome, "cpf": this.user.cpf, "telefone": this.user.telefone, "senha": this.user.senha, "email": this.user.email, "dataNascimento": this.user.dataNascimento})
       }
 }
