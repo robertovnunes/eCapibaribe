@@ -19,7 +19,10 @@ export class UserloginService {
   constructor(private http: HttpClient) { }
 
   getUser(value: string | null): Observable<dataResponse> {
-    return this.http.get<dataResponse>(this.apiUrl+value!.toString());
-
+    let response = this.http.get<dataResponse>(this.apiUrl+value!.toString());
+    if (response === null) {
+      throw new Error('User not found');
+    }
+    return response;
   }
 }

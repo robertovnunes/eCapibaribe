@@ -7,7 +7,9 @@
       {{category.description}}
       {{category.image}}
       {{category.items}}
-      <p (click)="remove(category.id)">remover</p>
+      <div class="btn-remover" (click)="remove(category.id)">
+        <h4>Remover</h4>
+      </div>
     </li>
 
   </ul>

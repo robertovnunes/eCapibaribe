@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 })
 export class CategoriesManagerComponent {
 
+
   constructor(private router: Router) { }
   onAddButtonClick() {
     this.router.navigate(['create-categories'], {replaceUrl: true}).then(r =>  r);

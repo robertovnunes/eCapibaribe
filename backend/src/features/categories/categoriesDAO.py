@@ -68,6 +68,8 @@ class database:
         for category in cdb["categories"]:
             if category["id"] == category_id:
                 return category
+            else:
+                return None
 
 
 
@@ -127,3 +129,5 @@ class database:
                 cdb.pop(index)
         write_categories_db(cdb)
         return cdb
+
+

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { NgIconsModule } from "@ng-icons/core";
 
 import { Category } from "../../../service/interfaces/category";
 import {CategoriesService} from "../../../service/categories/categories.service";

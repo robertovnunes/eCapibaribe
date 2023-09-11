@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
 
+import { NgIconsModule } from '@ng-icons/core';
+import { heroUsers } from '@ng-icons/heroicons/outline';
+
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 
@@ -13,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriesManagerComponent } from './components/categories/categories-manager/categories-manager.component';
 import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
+import { NavbarComponent } from './shared/layout/navbar/navbar.component';
+import { ButtonComponent } from './shared/layout/button/button.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { ListCategoriesComponent } from './components/categories/list-categories
     LoginComponent,
     HomeComponent,
     CategoriesManagerComponent,
-    ListCategoriesComponent
+    ListCategoriesComponent,
+    NavbarComponent,
+    ButtonComponent
 
   ],
     imports: [
@@ -31,6 +38,7 @@ import { ListCategoriesComponent } from './components/categories/list-categories
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
+        NgIconsModule.withIcons({ heroUsers }),
     ],
   providers: [],
   bootstrap: [AppComponent],

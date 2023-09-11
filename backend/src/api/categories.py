@@ -63,10 +63,10 @@ def get_categories() -> HttpResponseModel:
     responses={
         status.HTTP_200_OK: {
             "model": HttpResponseModel,
-            "description": "Successfully got category by id",
+            "description": "Categoria encontrada",
         },
         status.HTTP_404_NOT_FOUND: {
-            "description": "category not found",
+            "description": "Categoria náo existe",
         }
     },
 )

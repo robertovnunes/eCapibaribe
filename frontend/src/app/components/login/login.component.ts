@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserloginService} from "../../service/userlogin/userlogin.service";
@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   password: FormControl<string | null>;
   form: FormGroup;
 
+  countError!: number;
+  time!: number;
+
 
   constructor(private readonly fb: FormBuilder,
               private router: Router,
@@ -30,6 +33,7 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password,
     });
+    this.countError = 0;
   }
 
   ngOnInit() {
@@ -39,16 +43,38 @@ export class LoginComponent implements OnInit {
 
   }
 
-  countError = 0;
-
-
   loginError(mensagem: string) {
     this.usernameInput!.style.borderColor = 'red';
     this.passwordInput!.style.borderColor = 'red';
     this.textError!.textContent = mensagem;
-    this.textError!.style.display = 'block';
     alert(mensagem);
+    this.textError!.style.display = 'block';
     console.log(this.countError);
+
+  }
+
+  loginDisabled() {
+    this.time = 20
+    this.form.disable();
+    this.usernameInput!.disabled = true;
+    this.passwordInput!.disabled = true;
+    alert('Login disabled for '+this.time.toString()+' seconds');
+    this.usernameInput!.disabled = false;
+    this.passwordInput!.disabled = false;
+    this.textError!.style.display = 'none';
+    this.form.enable();
+    alert('Login enabled');
+    let timer = setInterval(() => {
+      this.time--;
+      if (this.time === 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+    this.countError = 0;
+    this.form.enable();
+    this.textError!.style.display = 'none';
+    this.router.navigateByUrl('/login', {replaceUrl: true}).then(r => console.log(r));
+
   }
 
   doLogin() {
@@ -57,34 +83,29 @@ export class LoginComponent implements OnInit {
       return false;
     }
     let result = false;
-    this.userloginService.getUser(this.username.value).subscribe((u) => this.user = u.data);
-    for (let x in this.user) {
-      console.log(x);
-    }
-    console.log(this.username, this.password);
-    if (this.username.value === this.user.cpf || this.username.value === this.user.email) {
-      result = this.password.value === this.user.senha;
-    }
+    this.userloginService.getUser(this.username.value).subscribe(u => {
+      this.user = u.data;
+    });
 
+    if ((this.username.value === this.user.cpf) || (this.username.value === this.user.email)) {
+      result = this.password.value === this.user.senha;
+    } else {
+      result = false;
+    }
     if (result) {
-      alert('Login Successfull');
-      this.router.navigateByUrl('/home', {replaceUrl: true}).then(r => console.log(r));
+      //adicionar uma variavel global para armazenar o usuario logado
+      this.router.navigateByUrl('/home', {replaceUrl: true}).then();
       return true;
     } else {
-      if (this.countError < 3){
+      if (this.countError === 3) {
+        this.loginDisabled();
+      } else {
         this.countError++;
         this.loginError('Username or Password is incorrect');
         alert('Login Failed');
-        return false;
-      } else {
-        setTimeout(() => {
-            this.loginError('Username or Password is incorrect 3 times, please wait 30 seconds to retry');
-            this.form.disable()
-          }
-        , 30000);
-        return false
-
       }
+
+      return false;
     }
   }
 }
