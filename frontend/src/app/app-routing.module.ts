@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoriesManagerComponent},
   { path: 'create-categories', component: CreateCategoriesComponent },
   {path: 'list-categories', component: ListCategoriesComponent},
+
 ];
 
 @NgModule({

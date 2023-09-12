@@ -10,7 +10,8 @@ import {LocalStorageService} from "../../../../service/local-storage.service";
 })
 export class NavbarComponent implements OnInit {
 
-  liLogout = document.querySelector('.logout') as HTMLLIElement;
+  liLogout: HTMLLIElement|null = document.querySelector('.liLogout');
+  isLogedIn:boolean = false;
 
   constructor(private readonly router: Router,
               private localStorageService: LocalStorageService) {
@@ -20,19 +21,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((val) => {
       if (val instanceof RouterEvent) {
+        console.log(val.url)
         if (val.url === '/login' || this.localStorageService.get('user') === null) {
-          this.liLogout.style.display = 'none';
+          this.isLogedIn = false;
         } else {
-          this.liLogout.style.display = 'block';
+          this.isLogedIn = true;
         }
       }
     });
   }
-  showComponent = false;
-  NgOnChanges() {
-    this.showComponent = this.router.url.includes('login')
 
-  }
   logout() {
     this.localStorageService.set('user', null);
     this.router.navigate(['/login']).then( );

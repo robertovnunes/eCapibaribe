@@ -11,9 +11,9 @@
         <div class="nav-wrapper">
           <a routerLink="/home" class="brand-logo">eCapibaribe</a>
           <ul id="nav-mobile" name="options" class="right hide-on-med-and-down">
-            <li><a routerLink="/users/register">Cadastro</a></li>
-            <li><a routerLink="/categories">Gerenciar categorias</a></li>
-            <li class="logout" (click)="logout()" *ngIf="showComponent"><a routerLink="/logout">Sair</a></li>
+            <li><a *ngIf="!isLogedIn" routerLink="/users/register">Cadastro</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/categories">Gerenciar categorias</a></li>
+            <li class="logout" *ngIf="isLogedIn" (click)="logout()"><a routerLink="/logout">Sair</a></li>
           </ul>
         </div>
       </nav>
