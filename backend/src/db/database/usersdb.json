@@ -17,6 +17,24 @@
             "senha": "0laMundo!",
             "telefone": "",
             "dataNascimento": ""
+        },
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "12324543112",
+            "email": "bc123cnf@cin.ufpe.br",
+            "senha": "Bianca123!",
+            "telefone": 995751338,
+            "dataNascimento": ""
+        },
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "71188047465",
+            "email": "1231bccnf@cin.ufpe.br",
+            "senha": "BiancaCar123#@!",
+            "telefone": 995751338,
+            "dataNascimento": ""
         }
     ]
 }
