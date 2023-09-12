@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Category } from "../../../service/interfaces/category";
+import { Category } from "../../../../service/interfaces/category";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {CategoriesService} from "../../../service/categories/categories.service";
+import {CategoriesService} from "../../../../service/categories/categories.service";
 
 @Component({
   selector: 'app-create-categories',

@@ -9,21 +9,19 @@ import { heroUsers } from '@ng-icons/heroicons/outline';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 
-import { CreateCategoriesComponent } from './components/categories/create-categories/create-categories.component';
-import { InputComponent } from './shared/input/input.component';
+import { CreateCategoriesComponent } from './components/pages/categories/create-categories/create-categories.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { CategoriesManagerComponent } from './components/categories/categories-manager/categories-manager.component';
-import { ListCategoriesComponent } from './components/categories/list-categories/list-categories.component';
-import { NavbarComponent } from './shared/layout/navbar/navbar.component';
-import { ButtonComponent } from './shared/layout/button/button.component';
+import { CategoriesManagerComponent } from './components/pages/categories/categories-manager/categories-manager.component';
+import { ListCategoriesComponent } from './components/pages/categories/list-categories/list-categories.component';
+import { NavbarComponent } from './components/shared/layout/navbar/navbar.component';
+import { ButtonComponent } from './components/shared/layout/button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateCategoriesComponent,
-    InputComponent,
     LoginComponent,
     HomeComponent,
     CategoriesManagerComponent,

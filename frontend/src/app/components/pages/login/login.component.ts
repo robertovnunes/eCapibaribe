@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {UserloginService} from "../../service/userlogin/userlogin.service";
-import {User} from "../../service/interfaces/user";
+import {UserloginService} from "../../../service/userlogin/userlogin.service";
+import {User} from "../../../service/interfaces/user";
+import {LocalStorageService} from "../../../service/local-storage.service";
 
 
 @Component({
@@ -26,7 +27,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly fb: FormBuilder,
               private router: Router,
-              private userloginService: UserloginService) {
+              private userloginService: UserloginService,
+              private localStorageService: LocalStorageService) {
+    this.localStorageService.set('user', null);
     this.username = this.fb.control('', [Validators.required]);
     this.password = this.fb.control('', [Validators.required]);
     this.form = this.fb.nonNullable.group({
@@ -43,6 +46,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+
   loginError(mensagem: string) {
     this.usernameInput!.style.borderColor = 'red';
     this.passwordInput!.style.borderColor = 'red';
@@ -58,7 +62,7 @@ export class LoginComponent implements OnInit {
     this.form.disable();
     this.usernameInput!.disabled = true;
     this.passwordInput!.disabled = true;
-    alert('Login disabled for '+this.time.toString()+' seconds');
+    alert('Login disabled for ' + this.time.toString() + ' seconds');
     this.usernameInput!.disabled = false;
     this.passwordInput!.disabled = false;
     this.textError!.style.display = 'none';
@@ -93,10 +97,11 @@ export class LoginComponent implements OnInit {
       result = false;
     }
     if (result) {
-      //adicionar uma variavel global para armazenar o usuario logado
+      this.localStorageService.set('user', this.user);
       this.router.navigateByUrl('/home', {replaceUrl: true}).then();
       return true;
     } else {
+      this.localStorageService.set('user', null);
       if (this.countError === 3) {
         this.loginDisabled();
       } else {
@@ -108,4 +113,10 @@ export class LoginComponent implements OnInit {
       return false;
     }
   }
+
+  clear() {
+    this.form.reset();
+  }
+
+
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { NgIconsModule } from "@ng-icons/core";
 
-import { Category } from "../../../service/interfaces/category";
-import {CategoriesService} from "../../../service/categories/categories.service";
+import { Category } from "../../../../service/interfaces/category";
+import {CategoriesService} from "../../../../service/categories/categories.service";
 
 @Component({
   selector: 'app-list-categories',
