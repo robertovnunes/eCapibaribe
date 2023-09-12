@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { FormsModule } from '@angular/forms';
-import { TesteApi } from './api/teste-api/teste-api.component';
+import { TesteApi } from './api/register-api/register-api.component';
 
 
 @NgModule({
@@ -17,4 +17,4 @@ import { TesteApi } from './api/teste-api/teste-api.component';
     FormsModule
   ]
 })
-export class TesteModule { }
+export class UsersModule { }

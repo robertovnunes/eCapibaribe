@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CadastroComponent } from './features/teste/pages/cadastro/cadastro.component';
+import { CadastroComponent } from './features/users/pages/cadastro/cadastro.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
