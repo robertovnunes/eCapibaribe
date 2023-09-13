@@ -13,8 +13,8 @@
         <form class="col s10 offset-s2" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onSubmit()" novalidate>
             <div class="row">
                 <div class="input-field col s5 form-group">
-                    <label for="nome">Nome*</label>
-                    <input id="nome" type="text" class="form-control" name="nome" [(ngModel)]="user.nome" #nome="ngModel" required>
+                    <label for="nome"></label>
+                    <input placeholder="Nome*" id="nome" type="text" class="form-control validate" name="nome" [(ngModel)]="user.nome" #nome="ngModel" required>
                     <span
                       class="text-danger"
                       *ngIf="(nome.touched || registerForm.submitted) && nome.errors?.['required']"
@@ -23,8 +23,8 @@
                     </span>
                 </div>
                 <div class="input-field col s5 form-group">
-                    <label for="sobrenome">Sobrenome*</label>
-                    <input id="sobrenome" type="text" class="form-control" name="sobrenome" [(ngModel)]="user.sobrenome" #sobrenome="ngModel" required>
+                    <label for="sobrenome"></label>
+                    <input placeholder="Sobrenome*" id="sobrenome" type="text" class="form-control" name="sobrenome" [(ngModel)]="user.sobrenome" #sobrenome="ngModel" required>
                     <span
                       class="text-danger"
                       *ngIf="(sobrenome.touched || registerForm.submitted) && sobrenome.errors?.['required']"
@@ -35,8 +35,8 @@
             </div>
             <div class="row">
                 <div class="input-field col s10 form-group">
-                    <label for="cpf">CPF*</label>
-                    <input id="cpf" type="text" class="form-control" name="cpf" [(ngModel)]="user.cpf" #cpf="ngModel" required>
+                    <label for="cpf"></label>
+                    <input placeholder="CPF*" id="cpf" type="text" class="form-control" name="cpf" [(ngModel)]="user.cpf" #cpf="ngModel" required>
                     <span
                       class="text-danger"
                       *ngIf="(cpf.touched || registerForm.submitted) && cpf.errors?.['required']"
@@ -47,18 +47,18 @@
             </div>
             <div class="row">
                 <div class="input-field col s5 form-group">
-                    <label for="telefone">Telefone</label>
-                    <input id="telefone" type="number" class="form-control" name="telefone" [(ngModel)]="user.telefone">
+                    <label for="telefone"></label>
+                    <input placeholder="Telefone" id="telefone" type="number" class="form-control" name="telefone" [(ngModel)]="user.telefone">
                 </div>
                 <div class="input-field col s5 form-group">
-                    <label for="dataNascimento">Data de Nascimento</label>
-                    <input id="dataNascimento" type="text" class="form-control" name="dataNascimento" [(ngModel)]="user.dataNascimento">
+                    <label for="dataNascimento"></label>
+                    <input placeholder="Data de Nascimento" id="dataNascimento" type="text" class="form-control" name="dataNascimento" [(ngModel)]="user.dataNascimento">
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10 form-group">
-                    <label for="email">Email*</label>
-                    <input id="email" type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+                    <label for="email"></label>
+                    <input placeholder="Email*" id="email" type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
                     <span
                       class="text-danger"
                       *ngIf="(email.touched || registerForm.submitted) && email.errors?.['required']"
@@ -74,8 +74,8 @@
             </div>
             <div class="row">
                 <div class="input-field col s10 form-group">
-                    <label for="senha">Senha*</label>
-                    <input id="senha" type="password" class="form-control" name="senha" [(ngModel)]="user.senha" #senha="ngModel" required>
+                    <label for="senha"></label>
+                    <input placeholder="Senha*" id="senha" type="password" class="form-control" name="senha" [(ngModel)]="user.senha" #senha="ngModel" required>
                     <span
                         class="text-danger"
                         *ngIf="(senha.touched || registerForm.submitted) && senha.errors?.['required']">
@@ -88,7 +88,7 @@
                     </span>
                 </div>
             </div>
-            <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar">Enviar
+            <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar" id="registrar">Enviar
             </button>
         </form>
     </div>

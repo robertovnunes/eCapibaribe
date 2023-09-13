@@ -31,7 +31,7 @@ export class CadastroComponent implements OnInit {
     };
 
     patternValidatorEmail(email: string): boolean {
-        const regex = new RegExp('^[\w\.-]+@[\w\.-]+\.\w+$');
+        const regex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
         const valid = regex.test(email);
         return valid ? false : true;
     };
