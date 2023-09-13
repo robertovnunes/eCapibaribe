@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+}
+
+.image-size {
+    width: 4rem;
+    height: 4rem;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CadastroComponent } from './features/users/cadastro/cadastro.component'
+import { ItemsModule } from './features/items/items.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CadastroComponent } from './features/users/cadastro/cadastro.component'
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ItemsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

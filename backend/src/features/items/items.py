@@ -1,27 +1,27 @@
 from fastapi import APIRouter
 from .models.item_model import Item
-from .list_items import get_all_from_list
+from .list_items import get_with_cpf
 from .create_items import create_new_item
 from .modify_item import modify_item
 from .delete_item import deletar_item
 items_router = APIRouter()
 
-@items_router.post("/items")
+@items_router.post("/api/items")
 async def create_item(item: Item, file_name: str | None = None):
     msg:str = create_new_item(item, file_name)
     return {"msg":msg}
 
-@items_router.put("/items/update")
+@items_router.put("/api/items/update")
 async def update_item(item: Item, file_name:str | None=None):
     msg:str = modify_item(item,file_name)
     return msg
 
-@items_router.delete("/items/delete/{id}")
+@items_router.delete("/api/items/delete/{id}")
 async def delete_item(id: int,file_name:str | None=None):
     id:int = deletar_item(id,file_name)
     return {"msg":id}
 
-@items_router.get("/items")
-async def list_items(file_name:str | None = None):
-    items = get_all_from_list(file_name)
+@items_router.get("/api/items/{cpf}")
+async def list_items(cpf:str, file_name:str | None = None):
+    items = get_with_cpf(cpf, file_name)
     return items
