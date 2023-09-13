@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.usernameInput = document.querySelector('input[name="username"]');
     this.passwordInput = document.querySelector('input[name="password"]');
     this.textError = document.querySelector('.login-error-paragraph');
-
+    this.time = 20;
   }
 
 
@@ -58,24 +58,27 @@ export class LoginComponent implements OnInit {
   }
 
   loginDisabled() {
-    this.time = 20
     this.form.disable();
-    this.usernameInput!.disabled = true;
-    this.passwordInput!.disabled = true;
     alert('Login disabled for ' + this.time.toString() + ' seconds');
-    this.usernameInput!.disabled = false;
-    this.passwordInput!.disabled = false;
-    this.textError!.style.display = 'none';
-    this.form.enable();
-    alert('Login enabled');
     let timer = setInterval(() => {
+      let message = 'Login disabled for ' + this.time.toString() + ' seconds';
+      if (this.time > 0) {
+        this.textError!.textContent = message;
+        this.textError!.style.display = 'block';
+      }
       this.time--;
       if (this.time === 0) {
         clearInterval(timer);
+        this.countError = 0;
+
+        alert('Login enabled');
+        this.form.enable();
+        this.textError!.style.display = 'none';
+        this.usernameInput!.style.borderColor = 'black';
+        this.passwordInput!.style.borderColor = 'black';
       }
     }, 1000);
-    this.countError = 0;
-    this.form.enable();
+
     this.textError!.style.display = 'none';
     this.router.navigateByUrl('/login', {replaceUrl: true}).then(r => console.log(r));
 
@@ -84,13 +87,16 @@ export class LoginComponent implements OnInit {
   doLogin() {
     if (this.form.invalid) {
       this.loginError('Username or Password is empty');
+      this.countError++;
+      if(this.countError === 3){
+        this.loginDisabled();
+      }
       return false;
     }
     let result = false;
-    this.userloginService.getUser(this.username.value).subscribe(u => {
-      this.user = u.data;
+    this.userloginService.getUser(this.username.value).subscribe((dataresponse) => {
+      this.user = dataresponse.data;
     });
-
     if ((this.username.value === this.user.cpf) || (this.username.value === this.user.email)) {
       result = this.password.value === this.user.senha;
     } else {
@@ -108,6 +114,7 @@ export class LoginComponent implements OnInit {
         this.countError++;
         this.loginError('Username or Password is incorrect');
         alert('Login Failed');
+        this.clear()
       }
 
       return false;
@@ -118,5 +125,10 @@ export class LoginComponent implements OnInit {
     this.form.reset();
   }
 
+  enterSubmit(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.doLogin();
+    }
+  }
 
 }

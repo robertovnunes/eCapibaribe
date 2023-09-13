@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit{
 
   }
   openCTM() {
-    this.router.navigateByUrl('/categories').then(r => r);
+    this.router.navigateByUrl('/categories').then();
   }
 
   ngOnInit(): void {

@@ -7,6 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class ButtonComponent {
 
-  protected readonly event = event;
+  disabled = false;
   @Input() textButton!: string;
 }
