@@ -6,7 +6,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-
-  protected readonly event = event;
   @Input() textButton!: string;
 }
