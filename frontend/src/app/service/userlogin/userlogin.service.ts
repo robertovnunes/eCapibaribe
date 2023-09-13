@@ -20,12 +20,9 @@ export class UserloginService {
 
   getUser(value: string | null): Observable<dataResponse> {
     let response = this.http.get<dataResponse>(this.apiUrl+value!.toString());
-    response.subscribe(dataresponse => {
-      if(dataresponse.status_code != '200') {
-        dataresponse.data = {} as User;
-      }
-    })
-
+    if (response === null) {
+      throw new Error('User not found');
+    }
     return response;
   }
 }

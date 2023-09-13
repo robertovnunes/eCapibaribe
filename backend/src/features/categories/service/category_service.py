@@ -8,11 +8,11 @@ from ..categoriesDAO import database as db
 
 class Category(BaseModel):
     id: Union[str, None] = None
-    name: Union[str, None] = None
-    description: Union[str, None] = None
-    image: Union[str, None] = None
-    keywords: Union[list, None] = None
-    items: Union[list, None] = None
+    name: str
+    description: str
+    image: str
+    keywords: list
+    items: list
 
 
 class categoryService(CategoryServiceMeta):
@@ -73,7 +73,7 @@ class categoryService(CategoryServiceMeta):
         )
 
     @staticmethod
-    def put_category(category_id: str, category: Category):
+    def put_category(category_id: str, category: dict):
         """Put category method implementation"""
         category = db.update_category(category_id, category)
         if not category:

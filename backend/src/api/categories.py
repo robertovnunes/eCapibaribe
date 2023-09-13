@@ -19,11 +19,11 @@ def validatefield(value) -> bool:
 
 class Category(BaseModel):
     id: Union[str, None] = None
-    name: Union[str, None] = None
-    description: Union[str, None] = None
-    image: Union[str, None] = None
-    keywords: Union[list, None] = None
-    items: Union[list, None] = None
+    name: str
+    description: str
+    image: str
+    keywords: list
+    items: list
 
 
 
@@ -148,7 +148,7 @@ def post_category(category: Category) -> HttpResponseModel:
         }
     },
 )
-def put_category(category_id, category: Category) -> HttpResponseModel:
+def put_category(category_id, category) -> HttpResponseModel:
     """
     Put category.
 

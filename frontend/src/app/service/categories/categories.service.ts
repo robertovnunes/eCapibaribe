@@ -41,12 +41,7 @@ export class CategoriesService {
 
   }
 
-   getCategory(id:number){
-    return this.http.get<categoriesResponse>(this.apiUrl+id.toString());
-  }
-
   addCategory(newCategory: Category) {
     return this.http.post<categoriesResponse>(this.apiUrl, newCategory);
   }
-
 }

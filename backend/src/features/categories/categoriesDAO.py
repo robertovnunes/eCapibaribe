@@ -10,12 +10,12 @@ logger = getLogger('uvicorn')
 
 
 class Category(BaseModel):
-    id: str
-    name: Union[str, None] = None
-    description: Union[str, None] = None
-    image: Union[str, None] = None
-    keywords: Union[list, None] = None
-    items: Union[list, None] = None
+    id: Union[str, None] = None
+    name: str
+    description: str
+    image: str
+    keywords: list
+    items: list
 
 
 def get_categories_db():
@@ -99,12 +99,12 @@ class database:
     @staticmethod
     def update_category(category_id: str, categoryupdt: Category):
         cdb = get_categories_db()
-        for category in cdb:
+        for category in cdb["categories"]:
             if category["id"] == category_id:
-                category["name"] = categoryupdt.name
+                category["name"] = categoryupdt["name"]
                 # segue nessa mesma logica para os outros campos
-                write_categories_db(cdb)
-                return category
+
+        write_categories_db(cdb)
 
     @staticmethod
     def delete_category(category_id: str) -> list:
