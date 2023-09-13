@@ -21,6 +21,6 @@ def modify_item(new_item:Item,file_name: str |None ) -> str:
     items: list[dict] = data["items"]
     for idX, item in enumerate(items):
         if new_item.item_id == item["item_id"]:
-            data["items"][idX]=vars(new_item)
+            data["items"][idX].update(new_item)
     save_json(path, data)
     return "Informações do item id {} alteradas com sucesso!".format(str(new_item.item_id))

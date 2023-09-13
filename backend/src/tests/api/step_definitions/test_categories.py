@@ -131,7 +131,6 @@ def check_response_body_is_a_list(context, total):
 
 
 @then(parsers.cfparse('a categoria com id igual a {id} e nome igual a {nome}'), target_fixture="context")
-@then("a categoria com id igual a <id> e nome igual a <nome>")
 def check_all_response_body_id(context, id, nome):
     """
     Check if each category in the response body has an id
