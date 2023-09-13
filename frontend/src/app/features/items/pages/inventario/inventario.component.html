@@ -41,17 +41,17 @@
     </ng-container>
 
     <ng-container matColumnDef="Editar">
-        <th mat-header-cell *matHeaderCellDef> Editar </th>
+        <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element"> 
-            <div class="example-button-container">
-                <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
-                    <mat-icon>home</mat-icon>
-                </button>
-            </div>
+            <button mat-icon-button color="primary">
+                <mat-icon [ngStyle]="{'color':'#3f51b5'}">edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+                <mat-icon [ngStyle]="{'color':'red'}">delete_forever</mat-icon>
+            </button>
         </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedItems"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedItems;"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['Editar']"></tr>
 </table> 

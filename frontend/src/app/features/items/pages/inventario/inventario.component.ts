@@ -8,7 +8,7 @@ import { ItemsApi } from '../../api/items-api';
   styleUrls: ['./inventario.component.css']
 })
 export class InventarioComponent implements OnInit {
-  displayedItems: string[] = ['Item-ID', 'Nome', 'Preço', 'Marca', 'Quantidade', 'Categoria', 'Imagem'];
+  displayedItems: string[] = ['Item-ID', 'Nome', 'Preço', 'Marca', 'Quantidade', 'Categoria', 'Imagem', 'Editar'];
   itemSource: showItem[] = [];
 
   constructor(private itemsApi: ItemsApi) { }
