@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastro.component.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+    <title>eCapibaribe - Cadastro</title>
+</head>
+<body>
+    <h2 class="brand-logo center" style="font-weight: 600;" >Cadastro</h2>
+    <div class="row">
+        <form class="col s10" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onSubmit()" novalidate>
+            <div class="row">
+                <div class="input-field col s5 form-group">
+                    <label for="nome"></label>
+                    <input placeholder="Nome*" id="nome" type="text" class="form-control validate" name="nome" [(ngModel)]="user.nome" #nome="ngModel" required>
+                    <span
+                      class="text-danger"
+                      id="campo_obrigatorio"
+                      *ngIf="(nome.touched || registerForm.submitted) && nome.errors?.['required']"
+                    >
+                      Campo obrigatório
+                    </span>
+                </div>
+                <div class="input-field col s5 form-group">
+                    <label for="sobrenome"></label>
+                    <input placeholder="Sobrenome*" id="sobrenome" type="text" class="form-control" name="sobrenome" [(ngModel)]="user.sobrenome" #sobrenome="ngModel" required>
+                    <span
+                      class="text-danger"
+                      id="campo_obrigatorio"
+                      *ngIf="(sobrenome.touched || registerForm.submitted) && sobrenome.errors?.['required']"
+                    >
+                      Campo obrigatório
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 form-group">
+                    <label for="cpf"></label>
+                    <input placeholder="CPF*" id="cpf" type="text" class="form-control" name="cpf" [(ngModel)]="user.cpf" #cpf="ngModel" required>
+                    <span
+                      class="text-danger"
+                      id="campo_obrigatorio"
+                      *ngIf="(cpf.touched || registerForm.submitted) && cpf.errors?.['required']"
+                    >
+                      Campo obrigatório
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s5 form-group">
+                    <label for="telefone"></label>
+                    <input placeholder="Telefone" id="telefone" type="number" class="form-control" name="telefone" [(ngModel)]="user.telefone">
+                </div>
+                <div class="input-field col s5 form-group">
+                    <label for="dataNascimento"></label>
+                    <input placeholder="Data de Nascimento" id="dataNascimento" type="text" class="form-control" name="dataNascimento" [(ngModel)]="user.dataNascimento">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 form-group">
+                    <label for="email"></label>
+                    <input placeholder="Email*" id="email" type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+                    <span
+                      class="text-danger"
+                      id="campo_obrigatorio"
+                      *ngIf="(email.touched || registerForm.submitted) && email.errors?.['required']"
+                    >
+                      Campo obrigatório
+                    </span>
+                    <span
+                        class="text-danger"
+                        *ngIf="registerForm.submitted && patternValidatorEmail(user.email)">
+                        Email inválido
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 form-group">
+                    <label for="senha"></label>
+                    <input placeholder="Senha*" id="senha" type="password" class="form-control" name="senha" [(ngModel)]="user.senha" #senha="ngModel" required>
+                    <span
+                        class="text-danger"
+                        id="campo_obrigatorio"
+                        *ngIf="(senha.touched || registerForm.submitted) && senha.errors?.['required']">
+                        Campo obrigatório
+                    </span>
+                    <span
+                        class="text-danger"
+                        id="senha_errada"
+                        *ngIf="registerForm.submitted && patternValidator(user.senha)">
+                        A senha deve ter pelo menos 6 caracteres, 1 caractere especial, 1 letra maiúscula, 1 letra minúscula e 1 dígito.
+                    </span>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar" id="registrar">Enviar
+            </button>
+        </form>
+    </div>
+</body>
+</html>

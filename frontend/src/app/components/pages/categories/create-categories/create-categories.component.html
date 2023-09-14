@@ -1,0 +1,20 @@
+<div>
+  <form class="form" [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Nome da Categoria</label><br>
+      <input type="text" id="name" name="name" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="desc">Descrição da categoria</label><br>
+      <input type="text" id="desc" name="desc" formControlName="desc">
+    </div>
+    <div class="form-group">
+      <label for="keywords">Keywords</label><br>
+      <input type="text" id="keywords" name="keywords" formControlName="keywords" >
+    </div>
+    <div class="form-buttons">
+      <app-button class="btn btn-primary" [textButton]="'Adicionar'" (click)="save()"></app-button>
+      <app-button class="btn btn-cancel" [textButton]="'Cancelar'" (click)="cancel()"></app-button>
+    </div>
+  </form>
+</div>

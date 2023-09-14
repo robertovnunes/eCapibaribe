@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.component.css">
+    <title>eCapibaribe</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+          <a routerLink="" class="brand-logo left">eCapibaribe</a>
+          <ul id="nav-mobile" class="right">
+            <li><a *ngIf="!isLogedIn" routerLink="login">Login</a></li>
+            <li><a *ngIf="!isLogedIn" routerLink="/users/register">Cadastro</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/items/inventario">Inventario</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/items/cadastro">Registar Item</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/categories">Gerenciar categorias</a></li>
+            <li class="logout" *ngIf="isLogedIn" (click)="logout()"><a routerLink="/logout">Sair</a></li>
+          </ul>
+        </div>
+      </nav>
+</body>

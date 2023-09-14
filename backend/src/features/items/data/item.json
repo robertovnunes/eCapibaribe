@@ -24,6 +24,19 @@
             "imagem": "imagem007.jpg",
             "op_envio": "correio",
             "palavrachave": null
+        },
+        {
+            "cpf_user": "123.456.789-10",
+            "item_id": 123,
+            "item_nome": "lapis",
+            "item_price": 1.5,
+            "quantidade": 10,
+            "marca": "faber",
+            "categoria": "material de estudo",
+            "descricao": "lapis",
+            "imagem": "",
+            "op_envio": "entrega rapida",
+            "palavrachave": ""
         }
     ]
 }
