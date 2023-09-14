@@ -9,8 +9,8 @@ Feature: Adicionar categorias no backend
     Then o status da resposta deve ser "200"
     And a categoria "<name>" existe no banco de dados
     Examples:
-        |name           |description   |image                        |keywords       |itens|
-        | eletronicos   |  eletronicos |https://picsum.photos/200/300|['eletronicos']| []  |
+      | name   | description | image                         | keywords      | itens |
+      | comida | eletronicos | https://picsum.photos/200/300 | [eletronicos] | null  |
 
 
   Scenario Outline: Adicionando Categoria com nome já existente
@@ -19,8 +19,8 @@ Feature: Adicionar categorias no backend
     Then o status da resposta deve ser "400"
     And a mensagem de erro deve ser "Category already exists"
     Examples:
-        |name           |description   |image                        |keywords      |itens|
-        |  brinquedos   |  brinquedos  |https://picsum.photos/200/300|["brinquedos"]|[]   |
+      | name       | description | image                         | keywords     | itens |
+      | brinquedos | brinquedos  | https://picsum.photos/200/300 | [brinquedos] | null  |
 
 
   Scenario Outline: Adicionando Categoria com nome vazio
@@ -29,8 +29,8 @@ Feature: Adicionar categorias no backend
     Then o status da resposta deve ser "400"
     And a mensagem de erro deve ser "Category name cannot be empty"
     Examples:
-        |name           |description   |image                        |keywords      |itens|
-        |      ""       |  brinquedos  |https://picsum.photos/200/300|["brinquedos"]|[]   |
+      | name | description | image                         | keywords     | itens |
+      |      | brinquedos  | https://picsum.photos/200/300 | [brinquedos] | null  |
 
 
   Scenario Outline: Adicionando Categoria com descrição vazia
@@ -39,8 +39,8 @@ Feature: Adicionar categorias no backend
     Then o status da resposta deve ser "400"
     And a mensagem de erro deve ser "Category description cannot be empty"
     Examples:
-        |name           |description   |image                        |keywords      |itens|
-        |  comida   |      ""      |https://picsum.photos/200/300|["brinquedos"]|[]   |
+      | name   | description | image                         | keywords     | itens |
+      | comida |             | https://picsum.photos/200/300 | [brinquedos] | null  |
 
 
   Scenario Outline: Adicionando Categoria com imagem vazia
@@ -49,5 +49,5 @@ Feature: Adicionar categorias no backend
     Then o status da resposta deve ser "400"
     And a mensagem de erro deve ser "Category image cannot be empty"
     Examples:
-        |name           |description   |image                        |keywords      |itens|
-        |  comida   |  comida  |      ""                     |["comida"]|[]   |
+      | name   | description | image | keywords | itens |
+      | comida | comida      |       | [comida] | null  |
