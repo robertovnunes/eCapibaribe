@@ -35,6 +35,21 @@ When('o usuário preenche o nome com {string}, e-mail com {string}, CPF com {str
     cy.get('#registrar').click();
 });
 
+
+Then (
+    'o usuário recebe uma mensagem {string}',
+    (message: string) => {
+      cy.get('#senha_errada').should('be.visible');
+    }
+  );
+
+Then (
+    'o usuário recebe uma mensagem {string}',
+    (message: string) => {
+        cy.get('#campo_obrigatorio').should('be.visible');
+    }
+);
+
 Then('o usuário recebe uma mensagem {string}', (mensagemEsperada: string) => {
     cy.on('window:alert', (mensagemAlerta) => {
         expect(mensagemAlerta).to.equal(mensagemEsperada);

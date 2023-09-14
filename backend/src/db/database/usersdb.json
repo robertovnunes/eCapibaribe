@@ -12,7 +12,7 @@
         {
             "nome": "teste",
             "sobrenome": "falha",
-            "cpf": "12345678910",
+            "cpf": "123.456.789-10",
             "email": "teste@email.com",
             "senha": "0laMundo!",
             "telefone": "",
