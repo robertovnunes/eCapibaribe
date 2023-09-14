@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((val) => {
       if (val instanceof RouterEvent) {
-        console.log(val.url)
+        
         if (val.url === '/login' || this.localStorageService.get('user') === null) {
           this.isLogedIn = false;
         } else {

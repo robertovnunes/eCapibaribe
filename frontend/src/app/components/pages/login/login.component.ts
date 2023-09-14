@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.usernameInput = document.querySelector('input[name="username"]');
     this.passwordInput = document.querySelector('input[name="password"]');
     this.textError = document.querySelector('.login-error-paragraph');
-
+    this.clear();
   }
 
 
@@ -53,44 +53,52 @@ export class LoginComponent implements OnInit {
     this.textError!.textContent = mensagem;
     alert(mensagem);
     this.textError!.style.display = 'block';
-    console.log(this.countError);
-
   }
 
   loginDisabled() {
     this.time = 20
-    this.form.disable();
-    this.usernameInput!.disabled = true;
-    this.passwordInput!.disabled = true;
-    alert('Login disabled for ' + this.time.toString() + ' seconds');
-    this.usernameInput!.disabled = false;
-    this.passwordInput!.disabled = false;
-    this.textError!.style.display = 'none';
-    this.form.enable();
-    alert('Login enabled');
+    let message = 'Login disabled for ' + this.time.toString() + ' seconds'
+    alert(message);
     let timer = setInterval(() => {
-      this.time--;
-      if (this.time === 0) {
+      if (this.time > 0) {
+        this.form.disable();
+        message = 'Login disabled for ' + this.time.toString() + ' seconds';
+        this.textError!.textContent = message;
+        this.textError!.style.display = 'block';
+        this.time--;
+      } else {
         clearInterval(timer);
+        this.usernameInput!.style.borderColor = this.passwordInput!.style.borderColor = 'black';
+        this.textError!.style.display = 'none';
+        this.form.enable();
+        this.clear();
+        alert('Login enabled');
       }
     }, 1000);
     this.countError = 0;
-    this.form.enable();
-    this.textError!.style.display = 'none';
-    this.router.navigateByUrl('/login', {replaceUrl: true}).then(r => console.log(r));
+    this.router.navigateByUrl('/login', {replaceUrl: true}).then();
 
   }
 
   doLogin() {
     if (this.form.invalid) {
       this.loginError('Username or Password is empty');
+      this.countError++;
+      if (this.countError === 3) {
+        this.loginDisabled();
+      }
       return false;
     }
     let result = false;
-    this.userloginService.getUser(this.username.value).subscribe(u => {
-      this.user = u.data;
-    });
-
+    try {
+      this.userloginService.getUser(this.username.value).subscribe(u => {
+        this.user = u.data;
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        return false;
+      }
+    }
     if ((this.username.value === this.user.cpf) || (this.username.value === this.user.email)) {
       result = this.password.value === this.user.senha;
     } else {
@@ -118,5 +126,10 @@ export class LoginComponent implements OnInit {
     this.form.reset();
   }
 
+  enterSubmit(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.doLogin();
+    }
+  }
 
 }

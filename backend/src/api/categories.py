@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, File
 from ..schemas.response import HttpResponseModel, HTTPResponses
 from ..features.categories.service.category_service import categoryService
 from pydantic import BaseModel
@@ -129,7 +129,7 @@ def post_category(category: Category) -> HttpResponseModel:
             data={"fields": missingfieldslist}
         )
 
-    print(category)
+    
     category_post_response = categoryService.post_category(category)
 
     return category_post_response
