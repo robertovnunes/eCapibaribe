@@ -6,7 +6,7 @@ from features.items.items import items_router
 from api.router import api_router
 
 
-app = FastAPI()
+app = FastAPI(debug= True)
 
 app.add_middleware(     
     CORSMiddleware,     
@@ -19,5 +19,3 @@ app.add_middleware(
 app.include_router(items_router)
 app.include_router(users_router)
 app.include_router(api_router)
-
-
