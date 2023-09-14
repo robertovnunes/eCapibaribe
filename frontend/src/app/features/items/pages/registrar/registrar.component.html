@@ -87,7 +87,7 @@
             <div class="input-field col s10 form-group">
                 <label for="imagem"></label>
                 <input placeholder="FOTO*" id="imagem" type="file" class="form-control file-upload"
-                     name="imagem" [(ngModel)]="item.imagem" #imagem="ngModel" required
+                     name="imagem" [(ngModel)]="item.imagem" #imagem="ngModel"
                      requiredFileType="image/png" (change)="receiveImage($event)">
                 <span
                     class="text-danger"
@@ -115,7 +115,7 @@
                 <input placeholder="palavrachave" id="palavrachave" type="text" class="form-control" name="palavrachave" [(ngModel)]="item.palavrachave">
             </div>
         </div>
-        <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar">Enviar
+        <button class="btn waves-effect waves-light offset-s2" id="RegistrarItem" type="submit" value="enviar">Registrar Item
         </button>
     </form>
 </div>

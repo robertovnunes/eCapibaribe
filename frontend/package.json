@@ -6,7 +6,12 @@
     "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --disable-host-check true",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:electron": "cypress run --browser electron --no-exit"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "step_definitions": "cypress/e2e/features/"
   },
   "private": true,
   "dependencies": {
@@ -15,10 +20,12 @@
     "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
     "@angular/forms": "^16.2.0",
-    "@angular/material": "^16.2.3",
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "cucumber": "^6.0.7",
+    "materialize-css": "^1.0.0-rc.2",
+    "protractor": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -28,6 +35,9 @@
     "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+    "@types/node": "^20.6.0",
+    "cypress": "^13.2.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
