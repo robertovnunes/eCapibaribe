@@ -27,6 +27,7 @@ export class EditarComponent implements OnInit {
   onSubmit() {
     this.itemsApi.alterarItem(this.item).subscribe((response: any)=> {
       console.log(response);
+      alert("Item editado com sucesso!")
       this._router.navigateByUrl('/items/inventario');
     })
   }
