@@ -17,8 +17,7 @@ import { ItemsModule } from './features/items/items.module';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    UsersModule
-    FormsModule,
+    UsersModule,
     ItemsModule
   ],
   providers: [],
