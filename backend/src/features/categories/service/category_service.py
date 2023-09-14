@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import File
 from pydantic import BaseModel
-from ....schemas.response import HTTPResponses, HttpResponseModel
+from schemas.response import HTTPResponses, HttpResponseModel
 from .category_service_meta import CategoryServiceMeta
-from ..categoriesDAO import database as db
+from features.categories.categoriesDAO import database as db
 
 
 class Category(BaseModel):

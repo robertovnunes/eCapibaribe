@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, File
-from ..schemas.response import HttpResponseModel, HTTPResponses
-from ..features.categories.service.category_service import categoryService
+from schemas.response import HttpResponseModel, HTTPResponses
+from features.categories.service.category_service import categoryService
 from pydantic import BaseModel
 from typing import Union
 

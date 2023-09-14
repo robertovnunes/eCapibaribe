@@ -1,8 +1,8 @@
 
 from abc import ABC, abstractmethod
 
-from ....schemas.category import CategoryGet
-from ....schemas.response import HttpResponseModel
+from schemas.category import CategoryGet
+from schemas.response import HttpResponseModel
 
 
 class CategoryServiceMeta(ABC):
