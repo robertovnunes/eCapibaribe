@@ -46,8 +46,6 @@ class Cadastro():
     def __init__(self, request: Request) -> None:
         self.request = request
         self.request_dict = {}
-        for key in REQUEST_FIELDS:
-            self.request_dict[key] = None
         pass
     
     def __str__(self) -> str:
@@ -59,9 +57,11 @@ class Cadastro():
     async def load_data(self) -> None:
         """loads request into Cadastro object
         """
-        form = await self.request.form()
+        form = await self.request.json()
+        print(form)
         for key in REQUEST_FIELDS:
-            self.request_dict[key] = form.get(key)
+            self.request_dict[key] = form[key]
+            print(self.request_dict[key])
         
 
     async def is_valid(self) -> (dict, dict):

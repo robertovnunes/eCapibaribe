@@ -4344,6 +4344,17 @@
             transform: translateX(-50%);
   }
   
+
+  nav .brand-logo.left {
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 20;
+    font-weight: 600;
+    left: 1%;
+  }
+
   @media only screen and (max-width: 992px) {
     nav .brand-logo {
       left: 50%;
