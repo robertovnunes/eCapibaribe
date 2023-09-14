@@ -22,7 +22,7 @@ export class RegistrarComponent {
   onSubmit() {
     this.itemsApi.cadastrarItem(this.item).subscribe((response: any)=> {
       console.log(response);
-      if(response.msg = "Item registrado com sucesso!"){
+      if(response.msg === "Item registrado com sucesso!"){
         this._router.navigateByUrl('/items/inventario');
       }else{
         alert(response.msg);

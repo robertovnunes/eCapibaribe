@@ -1,17 +1,21 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  component: {
-    devServer: {
-      framework: "angular",
-      bundler: "webpack",
-    },
-    specPattern: "**/*.cy.js",
+  video: false,
+  viewportWidth: 1280,
+  viewportHeight: 720,
+  defaultCommandTimeout: 5000,
+  execTimeout: 60000,
+  retries: {
+    runMode: 2,
+    openMode: 0,
   },
-
+  chromeWebSecurity: false,
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      return require('./cypress/plugin/index.js')(on, config);
     },
+    baseUrl: 'http://localhost:4200',
+    specPattern: 'cypress/e2e/features/*.feature',
   },
 });

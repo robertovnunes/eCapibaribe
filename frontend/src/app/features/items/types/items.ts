@@ -7,7 +7,7 @@ export interface Item {
     marca: string,
     categoria: string,
     descricao: string,
-    imagem: string,
+    imagem: string | undefined,
     op_envio: string,
     palavrachave: string | undefined
 }
@@ -33,5 +33,5 @@ export interface showItem {
     quantidade: number,
     marca: string,
     categoria: string,
-    imagem: string,
+    imagem: string | undefined,
 }

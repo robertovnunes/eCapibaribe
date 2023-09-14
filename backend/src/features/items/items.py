@@ -9,6 +9,7 @@ items_router = APIRouter()
 @items_router.post("/api/items")
 async def create_item(item: Item, file_name: str | None = None):
     msg:str = create_new_item(item, file_name)
+    print(msg)
     return {"msg":msg}
 
 @items_router.put("/api/items/update")
