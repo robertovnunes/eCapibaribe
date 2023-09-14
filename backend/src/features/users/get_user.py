@@ -2,7 +2,7 @@ import json
 
 from fastapi import HTTPException
 
-USER_DATABASE_FILE = "src/features/users/data/users.json"
+USER_DATABASE_FILE = "./features/users/data/users.json"
 
 
 
