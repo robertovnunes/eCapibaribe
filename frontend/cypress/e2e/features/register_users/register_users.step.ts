@@ -50,7 +50,7 @@ Then (
     }
 );
 
-Then('o usuário recebe uma mensagem {string}', (mensagemEsperada: string) => {
+Then('o usuário recebe um alerta {string}', (mensagemEsperada: string) => {
     cy.on('window:alert', (mensagemAlerta) => {
         expect(mensagemAlerta).to.equal(mensagemEsperada);
     });
