@@ -1,0 +1,32 @@
+<div>
+  <p>Categorias</p>
+  <ul>
+    <li *ngFor="let category of categories">
+        <div class="label-info">
+          <label >nome: {{category.name}}</label>
+        </div>
+        <div class="label-info">
+          <label >description: {{category.description}}</label>
+        </div>
+        <div class="label-info">
+          <label >image {{category.image}}</label>
+        </div>
+        <div class="label-info">
+          <label >items: {{category.items}}</label>
+        </div>
+      
+
+      <div>
+        <div class="btn-remover" (click)="remove(category.id)">
+          <h4>Remover</h4>
+        </div>
+  
+        <div class="btn-edit" (click)="goedit(category.id)">
+          <h4>Editar</h4>
+        </div>
+      
+    </div>
+      
+    </li>
+  </ul>
+</div>

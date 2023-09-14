@@ -1,0 +1,25 @@
+<div>
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Nome da Categoria</label><br>
+      <input type="text" id="name" name="name" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="desc">Descrição da categoria</label><br>
+      <input type="text" id="desc" name="desc" formControlName="desc">
+    </div>
+    <div class="form-group">
+      <label for="keywords">Keywords</label><br>
+      <input type="text" id="keywords" name="keywords" formControlName="keywords">
+    </div>
+    <div class="form-group">
+      <!--substituir pelo upload de uma imagem -->
+      <label for="image">imagem</label><br>
+      <input type="url" id="image" name="image" formControlName="image">
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="save()">Adicionar</button>
+      <button class="btn btn-primary" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

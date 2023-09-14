@@ -4,6 +4,10 @@ from fastapi.testclient import TestClient
 
 db_file_name = "users_test"
 
+#@pytest.fixture
+#def create_user(cpf: str):
+    
+
 """ Scenario: Modificar dados do usuário com sucesso """
 # This method is used to define the scenario name and feature file path
 @scenario(scenario_name="Modificar dados do usuário com sucesso", feature_name="../features/cadastro_de_usuarios.feature")

@@ -1,8 +1,30 @@
 from fastapi import APIRouter, status
-from schemas.response import HttpResponseModel
-from service.impl.category_service import categoryService
+from ..schemas.response import HttpResponseModel, HTTPResponses
+from ..features.categories.service.category_service import categoryService
+from pydantic import BaseModel
+from typing import Union
+
 
 router = APIRouter()
+
+
+def validatefield(value) -> bool:
+    '''
+    Validates the model fields
+    returns a list of missing fields
+    '''
+    if value is None:
+        return True
+    return False
+
+class Category(BaseModel):
+    id: Union[str, None] = None
+    name: str
+    description: str
+    image: str
+    keywords: list
+    items: list
+
 
 
 @router.get(
@@ -41,10 +63,10 @@ def get_categories() -> HttpResponseModel:
     responses={
         status.HTTP_200_OK: {
             "model": HttpResponseModel,
-            "description": "Successfully got category by id",
+            "description": "Categoria encontrada",
         },
         status.HTTP_404_NOT_FOUND: {
-            "description": "category not found",
+            "description": "Categoria náo existe",
         }
     },
 )
@@ -66,14 +88,11 @@ def get_category(category_id: str) -> HttpResponseModel:
     return category_get_response
 
 
-# TODO: Add POST, PUT, DELETE endpoints
-
-
 @router.post(
     "/",
     response_model=HttpResponseModel,
     status_code=status.HTTP_200_OK,
-    description="Retrieve all categories",
+    description="Posting category",
     tags=["categories"],
     responses={
         status.HTTP_200_OK: {
@@ -82,7 +101,7 @@ def get_category(category_id: str) -> HttpResponseModel:
         }
     },
 )
-def post_category(category) -> HttpResponseModel:
+def post_category(category: Category) -> HttpResponseModel:
     """
     Post category.
 
@@ -90,10 +109,30 @@ def post_category(category) -> HttpResponseModel:
     - A list of all categories.
 
     """
+    categories = categoryService.get_categories()
+    categories = categories.data
+    for c in categories:
+        if category.name == c["name"]:
+            return HttpResponseModel(
+                message=HTTPResponses.CATEGORY_ALREADY_EXISTS().message,
+                status_code=HTTPResponses.CATEGORY_ALREADY_EXISTS().status_code,
+            )
+    category.id = str((int(categories[-1]["id"]) + 1))
+    missingfieldslist = []
+    for f, v in category.model_fields.items():
+        if validatefield(v):
+            missingfieldslist.append(f.__str__())
+    if len(missingfieldslist) > 0:
+        return HttpResponseModel(
+            message="Missing fields",
+            status_code=400,
+            data={"fields": missingfieldslist}
+        )
 
-    category_list_response = categoryService.post_category(category)
+    print(category)
+    category_post_response = categoryService.post_category(category)
 
-    return category_list_response
+    return category_post_response
 
 
 @router.put(
@@ -109,14 +148,7 @@ def post_category(category) -> HttpResponseModel:
         }
     },
 )
-def put_category(category_id, category) -> HttpResponseModel:
-    """
-    Put category.
-
-    Returns:
-    - A list of all categories.
-
-    """
+def put_category(category_id, category: Category) -> HttpResponseModel:
 
     category_list_response = categoryService.put_category(category_id, category)
 
@@ -136,7 +168,7 @@ def put_category(category_id, category) -> HttpResponseModel:
         }
     },
 )
-def delete_categgory(category_id) -> HttpResponseModel:
+def delete_category(category_id: str) -> HttpResponseModel:
     """
     Delete category.
 

@@ -1,0 +1,69 @@
+.btn-remover {
+  cursor: pointer;
+  border-radius: 3px;
+
+  border: rgb(13, 155, 6) 2px solid;
+  background-color: #26ff9b;
+  width: 200px;
+  height: 32px;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-remover:hover {
+  background-color: #FFA07A;
+}
+
+
+.label-info {
+  cursor: pointer;
+  border-radius: 3px;
+  object-fit: cover;
+  background-color: #99FF99;
+  width: 200px;
+  display: flex;
+  padding: 10px ;
+  justify-content: left;
+  align-items: center;
+}
+
+.label-info:hover {
+  background-color: #22AAFF;
+}
+
+
+.btn-edit {
+  cursor: pointer;
+  border-radius: 2px;
+  border: rgb(13, 155, 6) 2px solid;
+  background-color: #26ff9b;
+  width: 200px;
+  height: 32px;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-edit:hover {
+  background-color: #489556;
+}
+
+.btn-goedit {
+  cursor: pointer;
+  border: rgb(13, 155, 6) 2px solid;
+  border-radius: 2px;
+  background-color: #26ff9b;
+  width: 200px;
+  height: 32px;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-goedit:hover {
+  background-color: #489556;
+}

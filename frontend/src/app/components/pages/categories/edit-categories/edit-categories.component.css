@@ -1,0 +1,36 @@
+.btn-save {
+    cursor: pointer;
+    border: rgb(113, 113, 236) 2px solid;
+    background-color: #00FFff;
+    width: 72px;
+    height: 32px;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-save:hover {
+    background-color: #FFA07A;
+  }
+  
+  
+  .btn-cancel {
+    cursor: pointer;
+    border-radius: 25px;
+    border: rgb(113, 113, 236) 2px solid;
+    background-color: #00FFff;
+    width: 72px;
+    height: 32px;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #489556;
+  }
+  
+  
+  
