@@ -4,7 +4,7 @@ from logging import INFO, WARNING, getLogger
 
 from pydantic import BaseModel
 
-CATEGORY_DATABASE_FILE = "src/features/categories/data/categories.json"
+CATEGORY_DATABASE_FILE = "./features/categories/data/categories.json"
 
 logger = getLogger('uvicorn')
 
