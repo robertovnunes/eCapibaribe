@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "711.880.474-69",
+            "email": "bccnf@cin.ufpe.br",
+            "senha": "0laMundo!",
+            "telefone": "995751338",
+            "dataNascimento": ""
+        },
+        {
+            "nome": "teste",
+            "sobrenome": "falha",
+            "cpf": "123.456.789-10",
+            "email": "teste@email.com",
+            "senha": "0laMundo!",
+            "telefone": "",
+            "dataNascimento": ""
+        },
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "12324543112",
+            "email": "bc123cnf@cin.ufpe.br",
+            "senha": "Bianca123!",
+            "telefone": 995751338,
+            "dataNascimento": ""
+        },
+        {
+            "nome": "Bianca",
+            "sobrenome": "Carneiro",
+            "cpf": "71188047465",
+            "email": "1231bccnf@cin.ufpe.br",
+            "senha": "BiancaCar123#@!",
+            "telefone": 995751338,
+            "dataNascimento": ""
+        }
+    ]
+}
