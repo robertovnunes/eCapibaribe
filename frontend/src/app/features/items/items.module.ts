@@ -7,12 +7,17 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { EditarComponent } from './pages/editar/editar.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
   declarations: [
     RegistrarComponent,
-    InventarioComponent
+    InventarioComponent,
+    EditarComponent
   ],
   providers: [
     ItemsApi
@@ -22,7 +27,10 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class ItemsModule { }

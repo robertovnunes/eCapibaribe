@@ -43,10 +43,10 @@
     <ng-container matColumnDef="Editar">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element"> 
-            <button mat-icon-button color="primary">
+            <button (click)="onEdit(element.item_id)" mat-icon-button color="primary">
                 <mat-icon [ngStyle]="{'color':'#3f51b5'}">edit</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button (click)="onDelete(element.item_id)" mat-icon-button>
                 <mat-icon [ngStyle]="{'color':'red'}">delete_forever</mat-icon>
             </button>
         </td>

@@ -1,0 +1,121 @@
+<h2 class="brand-logo center" style="font-weight: 0;" >Editar Item</h2>
+<div class="row">
+    <form class="col s10 offset-s2" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onSubmit()" novalidate>
+        <div class="row">
+            <div class="input-field col s5 form-group">
+                <label for="item_id"></label>
+                <input disabled placeholder="ID do item*" id="item_id" type= "number" class="form-control validate" name="item_id" [(ngModel)]="item.item_id" #item_id="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(item_id.touched || registerForm.submitted) && item_id.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+            <div class="input-field col s5 form-group">
+                <label for="item_nome"></label>
+                <input placeholder="Nome do item*" id="item_nome" type="text" class="form-control" name="item_nome" [(ngModel)]="item.item_nome" #item_nome="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(item_nome.touched || registerForm.submitted) && item_nome.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="item_price"></label>
+                <input placeholder="Preço do item*" id="item_price" type="number" class="form-control" name="item_price" [(ngModel)]="item.item_price" #item_price="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(item_price.touched || registerForm.submitted) && item_price.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="quantidade"></label>
+                <input placeholder="Quantidade*" id="quantidade" type="number" class="form-control" name="quantidade" [(ngModel)]="item.quantidade" #quantidade="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(quantidade.touched || registerForm.submitted) && quantidade.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="marca"></label>
+                <input placeholder="Marca*" id="marca" type="text" class="form-control" name="marca" [(ngModel)]="item.marca" #marca="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(marca.touched || registerForm.submitted) && marca.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="categoria"></label>
+                <input placeholder="Categoria*" id="categoria" type="text" class="form-control" name="categoria" [(ngModel)]="item.categoria" #categoria="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(categoria.touched || registerForm.submitted) && categoria.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="descricao"></label>
+                <input placeholder="Descrição*" id="descricao" type="text" class="form-control" name="descricao" [(ngModel)]="item.descricao" #descricao="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(descricao.touched || registerForm.submitted) && descricao.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="imagem"></label>
+                <input placeholder="FOTO*" id="imagem" type="file" class="form-control file-upload"
+                     name="imagem" [(ngModel)]="item.imagem" #imagem="ngModel"
+                     requiredFileType="image/png" (change)="receiveImage($event)">
+                <span
+                    class="text-danger"
+                    *ngIf="(imagem.touched || registerForm.submitted) && imagem.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s10 form-group">
+                <label for="op_envio"></label>
+                <input placeholder="Opção de envio*" id="op_envio" type="text" class="form-control" name="op_envio" [(ngModel)]="item.op_envio" #op_envio="ngModel" required>
+                <span
+                    class="text-danger"
+                    *ngIf="(op_envio.touched || registerForm.submitted) && op_envio.errors?.['required']"
+                >
+                    Campo obrigatório
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s5 form-group">
+                <label for="palavrachave"></label>
+                <input placeholder="palavrachave" id="palavrachave" type="text" class="form-control" name="palavrachave" [(ngModel)]="item.palavrachave">
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light offset-s2" type="submit" value="enviar">Enviar
+        </button>
+    </form>
+</div>

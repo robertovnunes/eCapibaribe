@@ -12,15 +12,28 @@
             "op_envio": "correio"
         },
         {
-            "item_id": 45754,
+            "item_id": 854256,
             "item_nome": "Teste",
-            "item_price": 15.35,
+            "item_price": 19.35,
             "quantidade": 1,
             "marca": "marcaTeste",
             "categoria": "categoriaTeste",
             "descricao": "teste123",
             "imagem": "imagem.jpg",
             "op_envio": "correio"
+        },
+        {
+            "cpf_user": "123.456.789.10",
+            "item_id": 89098,
+            "item_nome": "nome_teste",
+            "item_price": 25.9,
+            "quantidade": 1,
+            "marca": "marca_teste",
+            "categoria": "categoria_teste",
+            "descricao": "desc_teste",
+            "imagem": "imagem.jpg",
+            "op_envio": "op_teste",
+            "palavrachave": "keyteste"
         }
     ]
 }

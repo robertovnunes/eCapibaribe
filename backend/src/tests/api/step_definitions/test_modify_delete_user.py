@@ -9,13 +9,20 @@ db_file_name = "users_test"
 @scenario(scenario_name="Modificar dados do usuário com sucesso", feature_name="../features/cadastro_de_usuarios.feature")
 def test_modify_user():
     """modify user"""
+    pass
 
 @given(parsers.cfparse("o usuário de CPF {cpf} existe no sistema"))
 def mock_user_in_system(cpf: str):
     return {
         "cpf": cpf
     }
+@given(parsers.cfparse('o usuário tem e-mail "{email}'))
+def add_email_on_login(email:str):
+    pass 
 
+@given(parsers.cfparse('o usuário não tem telefone'))
+
+# "PUT" for enviada para "/users/update" com o corpo da requisição que contém CPF "123.456.789-10"
 @when(
     parsers.cfparse('uma requisição DELETE for enviada para "{req_url}"'), 
     target_fixture="context"
@@ -72,13 +79,13 @@ def send_get_item_request(client: TestClient, context, req_url: str):
 
 
 
-
-""" Scenario: Deletar o usuário com sucesso """
-# This method is used to define the scenario name and feature file path
-@scenario(scenario_name="Deletar o usuário com sucesso", feature_name="../features/cadastro_de_usuarios.feature")
-def test_delete_user():
-    """delete user"""
-
+#
+#""" Scenario: Deletar o usuário com sucesso """
+## This method is used to define the scenario name and feature file path
+#@scenario(scenario_name="Deletar o usuário com sucesso", feature_name="../features/cadastro_de_usuarios.feature")
+#def test_delete_user():
+#    """delete user"""
+#
 
 
 #@then(
