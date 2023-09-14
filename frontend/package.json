@@ -10,7 +10,8 @@
     "test:electron": "cypress run --browser electron --no-exit"
   },
   "cypress-cucumber-preprocessor": {
-    "step_definitions": "cypress/support/steps"
+    "nonGlobalStepDefinitions": true,
+    "step_definitions": "cypress/e2e/features/"
   },
   "private": true,
   "dependencies": {

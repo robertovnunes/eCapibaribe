@@ -12,7 +12,10 @@ export default defineConfig({
   },
   chromeWebSecurity: false,
   e2e: {
+    setupNodeEvents(on, config) {
+      return require('./cypress/plugin/index.js')(on, config);
+    },
     baseUrl: 'http://localhost:4200',
-    specPattern: 'cypress/tests/**/**/*.feature',
+    specPattern: 'cypress/e2e/features/*.feature',
   },
 });
