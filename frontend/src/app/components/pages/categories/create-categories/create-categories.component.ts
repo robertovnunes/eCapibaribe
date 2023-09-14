@@ -51,7 +51,7 @@ export class CreateCategoriesComponent implements OnInit{
     if (!(this.name == null || this.desc == null || this.keywords == null)) {
       newCategory.name = <string>this.name.value;
       newCategory.description = <string>this.desc.value;
-      newCategory.keywords = this.keywords.value!.split(',');
+      newCategory.keywords = [<string>this.keywords.value];
       newCategory.items = [];
       this.categoriesService.addCategory(newCategory).subscribe(res => {
         if (res.status_code !== 201) {
