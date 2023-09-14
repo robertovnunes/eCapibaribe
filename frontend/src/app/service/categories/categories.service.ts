@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 
 class categoriesResponse {
   message: string = '';
-  status_code: string = '';
+  status_code = 0;
   data: Category[] = []
 }
 

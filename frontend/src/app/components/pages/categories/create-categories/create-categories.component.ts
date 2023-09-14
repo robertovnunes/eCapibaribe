@@ -14,7 +14,6 @@ export class CreateCategoriesComponent implements OnInit{
   nameInput!: HTMLInputElement | null;
   descInput!: HTMLInputElement | null;
   keywordsInput!: HTMLInputElement | null;
-  imageInput!: HTMLInputElement | null;
 
   name: FormControl<string | null>
   desc: FormControl<string | null>
@@ -22,7 +21,6 @@ export class CreateCategoriesComponent implements OnInit{
   image: FormControl<string | null>
 
   form: FormGroup;
-
 
 
   constructor(private readonly fb: FormBuilder,
@@ -36,7 +34,6 @@ export class CreateCategoriesComponent implements OnInit{
       name: this.name,
       desc: this.desc,
       keywords: this.keywords,
-      image: this.image
     });
   }
 
@@ -44,32 +41,29 @@ export class CreateCategoriesComponent implements OnInit{
     this.nameInput = document.querySelector('input[name="name"]');
     this.descInput = document.querySelector('input[name="desc"]');
     this.keywordsInput = document.querySelector('input[name="keywords"]');
-    this.imageInput = document.querySelector('input[name="image"]')
   }
 
 
   save() {
-    let result;
-    let message;
+
     let newCategory: Category;
     newCategory = {} as Category;
-    if (!(this.name == null || this.desc == null || this.keywords == null || this.image == null)) {
+    if (!(this.name == null || this.desc == null || this.keywords == null)) {
       newCategory.name = <string>this.name.value;
       newCategory.description = <string>this.desc.value;
-      newCategory.keywords = [<string>this.keywords.value];
-      newCategory.image = <string>this.image.value;
+      newCategory.keywords = this.keywords.value!.split(',');
       newCategory.items = [];
       this.categoriesService.addCategory(newCategory).subscribe(res => {
-        result = res.status_code;
-        message = res.message;
-      });
-      if (result === 200) {
-        alert("Categoria criada com sucesso!");
-        this.router.navigate(['list-categories'], {replaceUrl: true}).then(r => r);
-      } else {
-        alert("Erro ao criar categoria! "+ message);
-        return false;
+        if (res.status_code !== 201) {
+            alert("Erro ao criar categoria! "+ res.message);
+            return false;
       }
+        alert("Categoria criada com sucesso!");
+        this.router.navigate(['list-categories'], {replaceUrl: true}).then();
+        return true;
+      });
+      return true;
+
 
     }
     return true;
@@ -77,6 +71,6 @@ export class CreateCategoriesComponent implements OnInit{
   }
 
   cancel() {
-    this.router.navigateByUrl('/categories', {replaceUrl: true}).then(r => r);
+    this.router.navigateByUrl('/categories', {replaceUrl: true}).then();
   }
 }

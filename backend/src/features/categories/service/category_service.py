@@ -1,5 +1,6 @@
 from typing import Union
 
+from fastapi import File
 from pydantic import BaseModel
 from ....schemas.response import HTTPResponses, HttpResponseModel
 from .category_service_meta import CategoryServiceMeta
@@ -10,7 +11,6 @@ class Category(BaseModel):
     id: Union[str, None] = None
     name: str
     description: str
-    image: str
     keywords: list
     items: list
 

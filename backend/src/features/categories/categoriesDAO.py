@@ -13,7 +13,6 @@ class Category(BaseModel):
     id: Union[str, None] = None
     name: str
     description: str
-    image: str
     keywords: list
     items: list
 

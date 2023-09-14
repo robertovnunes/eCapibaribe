@@ -9,7 +9,6 @@ from ...main import app
 class Category(BaseModel):
     name: str
     description: str
-    image: str
     keywords: list
     items: list
 
@@ -74,7 +73,6 @@ def send_post_request(context, client, name, description, image, keywords, itens
     keywordlist = [keywords]
     new = Category(name=name,
                    description=description,
-                   image=image,
                    keywords=keywordlist,
                    items=itenslist).model_dump()
     response = req_type_to_function(client, "POST")("/categories", json=new)

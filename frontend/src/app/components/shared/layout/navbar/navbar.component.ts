@@ -31,8 +31,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.localStorageService.set('user', null);
-    this.router.navigate(['/login']).then( );
+    if (confirm('Are you sure you want to logout?')){
+      this.localStorageService.remove('user');
+      this.router.navigate(['/login']).then();
+    }
   }
 }
 
