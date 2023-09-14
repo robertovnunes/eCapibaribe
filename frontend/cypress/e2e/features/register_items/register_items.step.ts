@@ -7,7 +7,7 @@ Given('o usuário está na página de {string}',
 );
 
 When('o usuário preenche o id com {string}, item_nome com {string}, preco com {string}, quantidade com {string}, marca com {string}, categoria com {string}, descricao com {string}, op_envio com {string}, imagem com {string} e o usuário seleciona a opção "Registraritem"', 
-    (id: string, nome_item: string, preco: string, quantidade: string, marca: string, categoria: string, descricao: string, op_envio: string, imagem: string) => {
+    (id: string, nome_item: string, preco: string, quantidade: string, marca: string, categoria: string, descricao: string, op_envio: string) => {
     cy.get('#item_id').type(id);
     cy.get('#item_nome').type(nome_item);
     cy.get('#item_price').type(preco);
@@ -20,8 +20,7 @@ When('o usuário preenche o id com {string}, item_nome com {string}, preco com {
 });
 
 When('o usuário preenche o item_nome com {string}, preco com {string}, quantidade com {string}, marca com {string}, categoria com {string}, descricao com {string}, op_envio com {string}, imagem com {string} e o usuário seleciona a opção "Registraritem"', 
-    (id: string, nome_item: string, preco: string, quantidade: string, marca: string, categoria: string, descricao: string, op_envio: string, imagem: string) => {
-    cy.get('#item_id').type(id);
+    (nome_item: string, preco: string, quantidade: string, marca: string, categoria: string, descricao: string, op_envio: string) => {
     cy.get('#item_nome').type(nome_item);
     cy.get('#item_price').type(preco);
     cy.get('#quantidade').type(quantidade);
@@ -31,7 +30,6 @@ When('o usuário preenche o item_nome com {string}, preco com {string}, quantida
     cy.get('#op_envio').type(op_envio);
     cy.get('#RegistrarItem').click();
 });
-
 
 Then ('o usuário esta na pagina {string}',
     (page: string) => {
