@@ -4,6 +4,7 @@ from .list_items import get_single_item_with_cpf, get_with_cpf
 from .create_items import create_new_item
 from .modify_item import modify_item
 from .delete_item import deletar_item
+
 items_router = APIRouter()
 
 @items_router.post("/api/items")

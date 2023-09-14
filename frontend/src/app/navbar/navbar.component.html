@@ -11,10 +11,12 @@
         <div class="nav-wrapper">
           <a routerLink="" class="brand-logo left">eCapibaribe</a>
           <ul id="nav-mobile" class="right">
-            <li><a routerLink="/users/login">Login</a></li>
-            <li><a routerLink="/users/register">Cadastro</a></li>
-            <li><a routerLink="/items/inventario">Inventario</a></li>
-            <li><a routerLink="/items/cadastro">Registar Item</a></li>
+            <li><a *ngIf="!isLogedIn" routerLink="login">Login</a></li>
+            <li><a *ngIf="!isLogedIn" routerLink="/users/register">Cadastro</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/items/inventario">Inventario</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/items/cadastro">Registar Item</a></li>
+            <li><a *ngIf="isLogedIn" routerLink="/categories">Gerenciar categorias</a></li>
+            <li class="logout" *ngIf="isLogedIn" (click)="logout()"><a routerLink="/logout">Sair</a></li>
           </ul>
         </div>
       </nav>

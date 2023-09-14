@@ -1,5 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from "@angular/router";
+import { LoginComponent } from "./components/pages/login/login.component";
+import { HomeComponent } from "./components/home/home.component";
+import { CreateCategoriesComponent } from "./components/pages/categories/create-categories/create-categories.component";
+import { CategoriesManagerComponent } from "./components/pages/categories/categories-manager/categories-manager.component";
+import { ListCategoriesComponent } from "./components/pages/categories/list-categories/list-categories.component";
+
 import { AppComponent } from './app.component';
 import { CadastroComponent } from './features/users/pages/cadastro/cadastro.component';
 import { RegistrarComponent } from './features/items/pages/registrar/registrar.component';
@@ -7,16 +13,22 @@ import { InventarioComponent } from './features/items/pages/inventario/inventari
 import { EditarComponent } from './features/items/pages/editar/editar.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  //{ path: '', component: AppComponent },
   { path: 'users/register', component: CadastroComponent },
   { path: 'items/cadastro', component: RegistrarComponent },
   { path: 'items/inventario', component: InventarioComponent },
-  { path: 'items/editar', component: EditarComponent }
+  { path: 'items/editar', component: EditarComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'categories', component: CategoriesManagerComponent },
+  { path: 'create-categories', component: CreateCategoriesComponent },
+  { path: 'list-categories', component: ListCategoriesComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 
 export class AppRoutingModule { }

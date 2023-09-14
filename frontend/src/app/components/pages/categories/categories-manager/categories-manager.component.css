@@ -1,0 +1,10 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+app-button {
+  margin: 5%;
+  align-items: center;
+}

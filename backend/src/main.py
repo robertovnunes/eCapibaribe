@@ -6,7 +6,7 @@ from features.items.items import items_router
 from api.router import api_router
 
 
-app = FastAPI(debug= True)
+app = FastAPI()
 
 app.add_middleware(     
     CORSMiddleware,     

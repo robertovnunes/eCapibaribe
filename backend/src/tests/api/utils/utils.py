@@ -19,5 +19,3 @@ def get_response_itens_list(response):
     return response.json()["data"]["itens"]
 
 
-
-# TODO: create more utils functions

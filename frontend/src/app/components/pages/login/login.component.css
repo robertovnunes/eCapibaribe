@@ -1,0 +1,33 @@
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.login-container {
+  margin-left: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-buttons{
+  margin-top: 0.6em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20%;
+  font-size: 500%;
+}
+
+

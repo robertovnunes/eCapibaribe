@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
-from schemas.response import HttpResponseModel
-from service.impl.item_service import ItemService
+from src.schemas.response import HttpResponseModel
+from src.service.impl.item_service import ItemService
 
 router = APIRouter()
 
@@ -64,5 +64,3 @@ def get_itens() -> HttpResponseModel:
     
     return item_list_response
 
-
-# TODO: Add POST, PUT, DELETE endpoints
