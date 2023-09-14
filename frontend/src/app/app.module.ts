@@ -1,9 +1,3 @@
-
-
-import { NgIconsModule } from '@ng-icons/core';
-import { heroUsers } from '@ng-icons/heroicons/outline';
-
-
 import { CreateCategoriesComponent } from './components/pages/categories/create-categories/create-categories.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './components/pages/login/login.component';
@@ -19,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ItemsModule } from './features/items/items.module';
 import { UsersModule } from './features/users/users.module';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +30,6 @@ import { UsersModule } from './features/users/users.module';
   imports: [
       ReactiveFormsModule,
       HttpClientModule,
-      NgIconsModule.withIcons({ heroUsers }),
       BrowserModule,
       AppRoutingModule,
       FormsModule,
