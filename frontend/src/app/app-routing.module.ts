@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastroComponent } from './features/users/cadastro/cadastro.component';
 import { AppComponent } from './app.component';
 import { RegistrarComponent } from './features/items/pages/registrar/registrar.component';
 import { InventarioComponent } from './features/items/pages/inventario/inventario.component';
+import { CadastroComponent } from './features/users/pages/cadastro/cadastro.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
